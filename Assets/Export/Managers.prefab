@@ -1,0 +1,640 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7561255661760698672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7561255661760698678}
+  - component: {fileID: 7561255661760698679}
+  - component: {fileID: 7561255661760698676}
+  - component: {fileID: 7561255661760698667}
+  - component: {fileID: 7561255661760698664}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7561255661760698678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561255661760698672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7561255661760698679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561255661760698672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8608f7d6791940539d560fa899fec904, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneConfiguration:
+    levels:
+    - dialogObject:
+        IsSet: 1
+        Value:
+          dialogTexts:
+          - Hey chief, you are awake finally. Press F...
+          - We are trapped in this world or I am halucinating...
+          - Either way - make your choise between two cards
+          - I will be flying here you know for you to help
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 829c0fbf3909a43789ed403fa732750b, type: 2}
+          - {fileID: 11400000, guid: cddb2207b84f24127b8fa8e53fd5f188, type: 2}
+          - {fileID: 11400000, guid: 192104461e63c4d4dbd0725e1ab828e5, type: 2}
+      enemyCardsObject:
+        IsSet: 0
+        Value:
+          cardsEnemy: []
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls: []
+    - dialogObject:
+        IsSet: 0
+        Value:
+          dialogTexts:
+          - Hey chief, press f to continue and WASD to controll your view
+          - Now, make your choise between two cards
+          - But remember, that someone will be coming for you from the distance fella
+      chooseCardsObject:
+        IsSet: 1
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 829c0fbf3909a43789ed403fa732750b, type: 2}
+          - {fileID: 11400000, guid: cddb2207b84f24127b8fa8e53fd5f188, type: 2}
+          - {fileID: 11400000, guid: 192104461e63c4d4dbd0725e1ab828e5, type: 2}
+      enemyCardsObject:
+        IsSet: 0
+        Value:
+          cardsEnemy: []
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls: []
+    - dialogObject:
+        IsSet: 1
+        Value:
+          dialogTexts:
+          - If you didn't saw that - oscilograph tracks your health. If your health
+            will become zero
+          - ...
+          - Now, click "next round" button to start a fight
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 829c0fbf3909a43789ed403fa732750b, type: 2}
+          - {fileID: 11400000, guid: cddb2207b84f24127b8fa8e53fd5f188, type: 2}
+          - {fileID: 11400000, guid: 192104461e63c4d4dbd0725e1ab828e5, type: 2}
+      enemyCardsObject:
+        IsSet: 0
+        Value:
+          cardsEnemy: []
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls: []
+    - dialogObject:
+        IsSet: 0
+        Value:
+          dialogTexts:
+          - If you didn't saw that - oscilograph tracks your health. If your health
+            will become zero
+          - ...
+          - Now, click "next round" button to start a fight
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 829c0fbf3909a43789ed403fa732750b, type: 2}
+          - {fileID: 11400000, guid: cddb2207b84f24127b8fa8e53fd5f188, type: 2}
+          - {fileID: 11400000, guid: 192104461e63c4d4dbd0725e1ab828e5, type: 2}
+      enemyCardsObject:
+        IsSet: 1
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_MethodName: SetActive
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
+    - dialogObject:
+        IsSet: 1
+        Value:
+          dialogTexts:
+          - You probably wonder what is this place
+          - I don't know either. I am trapped inside a skull as you see
+          - The world was blown up, you see. Is it some kind of simulation or some
+            crap like that I wonder?
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
+          - {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
+          - {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
+      enemyCardsObject:
+        IsSet: 0
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls: []
+    - dialogObject:
+        IsSet: 0
+        Value:
+          dialogTexts:
+          - congratulations, you have passed that
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
+          - {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
+          - {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
+      enemyCardsObject:
+        IsSet: 1
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+            m_MethodName: set_enabled
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
+    - dialogObject:
+        IsSet: 1
+        Value:
+          dialogTexts:
+          - I know here is a fella lurking somewhere nearby
+          - Fella or some thing...
+          - 'You know, continuing with that idea that we are in simulation that can
+            be a virus of some sort '
+          - Just don't let us be killed by it
+          - Chief
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
+          - {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
+          - {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
+      enemyCardsObject:
+        IsSet: 0
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls: []
+    - dialogObject:
+        IsSet: 0
+        Value:
+          dialogTexts:
+          - wowowo
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
+          - {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
+          - {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
+      enemyCardsObject:
+        IsSet: 1
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_MethodName: SetActive
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+    - dialogObject:
+        IsSet: 1
+        Value:
+          dialogTexts:
+          - ...
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
+          - {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
+          - {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
+      enemyCardsObject:
+        IsSet: 0
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls: []
+    - dialogObject:
+        IsSet: 0
+        Value:
+          dialogTexts:
+          - wowowo
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
+          - {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
+          - {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
+      enemyCardsObject:
+        IsSet: 1
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 9b6ca95a266b848428c5b768b1da0f9c, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls: []
+    - dialogObject:
+        IsSet: 0
+        Value:
+          dialogTexts:
+          - congratulations, you have passed that
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
+          - {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
+          - {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
+      enemyCardsObject:
+        IsSet: 1
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: ee54129a8f369434eac3b0e955bfec7b, type: 2}
+          - {fileID: 11400000, guid: ee54129a8f369434eac3b0e955bfec7b, type: 2}
+          - {fileID: 11400000, guid: ee54129a8f369434eac3b0e955bfec7b, type: 2}
+          - {fileID: 11400000, guid: ee54129a8f369434eac3b0e955bfec7b, type: 2}
+          - {fileID: 11400000, guid: ee54129a8f369434eac3b0e955bfec7b, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls: []
+    - dialogObject:
+        IsSet: 0
+        Value:
+          dialogTexts:
+          - congratulations, you have passed that
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
+          - {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
+          - {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
+      enemyCardsObject:
+        IsSet: 1
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+          - {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls: []
+    - dialogObject:
+        IsSet: 0
+        Value:
+          dialogTexts:
+          - you won brotha
+      chooseCardsObject:
+        IsSet: 0
+        Value:
+          cardsToChoseFrom:
+          - {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
+          - {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
+          - {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
+      enemyCardsObject:
+        IsSet: 1
+        Value:
+          cardsEnemy:
+          - {fileID: 11400000, guid: 13a15041fade24268bfd4ef9d4554de3, type: 2}
+          - {fileID: 11400000, guid: 13a15041fade24268bfd4ef9d4554de3, type: 2}
+          - {fileID: 11400000, guid: 13a15041fade24268bfd4ef9d4554de3, type: 2}
+          - {fileID: 11400000, guid: 13a15041fade24268bfd4ef9d4554de3, type: 2}
+          - {fileID: 11400000, guid: 13a15041fade24268bfd4ef9d4554de3, type: 2}
+      levelStartEvents:
+        m_PersistentCalls:
+          m_Calls: []
+      levelEndEvents:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 0}
+            m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+            m_MethodName: set_enabled
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 1
+            m_CallState: 2
+    cardsPlayer: []
+    mainBoardCardUI: {fileID: 0}
+    mainCardObject: {fileID: 11400000, guid: 0eee6e848995642b3b4e024e54ec665b, type: 2}
+    cardsDeck: []
+    CARDS_ON_BOARD_COUNT: 5
+    MAX_CARDS_IN_HAND: 9
+    playerCardsHolder: {fileID: 0}
+    enemyCardsHolder: {fileID: 0}
+    handCardsHolder: {fileID: 0}
+    drawButton: {fileID: 0}
+    endTurnButton: {fileID: 0}
+    PLAYER_ENEMY_HP_BALANCE_WIN_TRESHOLD: 7
+    hpBalanceManagerText: {fileID: 0}
+    mainSceneHolder: {fileID: 0}
+    uiCanvasesPlaceHolder: {fileID: 0}
+    renderTextureCamera: {fileID: 0}
+    uiCamera: {fileID: 0}
+    playerCamera: {fileID: 0}
+    mapCanvas: {fileID: 0}
+    cardsCanvas: {fileID: 0}
+    narrativeImageCanvas: {fileID: 0}
+    endGameCanvas: {fileID: 0}
+    dialogText: {fileID: 0}
+    dialogAudio: {fileID: 8300000, guid: 4215fead6dacf4e8a8d0bad1f483bfc7, type: 3}
+    cardDamageAudio: {fileID: 8300000, guid: c2733aa4cc3344496ac530b1ff4fd764, type: 3}
+    tableAudioSource: {fileID: 0}
+    cardsChooseHolder: {fileID: 0}
+    choosenCardCameraOverlay: {fileID: 0}
+    clickedNextLevel: 0
+    cinemachineBrain: {fileID: 0}
+    tableVirtualCamera: {fileID: 0}
+    forwardVirtualCamera: {fileID: 0}
+    leftwardVirtualCamera: {fileID: 0}
+    rightwardVirtualCamera: {fileID: 0}
+    cinemaBlendingTime: 1
+    cinemaBlendingLongTime: 4
+    monster: {fileID: 0}
+    audioSource: {fileID: 0}
+    playerSpottedMonsterAudio: {fileID: 0}
+    planeGrid: {fileID: 0}
+    skillsObjectsDict:
+      splitAttack: {fileID: 11400000, guid: 1b17e6f07994c40698926f60888739a2, type: 2}
+      poisonOther: {fileID: 11400000, guid: 9fa25c30c4e4f44f5acbad7a19554556, type: 2}
+      deadlyPoison: {fileID: 11400000, guid: a72f1586840d34f28881b0cd3e774ef6, type: 2}
+      buff: {fileID: 11400000, guid: 0962bc603a2d24725bba42c3a2124f61, type: 2}
+      transformation: {fileID: 11400000, guid: 0012865a6beb84f1fb5300141704f063, type: 2}
+      arrowShot: {fileID: 11400000, guid: 4c548cbba204549d9811646765b87b06, type: 2}
+      steroids: {fileID: 11400000, guid: c163fb32ba29142e49a0ba3d831dc38b, type: 2}
+      summon: {fileID: 11400000, guid: 9a2a980ce31e34a32af70e2c8131cb0e, type: 2}
+      shield: {fileID: 11400000, guid: f815e4f108cd140eaa96534b963f6548, type: 2}
+      quill: {fileID: 11400000, guid: c8e73575c3f3a4a6c8cfc60d180c14f8, type: 2}
+      reduceDamage: {fileID: 11400000, guid: 0012865a6beb84f1fb5300141704f063, type: 2}
+      gyroAttack: {fileID: 11400000, guid: 0012865a6beb84f1fb5300141704f063, type: 2}
+    shop:
+      buyCardCost: 3
+      buyIncomeCost: 3
+      currentIncome: 0
+      currentMoney: 2
+      sacrificeCost: 0
+      currentMoneyUI: {fileID: 0}
+      buyCardUI: {fileID: 0}
+      buyIncomeUI: {fileID: 0}
+      shopChoseCardsObject:
+        cardsToChoseFrom:
+        - {fileID: 11400000, guid: cddb2207b84f24127b8fa8e53fd5f188, type: 2}
+        - {fileID: 11400000, guid: a277f0e830a8a4ab0a2e0130482d07a5, type: 2}
+        - {fileID: 11400000, guid: b5d5239f652244a48bfa1e12a8813b2a, type: 2}
+        - {fileID: 11400000, guid: 829c0fbf3909a43789ed403fa732750b, type: 2}
+        - {fileID: 11400000, guid: a7841c254cc7544b9adbdf1f2f7d1434, type: 2}
+        - {fileID: 11400000, guid: 192104461e63c4d4dbd0725e1ab828e5, type: 2}
+  gameContext:
+    cardChosenUI: {fileID: 0}
+    playerCardClickedUI: {fileID: 0}
+    isCardChoseLevel: 0
+--- !u!114 &7561255661760698676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561255661760698672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2700d754eeb4443483089d72cb9cf32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7561255661760698667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561255661760698672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa6fcf019dd4b9988634d130d7c58eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 7561255661760698664}
+--- !u!82 &7561255661760698664
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7561255661760698672}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f3c9f4ff4956e48779098ea131aa4564, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
