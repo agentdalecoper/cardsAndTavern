@@ -15,6 +15,7 @@ namespace Client
         private CardsSystem cardsSystem;
         private CameraController cameraController;
         private CardsChoseController cardsChoseController;
+        private ShopController shopController;
 
         public void Init()
         {
@@ -40,9 +41,11 @@ namespace Client
             
             // CardUI.ActionCardDraggedOn += (ui, cardUI) => Turn(ui, cardUI);
             
-            await CheckCardSessionIsFinished();
+            bool levelWon = await CheckCardSessionIsFinished();
             PlacePlayerCardsAgain(initialPlayerCards);
             cameraController.ShowPlayerOnlyCards();
+
+            shopController.ProcessLevelEndedIncome(levelWon);
 
             // CardUI.ActionCardDraggedOn -= (ui, cardUI) =>  Turn(ui, cardUI);
         }
@@ -94,7 +97,7 @@ namespace Client
             }
         }
 
-        private async Task CheckCardSessionIsFinished()
+        private async Task<bool> CheckCardSessionIsFinished()
         {
             while (!cardsSystem.CheckDamageBoardOrNoEnemy())
             {
@@ -103,7 +106,7 @@ namespace Client
                 await Task.Yield();
             }
 
-            await cardsSystem.EndOfInvasion();
+            return await cardsSystem.EndOfInvasion();
         }
 
         public void AssignCardUIPositions(Side side)

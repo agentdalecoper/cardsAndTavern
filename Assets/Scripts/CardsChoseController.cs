@@ -183,7 +183,7 @@ public class CardsChoseController : IEcsSystem
         //     sceneConfiguration.cardsChooseHolder);
 
         sceneConfiguration.playerCardsHolder.parent.gameObject.SetActive(false);
-        sceneConfiguration.cardsChooseHolder.parent.gameObject.SetActive(true);
+        sceneConfiguration.cardsChooseHolder.gameObject.SetActive(true);
         
                 
         Debug.Log("Show table");

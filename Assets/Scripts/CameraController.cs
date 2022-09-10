@@ -113,14 +113,14 @@ namespace Client
             sceneConfiguration.playerCardsHolder.parent.gameObject.SetActive(true);
             sceneConfiguration.playerCardsHolder.gameObject.SetActive(true);
             sceneConfiguration.enemyCardsHolder.gameObject.SetActive(true);
-            sceneConfiguration.cardsChooseHolder.parent.gameObject.SetActive(false);
+            sceneConfiguration.cardsChooseHolder.gameObject.SetActive(false);
         }
 
         public void ShowPlayerOnlyCards()
         {
             sceneConfiguration.playerCardsHolder.parent.gameObject.SetActive(true);
             sceneConfiguration.playerCardsHolder.gameObject.SetActive(true);
-            sceneConfiguration.cardsChooseHolder.parent.gameObject.SetActive(false);
+            sceneConfiguration.cardsChooseHolder.gameObject.SetActive(false);
             sceneConfiguration.enemyCardsHolder.gameObject.SetActive(false);
         }
 

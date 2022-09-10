@@ -21,9 +21,9 @@ namespace Client
             Card card = cardUi.card;
             Card enemyCard = enemyCardUi.card;
 
-            if (isDead(card)) return;
+            if (isDeadOrEmpty(card)) return;
 
-            if (isDead(enemyCard)) return;
+            if (isDeadOrEmpty(enemyCard)) return;
 
             await CardTurn(enemyCard, card, enemyCardUi, cardUi);
             await CardTurn(card, enemyCard, cardUi, enemyCardUi);
@@ -78,11 +78,11 @@ namespace Client
         public bool CheckDamageBoardOrNoEnemy()
         {
             List<CardUI> aliveCards = GetCardUiList(Side.player)
-                .Where(c => !isDead(c.card))
+                .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
             List<CardUI> aliveCardsEnemy = GetCardUiList(Side.enemy)
-                .Where(c => !isDead(c.card))
+                .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
             // Debug.Log($"Alive cards count player {aliveCards.Count}, alive cards enemy count {aliveCardsEnemy.Count}");
@@ -103,13 +103,13 @@ namespace Client
         {
             foreach (CardUI enemyCardUI in GetCardUiList(Side.enemy))
             {
-                if (enemyCardUI == null || isDead(enemyCardUI.card))
+                if (enemyCardUI == null || isDeadOrEmpty(enemyCardUI.card))
                 {
                     continue;
                 }
 
                 CardUI playerCardUI = GetCardToAttack(enemyCardUI);
-                if (playerCardUI != null && !isDead(playerCardUI.card))
+                if (playerCardUI != null && !isDeadOrEmpty(playerCardUI.card))
                 {
                     await Turn(enemyCardUI, playerCardUI);
                 }
@@ -123,14 +123,14 @@ namespace Client
         private CardUI GetCardToAttack(CardUI enemyCardUI)
         {
             CardUI playerCardUI = GetCardAcross(enemyCardUI);
-            if (playerCardUI == null || isDead(playerCardUI.card))
+            if (playerCardUI == null || isDeadOrEmpty(playerCardUI.card))
             {
                 for (int i = 0; i < sceneConfiguration.CARDS_ON_BOARD_COUNT; i++)
                 {
                     playerCardUI = GetCardAcrossAtPosition(enemyCardUI, i);
                     Debug.Log("Found player card " + playerCardUI);
 
-                    if (playerCardUI != null && !isDead(playerCardUI.card))
+                    if (playerCardUI != null && !isDeadOrEmpty(playerCardUI.card))
                     {
                         return playerCardUI;
                     }
@@ -174,19 +174,18 @@ namespace Client
         }
 
 
-        public async Task EndOfInvasion()
+        public async Task<bool> EndOfInvasion()
         {
+            bool levelWon;
+            
             List<CardUI> aliveCards = GetCardUiList(Side.player)
-                .Where(c => !isDead(c.card))
+                .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
             List<CardUI> aliveCardsEnemy = GetCardUiList(Side.enemy)
-                .Where(c => !isDead(c.card))
+                .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
-            int incomeMoney = aliveCards.Count
-                              + gameContext.invasionLevel;
-            
             if (aliveCards.Count == 0 && aliveCardsEnemy.Count != 0)
             {
                 int damage = 0;
@@ -203,17 +202,17 @@ namespace Client
                 // await Task.Delay(300);
                 await AnimationDamageMainBoard();
                 cameraController.ShowTable();
+
+                levelWon = false;
             }
             else
             {
-                incomeMoney += sceneConfiguration
-                    .levels[gameContext.invasionLevel]
-                    .enemyCardsObject.Value.cardsEnemy.Length;
+                levelWon = true;
             }
 
-            shopController.AddMoney(incomeMoney);
-
             gameContext.invasionLevel++;
+
+            return levelWon;
         }
 
         private async Task AnimationDamageMainBoard()
@@ -362,7 +361,7 @@ namespace Client
                 return;
             }
             
-            if (isDead(enemyCard)) return;
+            if (isDeadOrEmpty(enemyCard)) return;
             
             sceneConfiguration.tableAudioSource.PlayOneShot(sceneConfiguration.cardDamageAudio);
 
@@ -395,7 +394,7 @@ namespace Client
 
         public void CardIsDead(CardUI carenemyCardUi)
         {
-            if (isDead(carenemyCardUi.card)) return;
+            if (isDeadOrEmpty(carenemyCardUi.card)) return;
 
             TextPopUpSpawnerManager.Instance.StartTextPopUpTween("Dead", Color.red,
                 carenemyCardUi.transform);
@@ -444,9 +443,34 @@ namespace Client
 
             Card card = cardUI.card;
 
+            int cost = GetCost(card);
+            List<SkillObject> activeSkillObjects = GetActiveSkillObjects(card);
+            bool cardInInventory = shopController.GetInventoryCards().Contains(cardUI);
+
+            // poisoned
+
+            cardUI.ShowCardData(cardUI.card, 
+                cardUI.cardPosition,
+                activeSkillObjects,
+                cost, cardInInventory);
+        }
+
+        public int GetCost(Card card)
+        {
+            // todo also add check for special trader
+            if (card.itemOnly.IsSet && card.itemOnly.Value.sellHigh.IsSet)
+            {
+                return card.cost * 2;
+            }
+
+            return card.cost;
+        }
+
+        public List<SkillObject> GetActiveSkillObjects(Card card)
+        {
             List<SkillObject> activeSkillObjects = new List<SkillObject>();
 
-            if (card.poisonOther.IsSet)
+            if (card.poisonOther.IsSet) // todo just add SkillObject as a field to the skill?? 
             {
                 activeSkillObjects.Add(sceneConfiguration.skillsObjectsDict.poisonOther);
             }
@@ -506,9 +530,74 @@ namespace Client
                 activeSkillObjects.Add(sceneConfiguration.skillsObjectsDict.deadlyPoison);
             }
 
-            // poisoned
+            return activeSkillObjects;
+        }
 
-            cardUI.ShowCardData(cardUI.card, cardUI.cardPosition, activeSkillObjects);
+        public void AddSkillToACard(CardUI cardUI, SkillObject skillToAdd)
+        {
+            Card card = cardUI.card;
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.poisonOther) 
+                // todo just add SkillObject as a field to the skill?? Or probably I will use reflection class nam
+            {
+                card.poisonOther.Value = new Poison();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.splitAttack)
+            {
+                card.splitAttack.Value = new SplitAttack();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.buff)
+            {
+                card.buff.Value = new Buff();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.transformation)
+            {
+                card.buff.Value = new Buff();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.arrowShot)
+            {
+                card.arrowShot.Value = new ArrowShot();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.steroids)
+            {
+                card.steroids.Value = new Steroids();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.summon)
+            {
+                card.summon.Value = new Summon();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.shield)
+            {
+                card.shield.Value = new Shield();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.quill)
+            {
+                card.quill.Value = new Quill();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.reduceDamage)
+            {
+                card.reduceDamage.Value = new ReduceDamage();
+            }
+
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.gyroAttack)
+            {
+                card.gyroAttack.Value = new GyroAttack();
+            }
+
+            RefreshCard(cardUI);
+            
+            // if (card.poisoned.IsSet)
+            // {
+            //     activeSkillObjects.Add(sceneConfiguration.skillsObjectsDict.deadlyPoison);
+            // }
         }
 
 
@@ -542,7 +631,7 @@ namespace Client
             return side == Side.player ? sceneConfiguration.playerCardsHolder : sceneConfiguration.enemyCardsHolder;
         }
 
-        public bool isDead(Card card)
+        public static bool isDeadOrEmpty(Card card)
         {
             if (card == null || card.IsDead)
             {

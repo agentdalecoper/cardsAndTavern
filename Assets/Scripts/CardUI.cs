@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Client;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -43,6 +44,11 @@ public class CardUI : MonoBehaviour
 
     private Quaternion initialRotation;
 
+    private void Awake()
+    {
+        ShowEmptyCardData();
+    }
+
     private void Start()
     {
         // rectTransform = GetComponent<RectTransform>();
@@ -77,7 +83,8 @@ public class CardUI : MonoBehaviour
         }
     }
 
-    public void ShowCardData(Card cardToShow, int position, List<SkillObject> activeSkillObjects)
+    public void ShowCardData(Card cardToShow, int position,
+        List<SkillObject> activeSkillObjects, int cost, bool cardInInventory)
     {
         NullifyUis();
  

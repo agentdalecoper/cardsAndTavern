@@ -42,9 +42,10 @@ public class Card
     public int damage;
     public string name;
     
-    [Newtonsoft.Json.JsonIgnore]
+    [JsonIgnore]
     public Sprite sprite;
-    
+
+    public Optional<ItemOnly> itemOnly;
     public Optional<SplitAttack> splitAttack;
     public Optional<Poison> poisonOther;
     public Optional<DeadlyPoison> deadlyPoison;
@@ -63,11 +64,13 @@ public class Card
     [NonSerialized]
     public bool IsDead;
     
-    [NonSerialized, Newtonsoft.Json.JsonIgnore]
+    [NonSerialized, JsonIgnore]
     public Side side;
 
-    [NonSerialized, Newtonsoft.Json.JsonIgnore]
+    [NonSerialized, JsonIgnore]
     public CardObject cardObject;
+
+    public int cost;
 
     public override string ToString()
     {
@@ -76,6 +79,31 @@ public class Card
                $"{steroids} {arrowShot} {reduceDamage} {summon} {quill} {shield} " +
                $"{transformation} {gyroAttack}   ({poisoned} {poisoned?.Value?.level} {poisoned?.Value?.needToTick})";
     }
+}
+
+[Serializable]
+public class ItemOnly
+{
+    public Optional<Income> income;
+    public Optional<Skill> itemAddsSkill;
+    public Optional<SellHigh> sellHigh;
+}
+
+[Serializable]
+public class SellHigh
+{
+}
+
+[Serializable]
+public class Skill
+{
+    public Card cardWithSkill;
+}
+
+[Serializable]
+public class Income
+{
+    public int income;
 }
 
 public class Poisoned

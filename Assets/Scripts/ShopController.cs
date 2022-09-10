@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Client;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -6,6 +8,8 @@ internal class ShopController : IEcsInitSystem
 {
     private CameraController cameraController;
     private CardsChoseController cardsChoseController;
+    private InitializeCardSystem initializeCardSystem;
+    private CardsSystem cardsSystem;
     private GameContext gameContext;
 
     private SceneConfiguration sceneConfiguration;
@@ -85,5 +89,74 @@ internal class ShopController : IEcsInitSystem
     public void SacrificeCardClicked(CardUI cardToSacrificeUI)
     {
         cardToSacrificeUI.card = null;
+    }
+
+    public void InventoryClickedOnEmptySlot(CardUI inventoryCardUI)
+    {
+        if (!CardsSystem.isDeadOrEmpty(inventoryCardUI.card))
+        {
+            return;
+        }
+
+        if (gameContext.cardChosenUI == null
+            || CardsSystem.isDeadOrEmpty(gameContext.cardChosenUI.card))
+        {
+            return;
+        }
+
+        Card card = gameContext.cardChosenUI.card;
+
+        initializeCardSystem.CreateAndShowCardInHolder(inventoryCardUI.cardPosition,
+            Side.player,
+            card.cardObject,
+            sceneConfiguration.shop.inventoryCardsHolder.transform);
+
+        gameContext.cardChosenUI = null;
+    }
+
+    public List<CardUI> GetInventoryCards()
+    {
+        return sceneConfiguration.shop.inventoryCardsHolder
+            .GetComponentsInChildren<CardUI>().ToList();
+    }
+
+    public void SellACardClicked()
+    {
+        if (gameContext.cardChosenUI == null
+            || CardsSystem.isDeadOrEmpty(gameContext.cardChosenUI.card))
+        {
+            return;
+        }
+
+        Card card = gameContext.cardChosenUI.card;
+
+
+        AddMoney(card.cost);
+        gameContext.cardChosenUI = null;
+    }
+
+    public void ProcessLevelEndedIncome(bool levelWon)
+    {
+        int levelWonMoney = levelWon ? 2 : 0;
+        int incomeMoney = sceneConfiguration.shop.currentMoney / 10;
+        var incomeFromItems = GetInventoryCards()
+            .Select(c => c.card)
+            .Where(c => c.itemOnly.IsSet
+                        && c.itemOnly.Value.income.IsSet)
+            .Select(c => c.itemOnly.Value.income.Value.income)
+            .Sum();
+
+        AddMoney(incomeMoney + levelWonMoney + incomeFromItems);
+    }
+
+    public void AddSkillToACard(CardUI itemCardWithSkill, CardUI cardSkillToAdd)
+    {
+
+        SkillObject skillObject = cardsSystem
+            .GetActiveSkillObjects(itemCardWithSkill.card.itemOnly.Value.itemAddsSkill.Value.cardWithSkill)
+            .First();
+        
+        cardsSystem.AddSkillToACard(cardSkillToAdd, skillObject);
+        cardsChoseController.NullifyUIs();
     }
 }

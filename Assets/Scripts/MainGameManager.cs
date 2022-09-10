@@ -43,8 +43,15 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
         Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
 #endif
 
-        /**
+        /*
+         * (давай все 3дшно сделаем)
+         * (можно уменьшить карточки, между инвейженами показывать только 8 твоих карт
+         * а потом отдалять экран, возможно сделать оверлэй какой-то камнры)
          * 
+         * - Cards inventory (items + cards) 
+         * - Продавание карты из инвентаряа 
+         * - стоимость карты появление
+         * - Choose card to sacrifice - ну слушай сделать это как when playerCard tapped код 
          */
         
         CardsInvasionController invasionController = new CardsInvasionController();
@@ -194,7 +201,17 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
     public void PlayerCardClickedUI(CardUI cardUI)
     {
         Debug.Log("Player card clicked " + cardUI);
-        gameContext.playerCardClickedUI = cardUI;
+
+        if (gameContext.cardChosenUI != null
+            && gameContext.cardChosenUI.card.itemOnly.IsSet
+            && gameContext.cardChosenUI.card.itemOnly.Value.itemAddsSkill.IsSet)
+        {
+            shopController.AddSkillToACard(gameContext.cardChosenUI, cardUI);
+        }
+        else
+        {
+            gameContext.playerCardClickedUI = cardUI;
+        }
     }
 
     public void SeyPlayerClickedNextLevel()
@@ -206,6 +223,18 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
     public void BuyCardClicked()
     {
         shopController.BuyCardClicked();
+    }
+
+    public void InventoryClickedOnEmptySlot(CardUI inventoryCardUI)
+    {
+        Debug.Log("" + inventoryCardUI);
+        shopController.InventoryClickedOnEmptySlot(inventoryCardUI);
+    }
+
+    public void SellACardClicked()
+    {
+        shopController.SellACardClicked();
+        Debug.Log("sell card clicked");
     }
 
     public void BuyIncomeClicked()

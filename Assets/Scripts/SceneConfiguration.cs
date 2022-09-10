@@ -84,6 +84,8 @@ namespace Client
         public ShopCardUI buyIncomeUI;
 
         public ChoseCardsObject shopChoseCardsObject;
+
+        public GameObject inventoryCardsHolder;
     }
 
     [Serializable]
