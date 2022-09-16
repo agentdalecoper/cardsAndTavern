@@ -11,6 +11,7 @@ internal class ShopController : IEcsInitSystem
     private InitializeCardSystem initializeCardSystem;
     private CardsSystem cardsSystem;
     private GameContext gameContext;
+    private DialogController dialogController;
 
     private SceneConfiguration sceneConfiguration;
 
@@ -140,13 +141,19 @@ internal class ShopController : IEcsInitSystem
         int levelWonMoney = levelWon ? 2 : 0;
         int incomeMoney = sceneConfiguration.shop.currentMoney / 10;
         var incomeFromItems = GetInventoryCards()
+            .Where(c => !CardsSystem.isDeadOrEmpty(c.card))
             .Select(c => c.card)
             .Where(c => c.itemOnly.IsSet
                         && c.itemOnly.Value.income.IsSet)
             .Select(c => c.itemOnly.Value.income.Value.income)
             .Sum();
 
+        string incomeFromItemsText = + incomeFromItems == 0 ? "" : $", income from items={incomeFromItems}";
         AddMoney(incomeMoney + levelWonMoney + incomeFromItems);
+        
+        DialogTextManager.Instance.ShowText($"Income added level money = {levelWonMoney}, " +
+                                            $"income={incomeMoney}" 
+                                            + incomeFromItemsText);
     }
 
     public void AddSkillToACard(CardUI itemCardWithSkill, CardUI cardSkillToAdd)

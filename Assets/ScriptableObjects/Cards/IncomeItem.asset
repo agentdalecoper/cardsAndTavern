@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8bdeb6482a34bd785dbb6612cfa383c, type: 3}
-  m_Name: Compulsory Finger
+  m_Name: IncomeItem
   m_EditorClassIdentifier: 
   card:
-    hp: 1
-    damage: 1
+    hp: 0
+    damage: 0
     name: 
-    sprite: {fileID: 21300000, guid: 4dcd12ac7503f4514b899f67e051f810, type: 3}
+    sprite: {fileID: 0}
     itemOnly:
-      IsSet: 0
+      IsSet: 1
       Value:
         income:
-          IsSet: 0
+          IsSet: 1
           Value:
-            income: 0
+            income: 1
         itemAddsSkill:
           IsSet: 0
           Value:

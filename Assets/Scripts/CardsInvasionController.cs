@@ -21,6 +21,7 @@ namespace Client
         {
             AssignCardUIPositions(Side.player);
             AssignCardUIPositions(Side.enemy);
+            AssignInventoryCardPositions();
         }
         
         /*
@@ -111,7 +112,17 @@ namespace Client
 
         public void AssignCardUIPositions(Side side)
         {
-            var uis = cardsSystem.GetCardUiList(side);
+            List<CardUI> uis = cardsSystem.GetCardUiList(side);
+            for (var i = 0; i < uis.Count; i++)
+            {
+                CardUI cardUI = uis[i];
+                cardUI.cardPosition = i;
+            }
+        }
+
+        public void AssignInventoryCardPositions()
+        {
+            List<CardUI> uis = shopController.GetInventoryCards();
             for (var i = 0; i < uis.Count; i++)
             {
                 CardUI cardUI = uis[i];

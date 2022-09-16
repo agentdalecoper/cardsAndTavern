@@ -23,7 +23,7 @@ namespace Client
         {
             instance = this;
         }
-        
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -31,6 +31,10 @@ namespace Client
                 if (currentDialogObject != null)
                 {
                     ShowNextDialog();
+                }
+                else if (dialogTextUi.gameObject.activeSelf)
+                {
+                    dialogTextUi.gameObject.SetActive(false);
                 }
             }
         }
@@ -41,7 +45,7 @@ namespace Client
             {
                 dialogTextUi = sceneConfiguration.dialogText;
             }
-            
+
             currentDialogObject = dialogObject;
             dialogPos = 0;
 
@@ -67,6 +71,12 @@ namespace Client
         {
             dialogTextUi.gameObject.SetActive(true);
             dialogTextUi.text = currentDialogObject.dialogTexts[dialogPos];
+        }
+
+        public void ShowText(string text)
+        {
+            dialogTextUi.gameObject.SetActive(true);
+            dialogTextUi.text = text;
         }
     }
 }
