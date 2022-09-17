@@ -72,6 +72,8 @@ public class Card
 
     public int cost;
 
+    public int numberOfSlots = 1;
+
     public override string ToString()
     {
         return $"isDead: {IsDead} {name}\n hp:{hp}, damage:{damage}, {side}" +

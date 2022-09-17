@@ -55,8 +55,8 @@ public class InitializeCardSystem : IEcsSystem
 
     public void RefreshCardsUIs()
     {
-        List<CardUI> initialPlayerCards = cardsSystem.GetCardUiList(Side.player);
-        List<CardUI> initialEnemyCards = cardsSystem.GetCardUiList(Side.enemy);
+        List<CardUI> initialPlayerCards = cardsSystem.GetCardUIList(Side.player);
+        List<CardUI> initialEnemyCards = cardsSystem.GetCardUIList(Side.enemy);
         foreach (CardUI cardUI in initialPlayerCards)
         {
             cardsSystem.RefreshCard(cardUI);

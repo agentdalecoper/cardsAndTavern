@@ -82,7 +82,7 @@ namespace Client
                 
                 if (card != null)
                 {
-                    cardUI = cardsSystem.GetCardUiList(Side.player)[i];
+                    cardUI = cardsSystem.GetCardUIList(Side.player)[i];
                     cardUI.card = card;
                     cardsSystem.RefreshCard(cardUI);
                 }
@@ -112,7 +112,7 @@ namespace Client
 
         public void AssignCardUIPositions(Side side)
         {
-            List<CardUI> uis = cardsSystem.GetCardUiList(side);
+            List<CardUI> uis = cardsSystem.GetCardUIList(side);
             for (var i = 0; i < uis.Count; i++)
             {
                 CardUI cardUI = uis[i];
@@ -122,7 +122,7 @@ namespace Client
 
         public void AssignInventoryCardPositions()
         {
-            List<CardUI> uis = shopController.GetInventoryCards();
+            List<CardUI> uis = shopController.GetInventoryUICards();
             for (var i = 0; i < uis.Count; i++)
             {
                 CardUI cardUI = uis[i];

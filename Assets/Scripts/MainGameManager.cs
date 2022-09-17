@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Client;
@@ -192,12 +193,18 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
         }
     }
 
-
+    // card chosen and taken into the hand
     public void CardChoseUIClickedOnEmptySlot(CardUI cardUI)
     {
+        if (shopController.CheckIfCardSkillUpgrade(cardUI))
+        {
+            return;
+        }
+        
         gameContext.cardChosenUI = cardUI;
     }
 
+    // player card clicked on a board slot
     public void PlayerCardClickedUI(CardUI cardUI)
     {
         Debug.Log("Player card clicked " + cardUI);
@@ -222,13 +229,14 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
 
     public void BuyCardClicked()
     {
-        shopController.BuyCardClicked();
+        shopController.BuyCardSlotsClicked();
     }
 
+    // clicked on the inventory card
     public void InventoryClickedOnEmptySlot(CardUI inventoryCardUI)
     {
         Debug.Log("" + inventoryCardUI);
-        shopController.InventoryClickedOnEmptySlot(inventoryCardUI);
+        shopController.InventoryClicked(inventoryCardUI);
     }
 
     public void SellACardClicked()

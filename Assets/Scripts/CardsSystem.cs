@@ -36,7 +36,7 @@ namespace Client
 
         public async Task CardsTurn(CardUI cardUI, CardUI enemyCardUI, Side side)
         {
-            foreach (CardUI crdUi in GetCardUiList(side))
+            foreach (CardUI crdUi in GetCardUIList(side))
             {
                 Card crd = crdUi.card;
 
@@ -77,11 +77,11 @@ namespace Client
 
         public bool CheckDamageBoardOrNoEnemy()
         {
-            List<CardUI> aliveCards = GetCardUiList(Side.player)
+            List<CardUI> aliveCards = GetCardUIList(Side.player)
                 .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
-            List<CardUI> aliveCardsEnemy = GetCardUiList(Side.enemy)
+            List<CardUI> aliveCardsEnemy = GetCardUIList(Side.enemy)
                 .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
@@ -101,7 +101,7 @@ namespace Client
         
         public async Task IterateCardsAndDamage()
         {
-            foreach (CardUI enemyCardUI in GetCardUiList(Side.enemy))
+            foreach (CardUI enemyCardUI in GetCardUIList(Side.enemy))
             {
                 if (enemyCardUI == null || isDeadOrEmpty(enemyCardUI.card))
                 {
@@ -178,11 +178,11 @@ namespace Client
         {
             bool levelWon;
             
-            List<CardUI> aliveCards = GetCardUiList(Side.player)
+            List<CardUI> aliveCards = GetCardUIList(Side.player)
                 .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
-            List<CardUI> aliveCardsEnemy = GetCardUiList(Side.enemy)
+            List<CardUI> aliveCardsEnemy = GetCardUIList(Side.enemy)
                 .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
@@ -402,6 +402,12 @@ namespace Client
             carenemyCardUi.ShowEmptyCardData();
         }
 
+        public void RemoveCard(CardUI cardToRemove)
+        {
+            cardToRemove.card = null;
+            cardToRemove.ShowEmptyCardData();
+        }
+
         public CardUI GetCardAcross(CardUI cardUI)
         {
             return GetCardUiListAcross(cardUI.card)[cardUI.cardPosition];
@@ -430,7 +436,7 @@ namespace Client
          */
         public List<CardUI> GetCardUiListAcross(Card card)
         {
-            return GetCardUiList(card.side == Side.player ? Side.enemy : Side.player);
+            return GetCardUIList(card.side == Side.player ? Side.enemy : Side.player);
         }
 
         public void RefreshCard(CardUI cardUI)
@@ -445,7 +451,7 @@ namespace Client
 
             int cost = GetCost(card);
             List<SkillObject> activeSkillObjects = GetActiveSkillObjects(card);
-            bool cardInInventory = shopController.GetInventoryCards().Contains(cardUI);
+            bool cardInInventory = shopController.GetInventoryUICards().Contains(cardUI);
 
             // poisoned
 
@@ -620,7 +626,7 @@ namespace Client
             return cardHolder.GetComponentsInChildren<CardUI>().Select(cardUi => cardUi.card).ToArray();
         }
 
-        public List<CardUI> GetCardUiList(Side side)
+        public List<CardUI> GetCardUIList(Side side)
         {
             Transform cardHolder = GetCardHolder(side);
             return cardHolder.GetComponentsInChildren<CardUI>().ToList();

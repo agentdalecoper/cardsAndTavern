@@ -46,7 +46,6 @@ public class CardsChoseController : IEcsSystem
         
         NullifyUIs();
 
-
         ShowChoseCardsUi(cardsToChoseFrom);
         CardUI chosenCardUi = await CheckForCardChosen();
         await TakeCardInHandAndWaitForClick(chosenCardUi);
@@ -68,7 +67,7 @@ public class CardsChoseController : IEcsSystem
 
     public async Task TakeCardInHand(CardUI chosenCardUi)
     {
-        await AnimationCardFromTableToHand();
+        await AnimationCardFromTableToHand(chosenCardUi);
         RefreshCameraOverlayCard(chosenCardUi);
         cameraController.ShowChosenOverlayCard();
         cameraController.ShowPlayerOnlyCards();
@@ -91,27 +90,29 @@ public class CardsChoseController : IEcsSystem
     public async Task<CardUI> CheckForEmptySlotClicked()
     {
         Debug.Log("check for empty slot clicked");
-        while (gameContext.playerCardClickedUI == null || gameContext.playerCardClickedUI.card != null)
+        while (gameContext.cardChosenUI == null ||
+               gameContext.playerCardClickedUI == null || gameContext.playerCardClickedUI.card != null)
         {
             Debug.Log("Wait for empty slot clicked");
             await Task.Yield();
         }
 
-        await AnimationFromHandToTable();
+        await AnimationFromHandToTable(sceneConfiguration.choosenCardCameraOverlay, 
+            gameContext.playerCardClickedUI);
 
         Debug.Log("waiting started suc card is " + gameContext.playerCardClickedUI.card);
 
         return gameContext.playerCardClickedUI;
     }
 
-    private async Task AnimationFromHandToTable()
+    public async Task AnimationFromHandToTable(CardUI handCard, CardUI toCard)
     {
-        var cardOverlayTransform = sceneConfiguration.choosenCardCameraOverlay.transform;
+        var cardOverlayTransform = handCard.transform;
         var initialPos = cardOverlayTransform.position;
         var initialRotation = cardOverlayTransform.rotation;
         var initialLocalScale = cardOverlayTransform.localScale;
 
-        var targetTableCardTransform = gameContext.playerCardClickedUI.transform;
+        var targetTableCardTransform = toCard.transform;
         Debug.Log($"scale from {cardOverlayTransform.localScale} to {targetTableCardTransform.localScale}");
 
         var tween = DOTween.Sequence().Join(cardOverlayTransform.DOMove(targetTableCardTransform.position, 2f))
@@ -139,9 +140,9 @@ public class CardsChoseController : IEcsSystem
         return gameContext.cardChosenUI;
     }
 
-    private async Task AnimationCardFromTableToHand()
+    private async Task AnimationCardFromTableToHand(CardUI chosenCardUi)
     {
-        var cardChosenOnBoard = gameContext.cardChosenUI.transform;
+        var cardChosenOnBoard = chosenCardUi.transform;
         var targetCardOverlayTransform = sceneConfiguration.choosenCardCameraOverlay.transform;
 
         var initialPos = cardChosenOnBoard.position;
@@ -187,6 +188,6 @@ public class CardsChoseController : IEcsSystem
         
                 
         Debug.Log("Show table");
-        cameraController.ShowTable();
+        // cameraController.ShowTable();
     }
 }

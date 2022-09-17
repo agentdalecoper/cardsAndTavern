@@ -20,7 +20,7 @@ internal class ShopController : IEcsInitSystem
         RefreshShopUis();
     }
 
-    public void BuyCardClicked()
+    public void BuyCardSlotsClicked()
     {
         Debug.Log("Buy card clicked");
 
@@ -92,10 +92,14 @@ internal class ShopController : IEcsInitSystem
         cardToSacrificeUI.card = null;
     }
 
-    public void InventoryClickedOnEmptySlot(CardUI inventoryCardUI)
+    public async void InventoryClicked(CardUI inventoryCardUI)
     {
         if (!CardsSystem.isDeadOrEmpty(inventoryCardUI.card))
         {
+            await cardsChoseController.TakeCardInHand(inventoryCardUI);
+            cardsSystem.RemoveCard(inventoryCardUI);
+            gameContext.cardChosenUI = sceneConfiguration.choosenCardCameraOverlay;
+
             return;
         }
 
@@ -107,7 +111,12 @@ internal class ShopController : IEcsInitSystem
 
         Card card = gameContext.cardChosenUI.card;
 
-        initializeCardSystem.CreateAndShowCardInHolder(inventoryCardUI.cardPosition,
+        await cardsChoseController.AnimationFromHandToTable(
+            sceneConfiguration.choosenCardCameraOverlay, inventoryCardUI);
+        cardsChoseController.NullifyUIs();
+        
+        initializeCardSystem.CreateAndShowCardInHolder(
+            inventoryCardUI.cardPosition,
             Side.player,
             card.cardObject,
             sceneConfiguration.shop.inventoryCardsHolder.transform);
@@ -115,7 +124,7 @@ internal class ShopController : IEcsInitSystem
         gameContext.cardChosenUI = null;
     }
 
-    public List<CardUI> GetInventoryCards()
+    public List<CardUI> GetInventoryUICards()
     {
         return sceneConfiguration.shop.inventoryCardsHolder
             .GetComponentsInChildren<CardUI>().ToList();
@@ -140,7 +149,7 @@ internal class ShopController : IEcsInitSystem
     {
         int levelWonMoney = levelWon ? 2 : 0;
         int incomeMoney = sceneConfiguration.shop.currentMoney / 10;
-        var incomeFromItems = GetInventoryCards()
+        var incomeFromItems = GetInventoryUICards()
             .Where(c => !CardsSystem.isDeadOrEmpty(c.card))
             .Select(c => c.card)
             .Where(c => c.itemOnly.IsSet
@@ -148,11 +157,11 @@ internal class ShopController : IEcsInitSystem
             .Select(c => c.itemOnly.Value.income.Value.income)
             .Sum();
 
-        string incomeFromItemsText = + incomeFromItems == 0 ? "" : $", income from items={incomeFromItems}";
+        string incomeFromItemsText = +incomeFromItems == 0 ? "" : $", income from items={incomeFromItems}";
         AddMoney(incomeMoney + levelWonMoney + incomeFromItems);
-        
+
         DialogTextManager.Instance.ShowText($"Income added level money = {levelWonMoney}, " +
-                                            $"income={incomeMoney}" 
+                                            $"income={incomeMoney}"
                                             + incomeFromItemsText);
     }
 
@@ -165,5 +174,40 @@ internal class ShopController : IEcsInitSystem
         
         cardsSystem.AddSkillToACard(cardSkillToAdd, skillObject);
         cardsChoseController.NullifyUIs();
+    }
+
+    public bool CheckIfCardSkillUpgrade(CardUI cardUI)
+    {
+        List<CardUI> cardUIsInTheInventory = GetInventoryUICards();
+        List<CardUI> cardUIsOnTheBoard = cardsSystem.GetCardUIList(Side.player);
+
+        List<CardUI> sameInventoryCards =
+            cardUIsInTheInventory.Where(c => !CardsSystem.isDeadOrEmpty(c.card)
+                                             && cardUI.card.name == c.card.name).ToList();
+        List<CardUI> sameBoardCards = cardUIsOnTheBoard.Where(c => !CardsSystem.isDeadOrEmpty(c.card)
+                                                                   && cardUI.card.name == c.card.name).ToList();
+
+        if (sameInventoryCards.Count + sameBoardCards.Count >= 3)
+        {
+            CardUI mainCardToStarInto = sameInventoryCards.First();
+            sameInventoryCards.Remove(mainCardToStarInto);
+            CardUI secondCard = cardUI;
+            CardUI thirdCard = sameInventoryCards.Union(sameBoardCards).First();
+
+            StarUpgrade(mainCardToStarInto);
+            cardsSystem.RemoveCard(secondCard);
+            cardsSystem.RemoveCard(thirdCard);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private void StarUpgrade(CardUI cardToStarUpgrade)
+    {
+        Card card = cardToStarUpgrade.card;
+        card.numberOfSlots++;
+        // damage / hp x2? 
     }
 }
