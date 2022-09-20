@@ -108,9 +108,6 @@ namespace Client
          * GetCardHolder(Side side, int cardLineLevel = 0)
          * var cardLineLevel = cardUiPos % sceneConfiguration.cardCountOnBoard
          * 
-         * 
-         * 
-         * 
          */
         public async Task IterateCardsAndDamage()
         {
@@ -131,14 +128,52 @@ namespace Client
                     break;
                 }
             }
+
+
+            AdvancePreviousLineCards(Side.enemy);
+            // AdvancePreviousLineCards(Side.player);
+
+            // 
         }
-        
+
+        private void AdvancePreviousLineCards(Side side)
+        {
+            for (int line = 1;
+                 line <
+                 sceneConfiguration.maxCardsInAllSideLines / sceneConfiguration.cardsOnBoardCount;
+                 line++)
+            {
+                List<CardUI> previousLineCards = GetCardUIList(side, line - 1);
+                List<CardUI> cardsLineCards = GetCardUIList(side, line);
+
+                Debug.Log("Card Line cards " + string.Join(",", cardsLineCards));
+
+                for (int i = 0; i < sceneConfiguration.cardsOnBoardCount; i++)
+                {
+                    //  + sceneConfiguration.cardsOnBoardCount * (line - 1)
+                    //  + sceneConfiguration.cardsOnBoardCount * line
+
+                    CardUI backwardLineCard = cardsLineCards[i];
+                    CardUI forwardLineCard = previousLineCards[i];
+
+                    Debug.Log($"Check if advance card to next level backwardLineCard={backwardLineCard} forwardLineCard={forwardLineCard}");
+                    
+                    if (!isDeadOrEmpty(backwardLineCard.card) && isDeadOrEmpty(forwardLineCard.card))
+                    {
+                        Debug.Log("Advance card to next level " + backwardLineCard.card);
+                        initializeCardSystem.ShowCardData(backwardLineCard.card, forwardLineCard);
+                        RemoveCard(backwardLineCard);
+                    }
+                }
+            }
+        }
+
         private CardUI GetCardToAttack(CardUI enemyCardUI)
         {
             CardUI playerCardUI = GetCardAcross(enemyCardUI);
             if (playerCardUI == null || isDeadOrEmpty(playerCardUI.card))
             {
-                for (int i = 0; i < sceneConfiguration.CARDS_ON_BOARD_COUNT; i++)
+                for (int i = 0; i < sceneConfiguration.cardsOnBoardCount; i++)
                 {
                     playerCardUI = GetCardAcrossAtPosition(enemyCardUI, i);
                     Debug.Log("Found player card " + playerCardUI);
@@ -322,7 +357,7 @@ namespace Client
                 Debug.Log("split attack left " + cardAcrossUi.card);
             }
 
-            if (enemyCardUi.cardPosition + 1 < sceneConfiguration.CARDS_ON_BOARD_COUNT)
+            if (enemyCardUi.cardPosition + 1 < sceneConfiguration.cardsOnBoardCount)
             {
                 CardUI cardAcrossUi = cardsAcross[enemyCardUi.cardPosition + 1];
                 await DamageCardDirectly(cardAcrossUi.card, cardAcrossUi, 1);
@@ -652,15 +687,23 @@ namespace Client
             return cardHolder.GetComponentsInChildren<CardUI>().Select(cardUi => cardUi.card).ToArray();
         }
 
-        public List<CardUI> GetCardUIList(Side side)
+        public List<CardUI> GetCardUIList(Side side, int lineLevel = 0)
         {
             Transform cardHolder = GetCardHolder(side);
-            return cardHolder.GetComponentsInChildren<CardUI>().ToList();
+
+            Debug.Log($"Get card list level={lineLevel}," +
+                      $" cardsToCheck={string.Join(",", cardHolder.GetComponentsInChildren<CardUI>().ToList())}");
+            
+            return cardHolder
+                .GetComponentsInChildren<CardUI>()
+                .Where(cardUI => (cardUI.cardPosition / sceneConfiguration.cardsOnBoardCount) == lineLevel)
+                .ToList();
         }
 
         public Transform GetCardHolder(Side side)
         {
-            return side == Side.player ? sceneConfiguration.playerCardsHolder : sceneConfiguration.enemyCardsHolder;
+            return side == Side.player ? 
+                sceneConfiguration.playerCardsHolder : sceneConfiguration.enemyCardsHolder;
         }
 
         public static bool isDeadOrEmpty(Card card)

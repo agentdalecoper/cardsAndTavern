@@ -26,7 +26,8 @@ namespace Client
 
         public CardObject[] cardsPlayer;
         
-        public int CARDS_ON_BOARD_COUNT = 5;
+        public int cardsOnBoardCount = 5;
+        public int maxCardsInAllSideLines = 15;
         
         public Transform playerCardsHolder;
         public Transform enemyCardsHolder;

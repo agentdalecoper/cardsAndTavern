@@ -112,7 +112,11 @@ namespace Client
 
         public void AssignCardUIPositions(Side side)
         {
-            List<CardUI> uis = cardsSystem.GetCardUIList(side);
+            List<CardUI> uis = cardsSystem
+                .GetCardHolder(side)
+                .GetComponentsInChildren<CardUI>()
+                .ToList();
+
             for (var i = 0; i < uis.Count; i++)
             {
                 CardUI cardUI = uis[i];

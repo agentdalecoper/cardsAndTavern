@@ -281,6 +281,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
     private void test()
     {
         Debug.Log("Start test");
+        
         Card card1 = new Card();
         Card card2 = card1.CloneJson();
 

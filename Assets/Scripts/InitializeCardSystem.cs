@@ -44,7 +44,7 @@ public class InitializeCardSystem : IEcsSystem
      */
 
     public CardUI CreateAndShowCard(int position,
-        Side side, CardObject cardObject, int holderPosition = 0)
+        Side side, CardObject cardObject)
     {
         Transform holder = side == Side.player
             ? sceneConfiguration.playerCardsHolder
@@ -113,7 +113,7 @@ public class InitializeCardSystem : IEcsSystem
             return cardUI;
         }
 
-        Debug.Log("show normal card in " + cardsHolder);
+        Debug.Log("show normal card in " + cardsHolder + " " + position);
 
         cardUI.cardPosition = position;
         return ShowCardData(card, cardUI);
