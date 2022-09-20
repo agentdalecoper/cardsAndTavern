@@ -93,7 +93,11 @@ public class CardsChoseController : IEcsSystem
         while (gameContext.cardChosenUI == null ||
                gameContext.playerCardClickedUI == null || gameContext.playerCardClickedUI.card != null)
         {
-            Debug.Log("Wait for empty slot clicked");
+            if (gameContext.cardChosenUI != null && gameContext.cardChosenUI.card != null
+                                                 && gameContext.cardChosenUI.card.itemOnly.IsSet
+                                                 && gameContext.cardChosenUI.card.itemOnly.Value.itemAddsSkill.IsSet)
+
+                Debug.Log("Wait for empty slot clicked");
             await Task.Yield();
         }
 
@@ -115,7 +119,7 @@ public class CardsChoseController : IEcsSystem
         var targetTableCardTransform = toCard.transform;
         Debug.Log($"scale from {cardOverlayTransform.localScale} to {targetTableCardTransform.localScale}");
 
-        var tween = DOTween.Sequence().Join(cardOverlayTransform.DOMove(targetTableCardTransform.position, 2f))
+        var tween = DOTween.Sequence().Join(cardOverlayTransform.DOMove(targetTableCardTransform.position, 1f))
             .Join(cardOverlayTransform.DORotateQuaternion(targetTableCardTransform.rotation, 2f))
             // .Join(cardOverlayTransform.DOScale(targetTableCardTransform.localScale, 2f))
             ;
@@ -125,7 +129,6 @@ public class CardsChoseController : IEcsSystem
         cardOverlayTransform.position = initialPos;
         cardOverlayTransform.rotation = initialRotation;
         // cardOverlayTransform.localScale = initialLocalScale;
-
     }
 
     private async Task<CardUI> CheckForCardChosen()
@@ -150,8 +153,8 @@ public class CardsChoseController : IEcsSystem
         var initialLocalScale = cardChosenOnBoard.localScale;
 
         var tween = DOTween.Sequence()
-            .Join(cardChosenOnBoard.DOMove(targetCardOverlayTransform.position, 2f))
-            .Join(cardChosenOnBoard.DORotateQuaternion(targetCardOverlayTransform.rotation, 2f))
+            .Join(cardChosenOnBoard.DOMove(targetCardOverlayTransform.position, 1f))
+            .Join(cardChosenOnBoard.DORotateQuaternion(targetCardOverlayTransform.rotation, 1f))
             // .Join(cardChosenOnBoard.DOScale(targetCardOverlayTransform.localScale, 2f))
             ;
 

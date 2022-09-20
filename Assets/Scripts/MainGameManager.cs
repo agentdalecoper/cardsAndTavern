@@ -213,6 +213,11 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             && gameContext.cardChosenUI.card.itemOnly.IsSet
             && gameContext.cardChosenUI.card.itemOnly.Value.itemAddsSkill.IsSet)
         {
+            if (CardsSystem.isDeadOrEmpty(cardUI.card))
+            {
+                return;
+            }
+
             shopController.AddSkillToACard(gameContext.cardChosenUI, cardUI);
         }
         else

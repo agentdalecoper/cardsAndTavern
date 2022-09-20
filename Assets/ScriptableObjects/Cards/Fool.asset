@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8bdeb6482a34bd785dbb6612cfa383c, type: 3}
-  m_Name: Compulsory Finger
+  m_Name: Fool
   m_EditorClassIdentifier: 
   card:
     hp: 1
     damage: 1
     name: 
-    sprite: {fileID: 21300000, guid: 4dcd12ac7503f4514b899f67e051f810, type: 3}
+    sprite: {fileID: 21300000, guid: 3381906240b4c4b5cba10b180d4b29c0, type: 3}
     itemOnly:
       IsSet: 0
       Value:
@@ -47,6 +47,7 @@ MonoBehaviour:
                         damage: 0
                         name: 
                         cost: 0
+                        numberOfSlots: 1
                   sellHigh:
                     IsSet: 0
               splitAttack:
@@ -85,6 +86,7 @@ MonoBehaviour:
               poisoned:
                 IsSet: 0
               cost: 0
+              numberOfSlots: 1
         sellHigh:
           IsSet: 0
     splitAttack:
@@ -111,7 +113,7 @@ MonoBehaviour:
         turnsToSummon: 1
         cardToSummon: {fileID: 0}
     shield:
-      IsSet: 0
+      IsSet: 1
       Value:
         Alive: 1
     quill:
@@ -123,3 +125,4 @@ MonoBehaviour:
     poisoned:
       IsSet: 0
     cost: 0
+    numberOfSlots: 1

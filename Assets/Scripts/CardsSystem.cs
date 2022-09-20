@@ -99,6 +99,19 @@ namespace Client
             return false;
         }
         
+        /**
+         * так а как у нас будет выстраиваться второй третий ряд и тд врагов ?
+         * - - - -
+         * - - - -
+         * - - - -
+         *
+         * GetCardHolder(Side side, int cardLineLevel = 0)
+         * var cardLineLevel = cardUiPos % sceneConfiguration.cardCountOnBoard
+         * 
+         * 
+         * 
+         * 
+         */
         public async Task IterateCardsAndDamage()
         {
             foreach (CardUI enemyCardUI in GetCardUIList(Side.enemy))
@@ -542,64 +555,77 @@ namespace Client
         public void AddSkillToACard(CardUI cardUI, SkillObject skillToAdd)
         {
             Card card = cardUI.card;
-            if (skillToAdd == sceneConfiguration.skillsObjectsDict.poisonOther) 
+            if (skillToAdd == sceneConfiguration.skillsObjectsDict.poisonOther)
                 // todo just add SkillObject as a field to the skill?? Or probably I will use reflection class nam
             {
+                card.poisonOther.IsSet = true;
                 card.poisonOther.Value = new Poison();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.splitAttack)
             {
+                card.splitAttack.IsSet = true;
                 card.splitAttack.Value = new SplitAttack();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.buff)
             {
+                card.buff.IsSet = true;
                 card.buff.Value = new Buff();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.transformation)
             {
+                card.buff.IsSet = true;
                 card.buff.Value = new Buff();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.arrowShot)
             {
+                card.arrowShot.IsSet = true;
                 card.arrowShot.Value = new ArrowShot();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.steroids)
             {
+                card.steroids.IsSet = true;
                 card.steroids.Value = new Steroids();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.summon)
             {
+                card.summon.IsSet = true;
                 card.summon.Value = new Summon();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.shield)
             {
+                card.shield.IsSet = true;
                 card.shield.Value = new Shield();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.quill)
             {
+                card.quill.IsSet = true;
                 card.quill.Value = new Quill();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.reduceDamage)
             {
+                card.reduceDamage.IsSet = true;
                 card.reduceDamage.Value = new ReduceDamage();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.gyroAttack)
             {
+                card.gyroAttack.IsSet = true;
                 card.gyroAttack.Value = new GyroAttack();
             }
 
+            card.name += "+";
+
             RefreshCard(cardUI);
-            
+
             // if (card.poisoned.IsSet)
             // {
             //     activeSkillObjects.Add(sceneConfiguration.skillsObjectsDict.deadlyPoison);

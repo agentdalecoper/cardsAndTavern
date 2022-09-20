@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8bdeb6482a34bd785dbb6612cfa383c, type: 3}
-  m_Name: Phone
+  m_Name: Fallen priest
   m_EditorClassIdentifier: 
   card:
     hp: 2
     damage: 2
     name: 
-    sprite: {fileID: 21300000, guid: decd0ff46b73f4f0fb11d1c97c703c9e, type: 3}
+    sprite: {fileID: 21300000, guid: 50a856034672447ca8c1cb36b2658758, type: 3}
     itemOnly:
       IsSet: 0
       Value:
@@ -47,6 +47,7 @@ MonoBehaviour:
                         damage: 0
                         name: 
                         cost: 0
+                        numberOfSlots: 1
                   sellHigh:
                     IsSet: 0
               splitAttack:
@@ -85,6 +86,7 @@ MonoBehaviour:
               poisoned:
                 IsSet: 0
               cost: 0
+              numberOfSlots: 1
         sellHigh:
           IsSet: 0
     splitAttack:
@@ -123,3 +125,4 @@ MonoBehaviour:
     poisoned:
       IsSet: 0
     cost: 0
+    numberOfSlots: 1

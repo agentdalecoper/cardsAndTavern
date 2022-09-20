@@ -114,7 +114,7 @@ internal class ShopController : IEcsInitSystem
         await cardsChoseController.AnimationFromHandToTable(
             sceneConfiguration.choosenCardCameraOverlay, inventoryCardUI);
         cardsChoseController.NullifyUIs();
-        
+
         initializeCardSystem.CreateAndShowCardInHolder(
             inventoryCardUI.cardPosition,
             Side.player,
@@ -142,7 +142,7 @@ internal class ShopController : IEcsInitSystem
 
 
         AddMoney(card.cost);
-        gameContext.cardChosenUI = null;
+        cardsChoseController.NullifyUIs();
     }
 
     public void ProcessLevelEndedIncome(bool levelWon)
@@ -167,11 +167,10 @@ internal class ShopController : IEcsInitSystem
 
     public void AddSkillToACard(CardUI itemCardWithSkill, CardUI cardSkillToAdd)
     {
-
         SkillObject skillObject = cardsSystem
             .GetActiveSkillObjects(itemCardWithSkill.card.itemOnly.Value.itemAddsSkill.Value.cardWithSkill)
             .First();
-        
+
         cardsSystem.AddSkillToACard(cardSkillToAdd, skillObject);
         cardsChoseController.NullifyUIs();
     }
@@ -187,12 +186,19 @@ internal class ShopController : IEcsInitSystem
         List<CardUI> sameBoardCards = cardUIsOnTheBoard.Where(c => !CardsSystem.isDeadOrEmpty(c.card)
                                                                    && cardUI.card.name == c.card.name).ToList();
 
-        if (sameInventoryCards.Count + sameBoardCards.Count >= 3)
+        Debug.Log($"Checking card skill upgarde" +
+                  $" sameInventoryCards={string.Join(",", sameInventoryCards)} sameBoardCards={string.Join(",", sameBoardCards)}");
+        if (sameInventoryCards.Count + sameBoardCards.Count >= 2)
         {
-            CardUI mainCardToStarInto = sameInventoryCards.First();
-            sameInventoryCards.Remove(mainCardToStarInto);
-            CardUI secondCard = cardUI;
-            CardUI thirdCard = sameInventoryCards.Union(sameBoardCards).First();
+            List<CardUI> sameCardsUnion = sameBoardCards.Union(sameInventoryCards).ToList();
+
+            CardUI mainCardToStarInto = sameCardsUnion.First();
+            sameCardsUnion.Remove(mainCardToStarInto);
+
+            CardUI secondCard = sameCardsUnion.First();
+            sameCardsUnion.Remove(mainCardToStarInto);
+
+            CardUI thirdCard = cardUI;
 
             StarUpgrade(mainCardToStarInto);
             cardsSystem.RemoveCard(secondCard);
@@ -208,6 +214,10 @@ internal class ShopController : IEcsInitSystem
     {
         Card card = cardToStarUpgrade.card;
         card.numberOfSlots++;
+        card.name += "*";
+
+        cardsSystem.RefreshCard(cardToStarUpgrade);
+        cameraController.ShowPlayerOnlyCards();
         // damage / hp x2? 
     }
 }

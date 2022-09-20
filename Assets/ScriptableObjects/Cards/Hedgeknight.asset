@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8bdeb6482a34bd785dbb6612cfa383c, type: 3}
-  m_Name: Authority
+  m_Name: Hedgeknight
   m_EditorClassIdentifier: 
   card:
     hp: 3
-    damage: 3
+    damage: 1
     name: 
-    sprite: {fileID: 21300000, guid: decd0ff46b73f4f0fb11d1c97c703c9e, type: 3}
+    sprite: {fileID: 21300000, guid: d403bf23339da456eb7397947ba21a1e, type: 3}
     itemOnly:
       IsSet: 0
       Value:
@@ -47,6 +47,7 @@ MonoBehaviour:
                         damage: 0
                         name: 
                         cost: 0
+                        numberOfSlots: 1
                   sellHigh:
                     IsSet: 0
               splitAttack:
@@ -85,6 +86,7 @@ MonoBehaviour:
               poisoned:
                 IsSet: 0
               cost: 0
+              numberOfSlots: 1
         sellHigh:
           IsSet: 0
     splitAttack:
@@ -98,11 +100,11 @@ MonoBehaviour:
     buff:
       IsSet: 0
     transformation:
-      IsSet: 1
-      Value:
-        transformTo: {fileID: 11400000, guid: 20e8f36c6c5924cba84cebf830a3d35a, type: 2}
-    arrowShot:
       IsSet: 0
+      Value:
+        transformTo: {fileID: 0}
+    arrowShot:
+      IsSet: 1
     steroids:
       IsSet: 0
     summon:
@@ -123,3 +125,4 @@ MonoBehaviour:
     poisoned:
       IsSet: 0
     cost: 0
+    numberOfSlots: 1
