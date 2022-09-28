@@ -22,7 +22,6 @@ public class CardUI : MonoBehaviour
 
 
     public UnityEvent ActionCardClicked;
-    
     public static event Action<CardUI, CardUI> ActionCardDraggedOn;
 
     [NonSerialized] public int cardPosition;
@@ -84,7 +83,8 @@ public class CardUI : MonoBehaviour
     }
 
     public void ShowCardData(Card cardToShow, int position,
-        List<SkillObject> activeSkillObjects, int cost, bool cardInInventory)
+        List<SkillObject> activeSkillObjects,
+        int cost, bool cardInInventory)
     {
         NullifyUis();
  
@@ -94,16 +94,7 @@ public class CardUI : MonoBehaviour
         card = cardToShow;
         view.SetActive(true);
         
-        if (cardToShow.side == Side.player)
-        {
-            // image.raycastTarget = true;
-            dragable = false;
-        }
-        else
-        {
-            // image.raycastTarget = true;
-            dragable = true;
-        }
+        SetDraggable(cardToShow);
         
         for (var i = 0; i < activeSkillObjects.Count; i++)
         {
@@ -120,12 +111,30 @@ public class CardUI : MonoBehaviour
         transform.localRotation = initialRotation;
         cardFace.gameObject.SetActive(true);
     }
-    
+
+    public void SetDraggable(bool drag)
+    {
+        dragable = drag;
+    }
+    private void SetDraggable(Card cardToShow)
+    {
+        if (cardToShow.side == Side.player)
+        {
+            // image.raycastTarget = true;
+            dragable = true;
+        }
+        else
+        {
+            // image.raycastTarget = true;
+            dragable = false;
+        }
+    }
+
     void OnMouseDown()
     {
         Debug.Log("Card clicked " + this);
-        ActionCardClicked?.Invoke();
-
+        // ActionCardClicked?.Invoke();
+    
         if (!dragable)
         {
             return;
@@ -140,7 +149,7 @@ public class CardUI : MonoBehaviour
         {
             return;
         }
-
+        
         Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, CameraZDistance);
         Vector3 newWorldPosition = mainCamera.ScreenToWorldPoint(screenPosition); //Screen point converted to world point
         transform.position = new Vector3(newWorldPosition.x, transform.position.y, newWorldPosition.z);
@@ -172,16 +181,21 @@ public class CardUI : MonoBehaviour
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100))
+        RaycastHit[] hits = Physics.RaycastAll(ray, 100);
+            
+        if (hits.Length != 0)
         {
-            CardUI otherCardUi = hit.collider.gameObject.GetComponent<CardUI>();
-            if (otherCardUi != null && otherCardUi != this)
+            foreach (RaycastHit hit in hits)
             {
-                Debug.Log("Found raycast image!!! " + hit.collider.gameObject);
-                ActionCardDraggedOn?.Invoke(this, otherCardUi);
-                // transform.DOShakeRotation(0.1f, 2f, 10);
+                CardUI otherCardUi = hit.collider.gameObject.GetComponent<CardUI>();
+                if (otherCardUi != null && otherCardUi != this)
+                {
+                    Debug.Log("Found raycast image!!! " + hit.collider.gameObject);
+                    ActionCardDraggedOn?.Invoke(this, otherCardUi);
+                    // transform.DOShakeRotation(0.1f, 2f, 10);
+
+                    return;
+                }
             }
         }
         //

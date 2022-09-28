@@ -243,8 +243,9 @@ namespace Client
                     damage += cardUI.card.damage;
                 }
 
-                cameraController.ShowLeftward();
-                await cameraController.AwaitCinemachineBlending();
+                // cameraController.ShowLeftward();
+                // await cameraController.AwaitCinemachineBlending();
+                
                 gameContext.playerEnemyHpBalance -= damage;
                 Debug.Log("Damaging main board with damage " + damage);
                 // await Task.Delay(300);

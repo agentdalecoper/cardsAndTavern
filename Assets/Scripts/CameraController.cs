@@ -129,7 +129,7 @@ namespace Client
             // sceneConfiguration.playerCardsHolder.parent.gameObject.SetActive(false);
             // sceneConfiguration.cardsChooseHolder.parent.gameObject.SetActive(false);
             sceneConfiguration.dialogText.gameObject.SetActive(true);
-            ShowFront();
+            // ShowFront();
         }
 
         public void ShowChosenOverlayCard()

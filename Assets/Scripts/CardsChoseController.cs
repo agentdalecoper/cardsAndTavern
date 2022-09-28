@@ -44,11 +44,10 @@ public class CardsChoseController : IEcsSystem
     {
         gameContext.isCardChoseLevel = true;
         
-        NullifyUIs();
-
+        // NullifyUIs();
         ShowChoseCardsUi(cardsToChoseFrom);
-        CardUI chosenCardUi = await CheckForCardChosen();
-        await TakeCardInHandAndWaitForClick(chosenCardUi);
+        // CardUI chosenCardUi = await CheckForCardChosen();
+        // await TakeCardInHandAndWaitForClick(chosenCardUi);
         
         gameContext.isCardChoseLevel = false;
     }
@@ -67,7 +66,7 @@ public class CardsChoseController : IEcsSystem
 
     public async Task TakeCardInHand(CardUI chosenCardUi)
     {
-        await AnimationCardFromTableToHand(chosenCardUi);
+        // await AnimationCardFromTableToHand(chosenCardUi);
         RefreshCameraOverlayCard(chosenCardUi);
         cameraController.ShowChosenOverlayCard();
         cameraController.ShowPlayerOnlyCards();
@@ -101,8 +100,8 @@ public class CardsChoseController : IEcsSystem
             await Task.Yield();
         }
 
-        await AnimationFromHandToTable(sceneConfiguration.choosenCardCameraOverlay, 
-            gameContext.playerCardClickedUI);
+        // await AnimationFromHandToTable(sceneConfiguration.choosenCardCameraOverlay, 
+        //     gameContext.playerCardClickedUI);
 
         Debug.Log("waiting started suc card is " + gameContext.playerCardClickedUI.card);
 
@@ -186,10 +185,9 @@ public class CardsChoseController : IEcsSystem
         // initializeCardSystem.CreateAndShowCardInHolder(2, Side.player, cardsToChoseFrom[2],
         //     sceneConfiguration.cardsChooseHolder);
 
-        sceneConfiguration.playerCardsHolder.parent.gameObject.SetActive(false);
+        // sceneConfiguration.playerCardsHolder.parent.gameObject.SetActive(false);
         sceneConfiguration.cardsChooseHolder.gameObject.SetActive(true);
         
-                
         Debug.Log("Show table");
         // cameraController.ShowTable();
     }

@@ -119,6 +119,21 @@ public class InitializeCardSystem : IEcsSystem
         return ShowCardData(card, cardUI);
     }
 
+
+    public void MoveCardAndRemove(CardUI cardToMove, CardUI targetCard)
+    {
+        ShowCardData(cardToMove.card, targetCard);
+        cardsSystem.RemoveCard(cardToMove);
+    }
+    
+    public void SwapCards(CardUI cardUI1, CardUI cardUI2)
+    {
+        Card buffCard = cardUI1.card;
+
+        ShowCardData(cardUI2.card, cardUI1);
+        ShowCardData(buffCard, cardUI2);
+    }
+    
     public CardUI ShowCardData(Card card, CardUI cardUI)
     {
         cardUI.card = card;

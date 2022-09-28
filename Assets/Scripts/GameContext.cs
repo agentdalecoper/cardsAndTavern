@@ -1,33 +1,22 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using Client;
-using Leopotam.Ecs;
 using MyBox;
 using Newtonsoft.Json;
-using TMPro;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 [Serializable]
 public class GameContext
 {
-    [NonSerialized]
-    public Card[] cardsPlayer;
-    [NonSerialized]
-    public Card[] cardsEnemy;
-    
-    [NonSerialized]
-    public List<Card> cardsInDeck;
-    
-    [NonSerialized]
-    public List<Card> cardsInHand;
-    
-    [NonSerialized]
-    public int playerEnemyHpBalance = 5;
+    [NonSerialized] public Card[] cardsPlayer;
+    [NonSerialized] public Card[] cardsEnemy;
 
-    [NonSerialized] 
-    public int invasionLevel = 0;
+    [NonSerialized] public List<Card> cardsInDeck;
+
+    [NonSerialized] public List<Card> cardsInHand;
+
+    [NonSerialized] public int playerEnemyHpBalance = 5;
+
+    [NonSerialized] public int invasionLevel = 0;
 
     public CardUI cardChosenUI;
     public CardUI playerCardClickedUI;
@@ -211,5 +200,6 @@ public class Transformation
 public enum Side
 {
     player,
-    enemy
+    enemy,
+    shop
 }

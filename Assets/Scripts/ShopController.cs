@@ -111,8 +111,8 @@ internal class ShopController : IEcsInitSystem
 
         Card card = gameContext.cardChosenUI.card;
 
-        await cardsChoseController.AnimationFromHandToTable(
-            sceneConfiguration.choosenCardCameraOverlay, inventoryCardUI);
+        // await cardsChoseController.AnimationFromHandToTable(
+        //     sceneConfiguration.choosenCardCameraOverlay, inventoryCardUI);
         cardsChoseController.NullifyUIs();
 
         initializeCardSystem.CreateAndShowCardInHolder(
@@ -130,16 +130,15 @@ internal class ShopController : IEcsInitSystem
             .GetComponentsInChildren<CardUI>().ToList();
     }
 
-    public void SellACardClicked()
+    public void SellACardClicked(CardUI gameContextCardChosenUI)
     {
-        if (gameContext.cardChosenUI == null
+        if (gameContextCardChosenUI == null
             || CardsSystem.isDeadOrEmpty(gameContext.cardChosenUI.card))
         {
             return;
         }
 
-        Card card = gameContext.cardChosenUI.card;
-
+        Card card = gameContextCardChosenUI.card;
 
         AddMoney(card.cost);
         cardsChoseController.NullifyUIs();
@@ -219,5 +218,9 @@ internal class ShopController : IEcsInitSystem
         cardsSystem.RefreshCard(cardToStarUpgrade);
         cameraController.ShowPlayerOnlyCards();
         // damage / hp x2? 
+    }
+
+    public void BuyCardClicked(CardUI draggedCard)
+    {
     }
 }

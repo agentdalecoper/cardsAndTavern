@@ -45,14 +45,14 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
 #endif
 
         /*
-         * (давай все 3дшно сделаем)
-         * (можно уменьшить карточки, между инвейженами показывать только 8 твоих карт
-         * а потом отдалять экран, возможно сделать оверлэй какой-то камнры)
-         * 
-         * - Cards inventory (items + cards) 
-         * - Продавание карты из инвентаряа 
-         * - стоимость карты появление
-         * - Choose card to sacrifice - ну слушай сделать это как when playerCard tapped код 
+         * Так а драг как работает
+         * 1. Если в бою - то отключаем
+         * 2. Если не в бою - включаем
+         *      2.1 Можно перетащить из инвентаря
+         *      2.2 Можно перетащить в инвентарь
+         *      2.3 Можно поменять местами с инвентарем или с картой на поле
+         *      2.4 можно перетащить на штриховку чтобы продать
+         * 3. Если магазин ролл видим - то можем перетащить из магазина и купить карточку
          */
         
         CardsInvasionController invasionController = new CardsInvasionController();
@@ -84,10 +84,47 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             .Inject(shopSystm)
             .Inject(DialogTextManager.Instance)
             .Init();
-        // .OneFrame<TestComponent1> ()
-        // .OneFrame<TestComponent2> ()
 
         StartFunction();
+
+        // todo it can be better implemented via interfaces 
+        CardUI.ActionCardDraggedOn += (draggedCard, underCard) =>
+        {
+            if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.player)
+            {
+                Debug.Log("Sell a card ActionCardDraggedOn");
+                shopController.SellACardClicked(draggedCard);
+                return;
+            }
+
+            // if card is from the shop and it is empty slot - buy card
+            if (CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
+            {
+                Debug.Log("Buy a card ActionCardDraggedOn");
+                shopController.BuyCardClicked(draggedCard);
+                return;
+            }
+
+            if (!CardsSystem.isDeadOrEmpty(underCard.card) && underCard.card.side == Side.enemy)
+            {
+                Debug.LogWarning("Tried to drag onto the enemy");
+                return;
+            }
+
+            if (CardsSystem.isDeadOrEmpty(underCard.card))
+            {
+                Debug.Log("Move Card And Remove ActionCardDraggedOn");
+                initializeCardSystm.MoveCardAndRemove(draggedCard, underCard);
+                return;
+            }
+
+            if (!CardsSystem.isDeadOrEmpty(underCard.card))
+            {
+                Debug.Log("Swap cards ActionCardDraggedOn");
+                initializeCardSystm.SwapCards(draggedCard, underCard);
+                return;
+            }
+        };
 
         test();
     }
@@ -246,7 +283,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
 
     public void SellACardClicked()
     {
-        shopController.SellACardClicked();
+        shopController.SellACardClicked(gameContext.cardChosenUI);
         Debug.Log("sell card clicked");
     }
 
