@@ -178,9 +178,9 @@ public class CardsChoseController : IEcsSystem
 
     public void ShowChoseCardsUi(CardObject[] cardsToChoseFrom)
     {
-        initializeCardSystem.CreateAndShowCardInHolder(0, Side.player, cardsToChoseFrom[0],
+        initializeCardSystem.CreateAndShowCardInHolder(0, Side.shop, cardsToChoseFrom[0],
             sceneConfiguration.cardsChooseHolder);
-        initializeCardSystem.CreateAndShowCardInHolder(1, Side.player, cardsToChoseFrom[1],
+        initializeCardSystem.CreateAndShowCardInHolder(1, Side.shop, cardsToChoseFrom[1],
             sceneConfiguration.cardsChooseHolder);
         // initializeCardSystem.CreateAndShowCardInHolder(2, Side.player, cardsToChoseFrom[2],
         //     sceneConfiguration.cardsChooseHolder);

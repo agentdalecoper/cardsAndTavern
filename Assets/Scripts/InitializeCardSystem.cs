@@ -128,6 +128,9 @@ public class InitializeCardSystem : IEcsSystem
     
     public void SwapCards(CardUI cardUI1, CardUI cardUI2)
     {
+        cardUI1.MoveToStartPosition();
+        cardUI2.MoveToStartPosition();
+        
         Card buffCard = cardUI1.card;
 
         ShowCardData(cardUI2.card, cardUI1);

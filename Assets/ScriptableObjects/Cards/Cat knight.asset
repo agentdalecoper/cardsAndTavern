@@ -16,7 +16,7 @@ MonoBehaviour:
     hp: 5
     damage: 3
     name: 
-    sprite: {fileID: 21300000, guid: 685d397cab75b4f9ca4ff0a9e905121e, type: 3}
+    sprite: {fileID: 21300000, guid: d204422b85be3482091cdc71d81a9741, type: 3}
     itemOnly:
       IsSet: 0
       Value:

@@ -220,7 +220,10 @@ internal class ShopController : IEcsInitSystem
         // damage / hp x2? 
     }
 
-    public void BuyCardClicked(CardUI draggedCard)
+    public void BuyCardClicked(CardUI draggedCard, CardUI underCard)
     {
+        initializeCardSystem.ShowCardData(draggedCard.card, underCard);
+        cardsSystem.RemoveCard(draggedCard);
+        draggedCard.MoveToStartPosition();
     }
 }

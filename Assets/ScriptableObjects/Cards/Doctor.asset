@@ -16,7 +16,7 @@ MonoBehaviour:
     hp: 4
     damage: 1
     name: Agression
-    sprite: {fileID: 21300000, guid: 5373dfc8a18124cc78b822e144c40cb8, type: 3}
+    sprite: {fileID: 21300000, guid: 41ac12ca61283453b937ff836f760ea6, type: 3}
     itemOnly:
       IsSet: 0
       Value:

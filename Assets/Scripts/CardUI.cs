@@ -55,6 +55,7 @@ public class CardUI : MonoBehaviour
         CameraZDistance =
             mainCamera.WorldToScreenPoint(transform.position).z; //z axis of the game object for screen view
         initialRotation = transform.localRotation;
+        startAnchoredPosition = transform.position;
     }
     
     public void ShowEmptyCardData()
@@ -118,7 +119,7 @@ public class CardUI : MonoBehaviour
     }
     private void SetDraggable(Card cardToShow)
     {
-        if (cardToShow.side == Side.player)
+        if (cardToShow.side != Side.enemy)
         {
             // image.raycastTarget = true;
             dragable = true;
@@ -143,8 +144,11 @@ public class CardUI : MonoBehaviour
         startAnchoredPosition = transform.position;
     }
     
+    
     void OnMouseDrag()
     {
+        Debug.Log("drag");
+        
         if (!dragable)
         {
             return;
@@ -211,8 +215,13 @@ public class CardUI : MonoBehaviour
         //     }
         // }
 
-        transform.position = startAnchoredPosition;
+        MoveToStartPosition();
         // transform.rotation = initialRotation;
+    }
+
+    public void MoveToStartPosition()
+    {
+        transform.position = startAnchoredPosition;
     }
 
     public override string ToString()

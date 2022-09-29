@@ -101,7 +101,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             if (CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
             {
                 Debug.Log("Buy a card ActionCardDraggedOn");
-                shopController.BuyCardClicked(draggedCard);
+                shopController.BuyCardClicked(draggedCard, underCard);
                 return;
             }
 
