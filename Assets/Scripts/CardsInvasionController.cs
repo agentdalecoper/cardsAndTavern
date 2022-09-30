@@ -35,7 +35,10 @@ namespace Client
         {
             initializeCardSystem.RefreshCardsUIs();
 
-            Card[] initialPlayerCards = cardsSystem.GetCardList(Side.player).Select(CloneCard).ToArray();
+            Card[] initialPlayerCards = cardsSystem
+                .GetCardList(Side.player)
+                .Select(CloneCard)
+                .ToArray();
             // Card[] initialEnemyCards = cardsSystem.GetCardList(Side.enemy).Select(CloneCard).ToArray();
 
             InitiateDialogAndCardsInvasion(enemyCardsObject);
@@ -82,19 +85,18 @@ namespace Client
                 
                 if (card != null)
                 {
-                    cardUI = cardsSystem.GetCardUIList(Side.player)[i];
+                    cardUI = cardsSystem.GetCardAllUIs(Side.player)[i];
                     cardUI.card = card;
                     cardsSystem.RefreshCard(cardUI);
                 }
                 else
                 {
-                    cardUI = sceneConfiguration.playerCardsHolder.GetChild(i).GetComponent<CardUI>();
+                    cardUI = cardsSystem.GetCardAllUIs(Side.player)[i];
                     cardUI.ShowEmptyCardData();
                     Debug.Log("showed empty ui: " + cardUI);
                 }
                 
                 cardUI.gameObject.SetActive(true);
-                cardUI.view.SetActive(true);
             }
         }
 

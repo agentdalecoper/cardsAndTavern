@@ -122,6 +122,9 @@ public class InitializeCardSystem : IEcsSystem
 
     public void MoveCardAndRemove(CardUI cardToMove, CardUI targetCard)
     {
+        cardToMove.MoveToStartPosition();
+        targetCard.MoveToStartPosition();
+
         ShowCardData(cardToMove.card, targetCard);
         cardsSystem.RemoveCard(cardToMove);
     }

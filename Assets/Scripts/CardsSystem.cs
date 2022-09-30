@@ -501,6 +501,7 @@ namespace Client
             int cost = GetCost(card);
             List<SkillObject> activeSkillObjects = GetActiveSkillObjects(card);
             bool cardInInventory = shopController.GetInventoryUICards().Contains(cardUI);
+            cardUI.view.SetActive(true);
 
             // poisoned
 
@@ -690,15 +691,21 @@ namespace Client
 
         public List<CardUI> GetCardUIList(Side side, int lineLevel = 0)
         {
-            Transform cardHolder = GetCardHolder(side);
-
             Debug.Log($"Get card list level={lineLevel}," +
-                      $" cardsToCheck={string.Join(",", cardHolder.GetComponentsInChildren<CardUI>().ToList())}");
+                      $" cardsToCheck={string.Join(",", GetCardAllUIs(side))}");
             
-            return cardHolder
-                .GetComponentsInChildren<CardUI>()
+            return GetCardAllUIs(side)
                 .Where(cardUI => (cardUI.cardPosition / sceneConfiguration.cardsOnBoardCount) == lineLevel)
                 .ToList();
+        }
+
+        public List<CardUI> GetCardAllUIs(Side side)
+        {
+            Transform cardHolder = GetCardHolder(side);
+
+
+            return cardHolder
+                .GetComponentsInChildren<CardUI>().ToList();
         }
 
         public Transform GetCardHolder(Side side)

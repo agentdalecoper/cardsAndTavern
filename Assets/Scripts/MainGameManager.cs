@@ -44,17 +44,6 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
         Leopotam.Ecs.UnityIntegration.EcsSystemsObserver.Create(_systems);
 #endif
 
-        /*
-         * Так а драг как работает
-         * 1. Если в бою - то отключаем
-         * 2. Если не в бою - включаем
-         *      2.1 Можно перетащить из инвентаря
-         *      2.2 Можно перетащить в инвентарь
-         *      2.3 Можно поменять местами с инвентарем или с картой на поле
-         *      2.4 можно перетащить на штриховку чтобы продать
-         * 3. Если магазин ролл видим - то можем перетащить из магазина и купить карточку
-         */
-        
         CardsInvasionController invasionController = new CardsInvasionController();
         CardsChoseController choseController = new CardsChoseController();
         DialogController dialogCntrler = new DialogController();
@@ -118,12 +107,21 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
                 return;
             }
 
+            if (!CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.itemOnly.IsSet
+                                                           && draggedCard.card.itemOnly.Value.itemAddsSkill.IsSet)
+            {
+                shopController.AddSkillToACard(draggedCard, underCard);
+                Debug.Log("Add a skill to a card ActionCardDraggedOn");
+                return;
+            }
+            
             if (!CardsSystem.isDeadOrEmpty(underCard.card))
             {
                 Debug.Log("Swap cards ActionCardDraggedOn");
                 initializeCardSystm.SwapCards(draggedCard, underCard);
                 return;
             }
+
         };
 
         test();

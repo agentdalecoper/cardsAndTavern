@@ -132,14 +132,8 @@ internal class ShopController : IEcsInitSystem
 
     public void SellACardClicked(CardUI gameContextCardChosenUI)
     {
-        if (gameContextCardChosenUI == null
-            || CardsSystem.isDeadOrEmpty(gameContext.cardChosenUI.card))
-        {
-            return;
-        }
-
         Card card = gameContextCardChosenUI.card;
-
+        cardsSystem.RemoveCard(gameContextCardChosenUI);
         AddMoney(card.cost);
         cardsChoseController.NullifyUIs();
     }
@@ -166,24 +160,28 @@ internal class ShopController : IEcsInitSystem
 
     public void AddSkillToACard(CardUI itemCardWithSkill, CardUI cardSkillToAdd)
     {
+        itemCardWithSkill.MoveToStartPosition();
+        cardSkillToAdd.MoveToStartPosition();
+
         SkillObject skillObject = cardsSystem
             .GetActiveSkillObjects(itemCardWithSkill.card.itemOnly.Value.itemAddsSkill.Value.cardWithSkill)
             .First();
 
         cardsSystem.AddSkillToACard(cardSkillToAdd, skillObject);
+        cardsSystem.RemoveCard(itemCardWithSkill);
         cardsChoseController.NullifyUIs();
     }
 
     public bool CheckIfCardSkillUpgrade(CardUI cardUI)
     {
         List<CardUI> cardUIsInTheInventory = GetInventoryUICards();
-        List<CardUI> cardUIsOnTheBoard = cardsSystem.GetCardUIList(Side.player);
+        List<CardUI> cardUIsOnTheBoard = cardsSystem.GetCardAllUIs(Side.player);
 
         List<CardUI> sameInventoryCards =
             cardUIsInTheInventory.Where(c => !CardsSystem.isDeadOrEmpty(c.card)
-                                             && cardUI.card.name == c.card.name).ToList();
+                                             && cardUI.card.cardObject.name == c.card.cardObject.name).ToList();
         List<CardUI> sameBoardCards = cardUIsOnTheBoard.Where(c => !CardsSystem.isDeadOrEmpty(c.card)
-                                                                   && cardUI.card.name == c.card.name).ToList();
+                                                                   && cardUI.card.cardObject.name == c.card.cardObject.name).ToList();
 
         Debug.Log($"Checking card skill upgarde" +
                   $" sameInventoryCards={string.Join(",", sameInventoryCards)} sameBoardCards={string.Join(",", sameBoardCards)}");
@@ -202,6 +200,10 @@ internal class ShopController : IEcsInitSystem
             StarUpgrade(mainCardToStarInto);
             cardsSystem.RemoveCard(secondCard);
             cardsSystem.RemoveCard(thirdCard);
+            
+            mainCardToStarInto.MoveToStartPosition();
+            secondCard.MoveToStartPosition();
+            thirdCard.MoveToStartPosition();
 
             return true;
         }
@@ -222,8 +224,15 @@ internal class ShopController : IEcsInitSystem
 
     public void BuyCardClicked(CardUI draggedCard, CardUI underCard)
     {
-        initializeCardSystem.ShowCardData(draggedCard.card, underCard);
-        cardsSystem.RemoveCard(draggedCard);
-        draggedCard.MoveToStartPosition();
+        Card boughtCard = draggedCard.card;
+        boughtCard.side = Side.player;
+
+        if (!CheckIfCardSkillUpgrade(draggedCard))
+        {
+            initializeCardSystem.ShowCardData(draggedCard.card, underCard);
+            cardsSystem.RemoveCard(draggedCard);
+            RemoveMoney(1);
+            draggedCard.MoveToStartPosition();
+        }
     }
 }
