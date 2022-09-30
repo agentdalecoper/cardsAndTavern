@@ -67,8 +67,20 @@ namespace Client
         public SkillsObjectsListed skillsObjectsDict;
 
         public Shop shop;
+
+        public SceneAudioConfiguration sceneAudioConfiguration;
     }
-    
+
+    [Serializable]
+    public class SceneAudioConfiguration
+    {
+        public AudioClip tavernAmbient;
+        public AudioClip cardTake;
+        public AudioClip cardDrop;
+        public AudioClip cardMove;
+        public AudioClip cardAttack;
+    }
+
 
     [Serializable]
     public class Shop

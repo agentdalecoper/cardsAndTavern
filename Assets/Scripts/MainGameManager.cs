@@ -74,6 +74,19 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             .Inject(DialogTextManager.Instance)
             .Init();
 
+        sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.tavernAmbient;
+        sceneConfiguration.audioSource.Play();
+
+        CardUI.ActionCardStartDrag += cardUi =>
+        {
+            PlayAudioCardTaken();
+        };
+        CardsSystem.ActionCardDamaged += cardUi =>
+        {
+            sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardAttack;
+            sceneConfiguration.tableAudioSource.Play();
+        };
+
         StartFunction();
 
         // todo it can be better implemented via interfaces 
@@ -91,6 +104,8 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             {
                 Debug.Log("Buy a card ActionCardDraggedOn");
                 shopController.BuyCardClicked(draggedCard, underCard);
+                sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
+                sceneConfiguration.tableAudioSource.Play();
                 return;
             }
 
@@ -104,6 +119,8 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             {
                 Debug.Log("Move Card And Remove ActionCardDraggedOn");
                 initializeCardSystm.MoveCardAndRemove(draggedCard, underCard);
+                sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
+                sceneConfiguration.tableAudioSource.Play();
                 return;
             }
 
@@ -111,6 +128,8 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
                                                            && draggedCard.card.itemOnly.Value.itemAddsSkill.IsSet)
             {
                 shopController.AddSkillToACard(draggedCard, underCard);
+                sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
+                sceneConfiguration.tableAudioSource.Play();
                 Debug.Log("Add a skill to a card ActionCardDraggedOn");
                 return;
             }
@@ -119,12 +138,20 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             {
                 Debug.Log("Swap cards ActionCardDraggedOn");
                 initializeCardSystm.SwapCards(draggedCard, underCard);
+                sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
+                sceneConfiguration.tableAudioSource.Play();
                 return;
             }
 
         };
 
         test();
+    }
+
+    public void PlayAudioCardTaken()
+    {
+        sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardTake;
+        sceneConfiguration.tableAudioSource.Play();
     }
 
 

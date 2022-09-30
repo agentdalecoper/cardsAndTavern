@@ -20,13 +20,12 @@ public class CardUI : MonoBehaviour
 
     private RectTransform rectTransform;
 
-
     public UnityEvent ActionCardClicked;
     public static event Action<CardUI, CardUI> ActionCardDraggedOn;
+    public static event Action<CardUI> ActionCardStartDrag;
 
     [NonSerialized] public int cardPosition;
-
-
+    
     private bool dragable;
     private Vector3 startAnchoredPosition;
 
@@ -140,6 +139,8 @@ public class CardUI : MonoBehaviour
         {
             return;
         }
+        
+        ActionCardStartDrag?.Invoke(this);
         
         startAnchoredPosition = transform.position;
     }

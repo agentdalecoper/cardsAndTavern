@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,8 @@ namespace Client
         private InitializeCardSystem initializeCardSystem;
         private CameraController cameraController;
         private ShopController shopController;
+        
+        public static event Action<CardUI> ActionCardDamaged;
 
         public async Task CardTurn(CardUI cardUi, CardUI enemyCardUi)
         {
@@ -412,7 +415,7 @@ namespace Client
             
             if (isDeadOrEmpty(enemyCard)) return;
             
-            sceneConfiguration.tableAudioSource.PlayOneShot(sceneConfiguration.cardDamageAudio);
+            ActionCardDamaged?.Invoke(enemyCardUi);
 
             Debug.Log("damage dealt to card " + enemyCard);
 
