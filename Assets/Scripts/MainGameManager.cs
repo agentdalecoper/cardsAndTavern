@@ -102,6 +102,12 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
          */
         CardUI.ActionCardDraggedOn += (draggedCard, underCard) =>
         {
+            if (underCard.gameObject.name.StartsWith("BuyCard"))
+            {
+                draggedCard.MoveToStartPosition();
+                return;
+            }
+            
             if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.player)
             {
                 Debug.Log("Sell a card ActionCardDraggedOn");
@@ -127,8 +133,8 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             {
                 Debug.Log("Buy a card ActionCardDraggedOn");
                 shopController.BuyCardClicked(draggedCard, underCard);
-                sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
-                sceneConfiguration.tableAudioSource.Play();
+                // sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
+                // sceneConfiguration.tableAudioSource.Play();
                 return;
             }
 
@@ -147,7 +153,6 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
                 return;
             }
 
-            // bug
             if (!CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.itemOnly.IsSet
                                                            && draggedCard.card.itemOnly.Value.itemAddsSkill.IsSet)
             {

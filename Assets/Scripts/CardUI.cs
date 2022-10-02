@@ -40,6 +40,8 @@ public class CardUI : MonoBehaviour
 
     public SpriteRenderer cardFace;
 
+    public TextMesh cost;
+
     private Quaternion initialRotation;
 
     private void Awake()
@@ -80,28 +82,30 @@ public class CardUI : MonoBehaviour
             skillUis[i].sprite = null;
             skillUis[i].gameObject.SetActive(false);
         }
+        
+        cost.gameObject.transform.parent.gameObject.SetActive(false);
     }
 
     public void ShowCardData(Card cardToShow, int position,
         List<SkillObject> activeSkillObjects,
-        int cost, bool cardInInventory)
+        int cardCost, bool cardInInventory)
     {
         NullifyUis();
- 
+
         damageText.text = cardToShow.damage.ToString();
         hpText.text = cardToShow.hp.ToString();
         nameText.text = cardToShow.name;
         card = cardToShow;
         view.SetActive(true);
-        
+
         SetDraggable(cardToShow);
-        
+
         for (var i = 0; i < activeSkillObjects.Count; i++)
         {
             skillUis[i].sprite = activeSkillObjects[i].sprite;
             skillUis[i].gameObject.SetActive(true);
         }
-        
+
 
         // image.sprite = cardToShow.sprite;
 
@@ -110,6 +114,12 @@ public class CardUI : MonoBehaviour
         cardFace.sprite = cardToShow.cardObject.card.sprite;
         transform.localRotation = initialRotation;
         cardFace.gameObject.SetActive(true);
+
+        cost.text = cardCost + "$";
+        if (card.side == Side.shop)
+        {
+            cost.gameObject.transform.parent.gameObject.SetActive(true);
+        }
     }
 
     public void SetDraggable(bool drag)
@@ -144,21 +154,43 @@ public class CardUI : MonoBehaviour
         
         startAnchoredPosition = transform.position;
     }
-    
-    
+
+
     void OnMouseDrag()
     {
         Debug.Log("drag");
-        
+
         if (!dragable)
         {
             return;
         }
-        
+
         Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, CameraZDistance);
-        Vector3 newWorldPosition = mainCamera.ScreenToWorldPoint(screenPosition); //Screen point converted to world point
+        Vector3 newWorldPosition =
+            mainCamera.ScreenToWorldPoint(screenPosition); //Screen point converted to world point
         transform.position = new Vector3(newWorldPosition.x, transform.position.y, newWorldPosition.z);
         // transform.DOShakeRotation(0.1f, 0.1f, 1);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit[] hits = Physics.RaycastAll(ray, 100);
+
+        if (hits.Length != 0)
+        {
+            foreach (RaycastHit hit in hits)
+            {
+                CardUI otherCardUi = hit.collider.gameObject.GetComponent<CardUI>();
+                if (otherCardUi != null && otherCardUi != this && otherCardUi.gameObject.name == "SellCard")
+                {
+                    cost.gameObject.transform.parent.gameObject.SetActive(true);
+                    return;
+                }
+            }
+        }
+
+        if (card == null || card.side != Side.shop)
+        {
+            cost.gameObject.transform.parent.gameObject.SetActive(false);
+        }
     }
 
     private void OnMouseOver()

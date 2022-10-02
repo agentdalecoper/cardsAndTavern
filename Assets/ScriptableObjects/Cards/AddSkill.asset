@@ -85,7 +85,7 @@ MonoBehaviour:
                 IsSet: 0
               poisoned:
                 IsSet: 0
-              cost: 0
+              cost: 1
               numberOfSlots: 1
         sellHigh:
           IsSet: 0
