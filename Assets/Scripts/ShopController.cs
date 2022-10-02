@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Client;
@@ -14,6 +15,8 @@ internal class ShopController : IEcsInitSystem
     private DialogController dialogController;
 
     private SceneConfiguration sceneConfiguration;
+
+    public static event Action OnMoneyChanged;
 
     public void Init()
     {
@@ -56,12 +59,14 @@ internal class ShopController : IEcsInitSystem
     {
         sceneConfiguration.shop.currentMoney += money;
         RefreshShopUis();
+        OnMoneyChanged?.Invoke();
     }
 
     public void RemoveMoney(int money)
     {
         sceneConfiguration.shop.currentMoney -= money;
         RefreshShopUis();
+        OnMoneyChanged?.Invoke();
     }
 
     private void RefreshShopUis()
@@ -226,12 +231,12 @@ internal class ShopController : IEcsInitSystem
     {
         Card boughtCard = draggedCard.card;
         boughtCard.side = Side.player;
+        RemoveMoney(boughtCard.cost);
 
         if (!CheckIfCardSkillUpgrade(draggedCard))
         {
             initializeCardSystem.ShowCardData(draggedCard.card, underCard);
             cardsSystem.RemoveCard(draggedCard);
-            RemoveMoney(1);
             draggedCard.MoveToStartPosition();
         }
     }

@@ -3001,7 +3001,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.7984, y: 1}
+    m_SensorSize: {x: 1.6003649, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3018,7 +3018,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315318506}
   m_LocalRotation: {x: -0.05119921, y: 0.7169227, z: -0.048825473, w: -0.6935537}
-  m_LocalPosition: {x: -0.04, y: 3.387, z: 0.73355603}
+  m_LocalPosition: {x: -0.196, y: 4.471, z: 1.428}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11126,7 +11126,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.7984, y: 1}
+    m_SensorSize: {x: 1.6003649, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12783,7 +12783,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865483498}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.21, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23011,6 +23011,10 @@ PrefabInstance:
       propertyPath: sceneConfiguration.sceneAudioConfiguration.cardAttack
       value: 
       objectReference: {fileID: 8300000, guid: eb820b3491399403c92d38589178f4c3, type: 3}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.sceneAudioConfiguration.moneySound
+      value: 
+      objectReference: {fileID: 8300000, guid: 976270f4d653840a8ad1f3c23ae6875a, type: 3}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.sceneAudioConfiguration.tavernAmbient
       value: 

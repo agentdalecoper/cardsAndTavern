@@ -79,6 +79,9 @@ namespace Client
         public AudioClip cardDrop;
         public AudioClip cardMove;
         public AudioClip cardAttack;
+
+        public AudioClip moneySound;
+        public AudioClip medievalSound;
     }
 
 

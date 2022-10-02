@@ -132,7 +132,7 @@ public class CardUI : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("Card clicked " + this);
+            Debug.Log("Card clicked " + this);
         // ActionCardClicked?.Invoke();
     
         if (!dragable)

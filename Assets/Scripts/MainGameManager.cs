@@ -86,10 +86,20 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardAttack;
             sceneConfiguration.tableAudioSource.Play();
         };
+        ShopController.OnMoneyChanged += () =>
+        {
+            sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.moneySound;
+            sceneConfiguration.tableAudioSource.Play();
+        };
 
         StartFunction();
 
         // todo it can be better implemented via interfaces 
+        /*
+         * sell a card bg
+         * 
+         * 
+         */
         CardUI.ActionCardDraggedOn += (draggedCard, underCard) =>
         {
             if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.player)
@@ -98,6 +108,19 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
                 shopController.SellACardClicked(draggedCard);
                 return;
             }
+            
+            if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.shop)
+            {
+                draggedCard.MoveToStartPosition();
+                return;
+            }
+            
+            if (!CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
+            {
+                draggedCard.MoveToStartPosition();
+                return;
+            }
+            
 
             // if card is from the shop and it is empty slot - buy card
             if (CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
@@ -124,6 +147,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
                 return;
             }
 
+            // bug
             if (!CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.itemOnly.IsSet
                                                            && draggedCard.card.itemOnly.Value.itemAddsSkill.IsSet)
             {
