@@ -88,15 +88,14 @@ namespace Client
                     cardUI = cardsSystem.GetCardAllUIs(Side.player)[i];
                     cardUI.card = card;
                     cardsSystem.RefreshCard(cardUI);
+                    cardUI.gameObject.SetActive(true);
                 }
                 else
                 {
                     cardUI = cardsSystem.GetCardAllUIs(Side.player)[i];
-                    cardUI.ShowEmptyCardData();
+                    cardsSystem.RemoveCard(cardUI);
                     Debug.Log("showed empty ui: " + cardUI);
                 }
-                
-                cardUI.gameObject.SetActive(true);
             }
         }
 

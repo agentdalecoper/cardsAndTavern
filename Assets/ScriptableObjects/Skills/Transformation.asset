@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91dee88ab7446eb95f5f18f73ad8e1, type: 3}
   m_Name: Transformation
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: acbff8a149b4e4297b4db9a95815a027, type: 3}
+  sprite: {fileID: 21300000, guid: 7fe07dd79d3cd412dbb427745950d3f7, type: 3}
   name: 

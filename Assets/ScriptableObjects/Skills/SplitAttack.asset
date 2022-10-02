@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91dee88ab7446eb95f5f18f73ad8e1, type: 3}
   m_Name: SplitAttack
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 448d06523cdea4e62814898a5e322676, type: 3}
+  sprite: {fileID: 21300000, guid: e37d988e1550f43369e87cff508ee625, type: 3}
   name: 

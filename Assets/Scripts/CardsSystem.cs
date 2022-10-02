@@ -133,10 +133,8 @@ namespace Client
             }
 
 
-            AdvancePreviousLineCards(Side.enemy);
-            // AdvancePreviousLineCards(Side.player);
-
-            // 
+            AdvancePreviousLineCards(Side.enemy); // advance and take action
+            AdvancePreviousLineCards(Side.player);
         }
 
         private void AdvancePreviousLineCards(Side side)
@@ -150,6 +148,11 @@ namespace Client
                 List<CardUI> cardsLineCards = GetCardUIList(side, line);
 
                 Debug.Log("Card Line cards " + string.Join(",", cardsLineCards));
+
+                if (previousLineCards.Count == 0 || cardsLineCards.Count == 0)
+                {
+                    return;
+                }
 
                 for (int i = 0; i < sceneConfiguration.cardsOnBoardCount; i++)
                 {
