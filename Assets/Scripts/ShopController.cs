@@ -226,7 +226,7 @@ internal class ShopController : IEcsInitSystem
         card.name += "*";
 
         cardsSystem.RefreshCard(cardToStarUpgrade);
-        cameraController.ShowPlayerOnlyCards();
+        cameraController.ShowShopAndPlayerCards();
         // damage / hp x2? 
     }
 

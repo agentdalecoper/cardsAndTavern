@@ -29,25 +29,25 @@ namespace Client
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                ShowRightward();
-            }
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                ShowLeftward();
-            }
-
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                ShowTable();
-            }
-
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                ShowFront();
-            }
+            // if (Input.GetKeyDown(KeyCode.D))
+            // {
+            //     ShowRightward();
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.A))
+            // {
+            //     ShowLeftward();
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.S))
+            // {
+            //     ShowTable();
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.W))
+            // {
+            //     ShowFront();
+            // }
         }
 
         public async Task AwaitCinemachineBlending()
@@ -114,14 +114,16 @@ namespace Client
             sceneConfiguration.playerCardsHolder.gameObject.SetActive(true);
             sceneConfiguration.enemyCardsHolder.gameObject.SetActive(true);
             sceneConfiguration.cardsChooseHolder.gameObject.SetActive(false);
+            sceneConfiguration.shop.shopGameObject.gameObject.SetActive(false);
         }
 
-        public void ShowPlayerOnlyCards()
+        public void ShowShopAndPlayerCards()
         {
             sceneConfiguration.playerCardsHolder.parent.gameObject.SetActive(true);
             sceneConfiguration.playerCardsHolder.gameObject.SetActive(true);
             sceneConfiguration.cardsChooseHolder.gameObject.SetActive(false);
             sceneConfiguration.enemyCardsHolder.gameObject.SetActive(false);
+            sceneConfiguration.shop.shopGameObject.gameObject.SetActive(true);
         }
 
         public void ShowDialogOnly()
@@ -131,6 +133,8 @@ namespace Client
             sceneConfiguration.dialogText.gameObject.SetActive(true);
             // ShowFront();
         }
+        
+        
 
         public void ShowChosenOverlayCard()
         {

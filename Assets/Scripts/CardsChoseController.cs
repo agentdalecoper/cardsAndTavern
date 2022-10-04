@@ -69,7 +69,7 @@ public class CardsChoseController : IEcsSystem
         // await AnimationCardFromTableToHand(chosenCardUi);
         RefreshCameraOverlayCard(chosenCardUi);
         cameraController.ShowChosenOverlayCard();
-        cameraController.ShowPlayerOnlyCards();
+        cameraController.ShowShopAndPlayerCards();
     }
 
     private void RefreshCameraOverlayCard(CardUI chosenCardUi)

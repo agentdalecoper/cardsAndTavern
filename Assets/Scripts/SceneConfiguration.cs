@@ -102,6 +102,7 @@ namespace Client
         public ChoseCardsObject shopChoseCardsObject;
 
         public GameObject inventoryCardsHolder;
+        public GameObject shopGameObject;
     }
 
     [Serializable]

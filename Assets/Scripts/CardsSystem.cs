@@ -16,7 +16,7 @@ namespace Client
         private InitializeCardSystem initializeCardSystem;
         private CameraController cameraController;
         private ShopController shopController;
-        
+
         public static event Action<CardUI> ActionCardDamaged;
 
         public async Task CardTurn(CardUI cardUi, CardUI enemyCardUi)
@@ -28,8 +28,8 @@ namespace Client
 
             if (isDeadOrEmpty(enemyCard)) return;
 
-            await CardTurn(enemyCard, card, enemyCardUi, cardUi);
             await CardTurn(card, enemyCard, cardUi, enemyCardUi);
+            await CardTurn(enemyCard, card, enemyCardUi, cardUi);
 
             initializeCardSystem.ShowCardData(cardUi.cardPosition, card,
                 sceneConfiguration.enemyCardsHolder);
@@ -70,7 +70,7 @@ namespace Client
                         await AnimateTransformShake(crdUi);
                         Card transformedCard = initializeCardSystem.CreateCard(crd.side, transformation.transformTo);
                         initializeCardSystem.ShowCardData(crdUi.cardPosition, transformedCard, GetCardHolder(crd.side));
-                        
+
                         // crdUi.cardFace.color = Color.red;
                         // initializeCardSystem.SetCardAtPosition(crdUi.cardPosition, gameContext, crd);
                     }
@@ -101,7 +101,7 @@ namespace Client
 
             return false;
         }
-        
+
         /**
          * так а как у нас будет выстраиваться второй третий ряд и тд врагов ?
          * - - - -
@@ -162,8 +162,9 @@ namespace Client
                     CardUI backwardLineCard = cardsLineCards[i];
                     CardUI forwardLineCard = previousLineCards[i];
 
-                    Debug.Log($"Check if advance card to next level backwardLineCard={backwardLineCard} forwardLineCard={forwardLineCard}");
-                    
+                    Debug.Log(
+                        $"Check if advance card to next level backwardLineCard={backwardLineCard} forwardLineCard={forwardLineCard}");
+
                     if (!isDeadOrEmpty(backwardLineCard.card) && isDeadOrEmpty(forwardLineCard.card))
                     {
                         Debug.Log("Advance card to next level " + backwardLineCard.card);
@@ -193,21 +194,20 @@ namespace Client
 
             return playerCardUI;
         }
-        
+
         public async Task Turn(CardUI enemyCardUi, CardUI playerCardUi)
         {
             // await Task.k(100);
             Debug.Log(" local pos player hold " + playerCardUi.transform.localPosition);
             await enemyCardUi.transform.DOPunchPosition((playerCardUi.transform.localPosition)
-                                                        - enemyCardUi.transform.localPosition 
-                                                        
-                , 0.5f,1).AsyncWaitForCompletion();
-            
+                                                        - enemyCardUi.transform.localPosition
+                , 0.5f, 1).AsyncWaitForCompletion();
+
             await CardTurn(enemyCardUi,
                 playerCardUi);
-            
+
             await CardsTurn(enemyCardUi,
-                playerCardUi,  Side.player);
+                playerCardUi, Side.player);
 
             await CardsTurn(enemyCardUi,
                 playerCardUi, Side.enemy);
@@ -220,18 +220,24 @@ namespace Client
             playerCardUi.transform.localRotation = localRotation;
         }
 
-        private static async Task AnimateDamageShake(CardUI playerCardUi)
+        // todo do separate system for animating cards
+        private static async Task AnimateDamageShake(CardUI playerCardUi, CardUI oppositeCard)
         {
             var localRotation = playerCardUi.transform.localRotation;
-            await playerCardUi.transform.DOShakeRotation(0.5f, 10f).AsyncWaitForCompletion();
+            var tween =  playerCardUi.transform.DOShakeRotation(0.5f, 10f);
             playerCardUi.transform.localRotation = localRotation;
+            var initColor = playerCardUi.cardFace.color;
+            await DOTween.Sequence().Join(tween)
+                .Join(playerCardUi.cardFace.DOColor(Color.red, 0.3f))
+                .AsyncWaitForCompletion();
+            await playerCardUi.cardFace.DOColor(initColor, 0.1f).AsyncWaitForCompletion();
         }
 
 
         public async Task<bool> EndOfInvasion()
         {
             bool levelWon;
-            
+
             List<CardUI> aliveCards = GetCardUIList(Side.player)
                 .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
@@ -251,7 +257,7 @@ namespace Client
 
                 // cameraController.ShowLeftward();
                 // await cameraController.AwaitCinemachineBlending();
-                
+
                 gameContext.playerEnemyHpBalance -= damage;
                 Debug.Log("Damaging main board with damage " + damage);
                 // await Task.Delay(300);
@@ -308,7 +314,7 @@ namespace Client
         {
             CardUI acrossEnemyCardUI =
                 GetCardAcross(playerCardUI);
-            await DamageCardDirectly(acrossEnemyCardUI.card, acrossEnemyCardUI, 1);
+            await DamageCardDirectly(acrossEnemyCardUI.card, acrossEnemyCardUI, 1, playerCardUI);
             Debug.Log($"Arrow shot enemy card {acrossEnemyCardUI} player card {playerCardUI}");
         }
 
@@ -321,7 +327,7 @@ namespace Client
 
             if (card.splitAttack.IsSet)
             {
-                await SplitAttack(card, enemyCardUi);
+                await SplitAttack(cardUi, enemyCardUi);
             }
 
             if (card.gyroAttack.IsSet)
@@ -352,29 +358,32 @@ namespace Client
             }
         }
 
-        private async Task SplitAttack(Card card, CardUI enemyCardUi)
+        private async Task SplitAttack(CardUI cardUI, CardUI enemyCardUi)
         {
-            Debug.Log("split attack " + card);
-            List<CardUI> cardsAcross = GetCardUiListAcross(card);
+            Debug.Log("split attack " + cardUI.card);
+            List<CardUI> cardsAcross = GetCardUiListAcross(cardUI.card);
 
             if (enemyCardUi.cardPosition - 1 >= 0)
             {
                 CardUI cardAcrossUi = cardsAcross[enemyCardUi.cardPosition - 1];
-                await DamageCardDirectly(cardAcrossUi.card, cardAcrossUi, 1);
+                await DamageCardDirectly(cardAcrossUi.card, cardAcrossUi, 1, cardUI);
                 Debug.Log("split attack left " + cardAcrossUi.card);
             }
 
             if (enemyCardUi.cardPosition + 1 < sceneConfiguration.cardsOnBoardCount)
             {
                 CardUI cardAcrossUi = cardsAcross[enemyCardUi.cardPosition + 1];
-                await DamageCardDirectly(cardAcrossUi.card, cardAcrossUi, 1);
+                await DamageCardDirectly(cardAcrossUi.card, cardAcrossUi, 1, cardUI);
                 Debug.Log("split attack right " + cardAcrossUi.card);
             }
         }
 
         public async Task DamageCard(Card card, Card enemyCard, CardUI cardUI, CardUI enemyCardUi)
         {
-            await DamageCardDirectly(enemyCard, card, enemyCardUi, cardUI, card.damage);
+            await DamageCardDirectly(enemyCard,
+                card, enemyCardUi, 
+                cardUI, 
+                card.damage);
 
             if (enemyCard.quill.IsSet)
             {
@@ -403,21 +412,22 @@ namespace Client
         }
 
         public async Task DamageCardDirectly(Card cardToDamage, Card enemyCard, CardUI cardToDamageUI,
-            CardUI enemyCardUi,
+            CardUI cardUI,
             int damage)
         {
-            await DamageCardDirectly(cardToDamage, cardToDamageUI, damage);
+            await DamageCardDirectly(cardToDamage, cardToDamageUI, damage, cardUI);
         }
 
-        public async Task DamageCardDirectly(Card enemyCard, CardUI enemyCardUi, int damage)
+        public async Task DamageCardDirectly(Card enemyCard,
+            CardUI enemyCardUi, int damage, CardUI oppositeCard = null)
         {
             if (damage <= 0)
             {
                 return;
             }
-            
+
             if (isDeadOrEmpty(enemyCard)) return;
-            
+
             ActionCardDamaged?.Invoke(enemyCardUi);
 
             Debug.Log("damage dealt to card " + enemyCard);
@@ -435,7 +445,7 @@ namespace Client
             TextPopUpSpawnerManager.Instance.StartTextPopUpTween("-" + damage, Color.red,
                 enemyCardUi.transform);
             // await Task.Delay(500);
-            await AnimateDamageShake(enemyCardUi);
+            await AnimateDamageShake(enemyCardUi, oppositeCard);
 
 
             initializeCardSystem.ShowCardData(enemyCardUi.cardPosition, enemyCard,
@@ -467,12 +477,11 @@ namespace Client
         {
             return GetCardUiListAcross(cardUI.card)[cardUI.cardPosition];
         }
-        
+
         public CardUI GetCardAcrossAtPosition(CardUI cardUI, int position)
         {
             return GetCardUiListAcross(cardUI.card)[position];
         }
-
 
 
         private async Task DamageMainBoard(int damage)
@@ -511,7 +520,7 @@ namespace Client
 
             // poisoned
 
-            cardUI.ShowCardData(cardUI.card, 
+            cardUI.ShowCardData(cardUI.card,
                 cardUI.cardPosition,
                 activeSkillObjects,
                 cost, cardInInventory);
@@ -699,7 +708,7 @@ namespace Client
         {
             Debug.Log($"Get card list level={lineLevel}," +
                       $" cardsToCheck={string.Join(",", GetCardAllUIs(side))}");
-            
+
             return GetCardAllUIs(side)
                 .Where(cardUI => (cardUI.cardPosition / sceneConfiguration.cardsOnBoardCount) == lineLevel)
                 .ToList();
@@ -716,8 +725,7 @@ namespace Client
 
         public Transform GetCardHolder(Side side)
         {
-            return side == Side.player ? 
-                sceneConfiguration.playerCardsHolder : sceneConfiguration.enemyCardsHolder;
+            return side == Side.player ? sceneConfiguration.playerCardsHolder : sceneConfiguration.enemyCardsHolder;
         }
 
         public static bool isDeadOrEmpty(Card card)

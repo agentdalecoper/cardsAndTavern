@@ -41,13 +41,13 @@ namespace Client
                 .ToArray();
             // Card[] initialEnemyCards = cardsSystem.GetCardList(Side.enemy).Select(CloneCard).ToArray();
 
-            InitiateDialogAndCardsInvasion(enemyCardsObject);
+            InitiateCardsInvasion(enemyCardsObject);
             
             // CardUI.ActionCardDraggedOn += (ui, cardUI) => Turn(ui, cardUI);
             
             bool levelWon = await CheckCardSessionIsFinished();
             PlacePlayerCardsAgain(initialPlayerCards);
-            cameraController.ShowPlayerOnlyCards();
+            cameraController.ShowShopAndPlayerCards();
 
             shopController.ProcessLevelEndedIncome(levelWon);
 
@@ -135,7 +135,7 @@ namespace Client
             }
         }
 
-        private void InitiateDialogAndCardsInvasion(EnemyCardsObject enemyCardsObject)
+        private void InitiateCardsInvasion(EnemyCardsObject enemyCardsObject)
         {
             initializeCardSystem.InitializeCards(
                 enemyCardsObject.cardsEnemy, Side.enemy);
