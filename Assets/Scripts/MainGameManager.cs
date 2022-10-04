@@ -173,6 +173,8 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             }
 
         };
+        
+        MoneyDropManager.Instance.DropCoins(sceneConfiguration.shop.currentMoney);
 
         test();
     }

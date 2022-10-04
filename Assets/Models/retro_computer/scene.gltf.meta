@@ -7,22 +7,42 @@ ScriptedImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-  script: {fileID: 11500000, guid: 1fa4dafe23771ae498589f7f7c22c974, type: 3}
+  script: {fileID: 11500000, guid: 715df9372183c47e389bb6e19fbc3b52, type: 3}
+  editorImportSettings:
+    generateSecondaryUVSet: 0
   importSettings:
-    materials: 1
-    shaderOverrides:
-      metallic: {fileID: 4800000, guid: 057d08f5d01be134593d0fe0e40c1759, type: 3}
-      metallicBlend: {fileID: 4800000, guid: 7258d825fa9aac6439f21eb173b880c6, type: 3}
-      specular: {fileID: 4800000, guid: d28fc76bfd3057e4c8f1c6f0b91590c8, type: 3}
-      specularBlend: {fileID: 4800000, guid: 475158e3052e5c4488fa32f8df9d7be7, type: 3}
-    animationSettings:
-      looping: 0
-      frameRate: 24
-      interpolationMode: -1
-      compressBlendShapeKeyFrames: 1
-      useLegacyClips: 0
-    generateLightmapUVs: 0
-    hardAngle: 88
-    angleError: 8
-    areaError: 15
-    packMargin: 4
+    nodeNameMethod: 1
+    animationMethod: 2
+    generateMipMaps: 1
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  assetDependencies:
+  - type: 0
+    originalUri: Assets/Models/retro_computer/scene.bin
+    assetPath: Assets/Models/retro_computer/scene.bin
+  - type: 0
+    originalUri: Assets/Models/retro_computer/textures/Part1_baseColor.png
+    assetPath: Assets/Models/retro_computer/textures/Part1_baseColor.png
+  - type: 0
+    originalUri: Assets/Models/retro_computer/textures/Part1_metallicRoughness.png
+    assetPath: Assets/Models/retro_computer/textures/Part1_metallicRoughness.png
+  - type: 0
+    originalUri: Assets/Models/retro_computer/textures/Part1_emissive.jpeg
+    assetPath: Assets/Models/retro_computer/textures/Part1_emissive.jpeg
+  - type: 0
+    originalUri: Assets/Models/retro_computer/textures/Part1_normal.png
+    assetPath: Assets/Models/retro_computer/textures/Part1_normal.png
+  - type: 0
+    originalUri: Assets/Models/retro_computer/textures/Part2_baseColor.png
+    assetPath: Assets/Models/retro_computer/textures/Part2_baseColor.png
+  - type: 0
+    originalUri: Assets/Models/retro_computer/textures/Part2_metallicRoughness.png
+    assetPath: Assets/Models/retro_computer/textures/Part2_metallicRoughness.png
+  - type: 0
+    originalUri: Assets/Models/retro_computer/textures/Part2_emissive.jpeg
+    assetPath: Assets/Models/retro_computer/textures/Part2_emissive.jpeg
+  - type: 0
+    originalUri: Assets/Models/retro_computer/textures/Part2_normal.png
+    assetPath: Assets/Models/retro_computer/textures/Part2_normal.png
+  reportItems: []

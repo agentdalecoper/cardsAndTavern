@@ -60,6 +60,7 @@ internal class ShopController : IEcsInitSystem
         sceneConfiguration.shop.currentMoney += money;
         RefreshShopUis();
         OnMoneyChanged?.Invoke();
+        MoneyDropManager.Instance.DropCoins(money);
     }
 
     public void RemoveMoney(int money)
@@ -67,6 +68,7 @@ internal class ShopController : IEcsInitSystem
         sceneConfiguration.shop.currentMoney -= money;
         RefreshShopUis();
         OnMoneyChanged?.Invoke();
+        MoneyDropManager.Instance.RemoveCoins(money);
     }
 
     private void RefreshShopUis()
