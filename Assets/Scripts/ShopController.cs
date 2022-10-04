@@ -143,6 +143,7 @@ internal class ShopController : IEcsInitSystem
         cardsSystem.RemoveCard(gameContextCardChosenUI);
         AddMoney(card.cost);
         cardsChoseController.NullifyUIs();
+        gameContextCardChosenUI.MoveToStartPosition();
     }
 
     public void ProcessLevelEndedIncome(bool levelWon)

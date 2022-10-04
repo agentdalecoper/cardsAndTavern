@@ -25,9 +25,10 @@ public class MoneyDropManager : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             GameObject coin = Instantiate(coinPrefab, transform);
-            coin.transform.Rotate(Random.Range(0f, 30f),
-                Random.Range(0f, 30f), 
-                Random.Range(0f, 30f));
+            coin.transform.Rotate(
+                Random.Range(0f, 200f),
+                Random.Range(0f, 200f), 
+                Random.Range(0f, 200f));
             coin.transform.Translate(coin.transform.localPosition 
                                      + new Vector3(
                                          Random.Range(0f, 0.5f), 
