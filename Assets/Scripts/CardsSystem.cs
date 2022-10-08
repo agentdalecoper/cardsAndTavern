@@ -133,11 +133,11 @@ namespace Client
             }
 
 
-            AdvancePreviousLineCards(Side.enemy); // advance and take action
-            AdvancePreviousLineCards(Side.player);
+            await AdvancePreviousLineCards(Side.enemy); // advance and take action
+            await AdvancePreviousLineCards(Side.player);
         }
 
-        private void AdvancePreviousLineCards(Side side)
+        private async Task AdvancePreviousLineCards(Side side)
         {
             for (int line = 1;
                  line <
@@ -168,6 +168,14 @@ namespace Client
                     if (!isDeadOrEmpty(backwardLineCard.card) && isDeadOrEmpty(forwardLineCard.card))
                     {
                         Debug.Log("Advance card to next level " + backwardLineCard.card);
+
+                        Vector3 initialPosition = backwardLineCard.transform.position;
+                        await backwardLineCard.transform
+                            .DOMove(forwardLineCard.transform.position, 0.5f)
+                            .AsyncWaitForCompletion();
+
+                        backwardLineCard.MoveToStartPosition();
+
                         initializeCardSystem.ShowCardData(backwardLineCard.card, forwardLineCard);
                         RemoveCard(backwardLineCard);
                     }
@@ -199,9 +207,7 @@ namespace Client
         {
             // await Task.k(100);
             Debug.Log(" local pos player hold " + playerCardUi.transform.localPosition);
-            await enemyCardUi.transform.DOPunchPosition((playerCardUi.transform.localPosition)
-                                                        - enemyCardUi.transform.localPosition
-                , 0.5f, 1).AsyncWaitForCompletion();
+            await AnimateCardAttackPosition(enemyCardUi, playerCardUi);
 
             await CardTurn(enemyCardUi,
                 playerCardUi);
@@ -211,6 +217,27 @@ namespace Client
 
             await CardsTurn(enemyCardUi,
                 playerCardUi, Side.enemy);
+        }
+
+        private static async Task AnimateCardAttackPosition(CardUI enemyCardUi, CardUI playerCardUi)
+        {
+            // enemyCardUi.animator.enabled = true;
+            // enemyCardUi.animator.SetTrigger("Attack");
+            // enemyCardUi.animator.enabled = false;
+
+            await enemyCardUi.transform
+                .DOLocalRotate(new Vector3(-40f, 0f, 0f), 0.1f)
+                .AsyncWaitForCompletion();
+            
+            await enemyCardUi.transform
+                .DOPunchPosition((playerCardUi.transform.localPosition)
+                                                        - enemyCardUi.transform.localPosition
+                , 0.5f, 1).AsyncWaitForCompletion();
+            await enemyCardUi.transform
+                .DOLocalRotate(new Vector3(0f, 0f, 0f), 0.1f)
+                .AsyncWaitForCompletion();
+            
+            // enemyCardUi.animator.enabled = false;
         }
 
         private static async Task AnimateTransformShake(CardUI playerCardUi)

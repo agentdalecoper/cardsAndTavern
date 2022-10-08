@@ -69,6 +69,20 @@ namespace Client
         public Shop shop;
 
         public SceneAudioConfiguration sceneAudioConfiguration;
+
+        public SceneEffects sceneEffects;
+    }
+
+    [Serializable]
+    public class SceneEffects
+    {
+        public GameObject playerStartGo;
+        public GameObject enemyStartGo;
+        public GameObject inventoryStartGo;
+        
+        public GameObject poisonCloud;
+        public GameObject arrowShot;
+        public GameObject buffOrHeal;
     }
 
     [Serializable]

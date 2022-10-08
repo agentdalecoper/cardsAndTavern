@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Client;
+using DG.Tweening;
 using Leopotam.Ecs;
 using MyBox;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class InitializeCardSystem : IEcsSystem
     private GameContext gameContext;
     private CardsSystem cardsSystem;
 
-    public void InitializeCards(CardObject[] cards, Side side)
+    public async Task InitializeCards(CardObject[] cards, Side side)
     {
         // gameContext.cardsPlayer = new Card[sceneConfiguration.CARDS_ON_BOARD_COUNT];
         // gameContext.cardsEnemy = new Card[sceneConfiguration.CARDS_ON_BOARD_COUNT];
@@ -19,7 +20,7 @@ public class InitializeCardSystem : IEcsSystem
 
         for (var position = 0; position < cards.Length; position++)
         {
-            CardUI card = CreateAndShowCard(position, side, 
+            CardUI card = await CreateAndShowCard(position, side, 
                  cards[position]);
         }
 
@@ -43,14 +44,18 @@ public class InitializeCardSystem : IEcsSystem
         }
      */
 
-    public CardUI CreateAndShowCard(int position,
+    public async Task<CardUI> CreateAndShowCard(int position,
         Side side, CardObject cardObject)
     {
         Transform holder = side == Side.player
             ? sceneConfiguration.playerCardsHolder
             : sceneConfiguration.enemyCardsHolder;
-
-        return CreateAndShowCardInHolder(position, side, cardObject, holder);
+        
+        GameObject appearFromGo = side == Side.player
+            ? sceneConfiguration.sceneEffects.playerStartGo
+            : sceneConfiguration.sceneEffects.enemyStartGo;
+        
+        return await CreateAndShowCardInHolder(position, side, cardObject, holder, appearFromGo);
     }
 
     public void RefreshCardsUIs()
@@ -68,12 +73,22 @@ public class InitializeCardSystem : IEcsSystem
         }
     }
 
-    public CardUI CreateAndShowCardInHolder(int position, Side side, CardObject cardObject,
-        Transform holder)
+    public async Task<CardUI> CreateAndShowCardInHolder(int position,
+        Side side, CardObject cardObject,
+        Transform holder, GameObject animationMoveFromGo = null)
     {
         Card card = CreateCard(side, cardObject);
-        // card.IsDead = false;
-        return ShowCardData(position, card, holder);
+        // card.uIsDead = false;
+        CardUI cardUI = ShowCardData(position, card, holder);
+
+        if (animationMoveFromGo != null)
+        {
+            Vector3 initialPosition = cardUI.transform.position;
+            cardUI.transform.position = animationMoveFromGo.transform.position;
+           await cardUI.transform.DOMove(initialPosition, 0.25f).AsyncWaitForCompletion();
+        }
+
+        return cardUI;
     }
 
     public Card CreateCard(Side side, CardObject cardObject)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Client;
 using DG.Tweening;
 using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -44,9 +45,13 @@ public class CardUI : MonoBehaviour
 
     private Quaternion initialRotation;
 
+    public Animator animator;
+
     private void Awake()
     {
         ShowEmptyCardData();
+        animator = GetComponent<Animator>();
+        animator.enabled = false;
     }
 
     private void Start()

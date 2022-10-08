@@ -41,7 +41,7 @@ namespace Client
                 .ToArray();
             // Card[] initialEnemyCards = cardsSystem.GetCardList(Side.enemy).Select(CloneCard).ToArray();
 
-            InitiateCardsInvasion(enemyCardsObject);
+            await InitiateCardsInvasion(enemyCardsObject);
             
             // CardUI.ActionCardDraggedOn += (ui, cardUI) => Turn(ui, cardUI);
             
@@ -135,9 +135,9 @@ namespace Client
             }
         }
 
-        private void InitiateCardsInvasion(EnemyCardsObject enemyCardsObject)
+        private async Task InitiateCardsInvasion(EnemyCardsObject enemyCardsObject)
         {
-            initializeCardSystem.InitializeCards(
+            await initializeCardSystem.InitializeCards(
                 enemyCardsObject.cardsEnemy, Side.enemy);
             
             cameraController.ShowInvasionAndPlayerCards();
