@@ -4,4 +4,5 @@ using UnityEngine;
 public class CardObject : ScriptableObject
 {
     public Card card;
+    public CardObject nextGrade;
 }

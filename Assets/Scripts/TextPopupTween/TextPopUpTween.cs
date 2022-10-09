@@ -7,11 +7,10 @@ using Random = UnityEngine.Random;
 public class TextPopUpTween : MonoBehaviour
 {
     public string popUpText;
-    public TextMeshProUGUI text;
+    public TextMesh text;
 
     private void Awake()
     {
-        text = GetComponent<TextMeshProUGUI>();
     }
 
     public void Activate()

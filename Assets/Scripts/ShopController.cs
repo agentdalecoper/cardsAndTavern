@@ -221,9 +221,9 @@ internal class ShopController : IEcsInitSystem
 
     private void StarUpgrade(CardUI cardToStarUpgrade)
     {
-        Card card = cardToStarUpgrade.card;
-        card.numberOfSlots++;
-        card.name += "*";
+        Card upgradedCard = initializeCardSystem.CreateCard(Side.player,
+            cardToStarUpgrade.card.cardObject.nextGrade);
+        cardToStarUpgrade.card = upgradedCard;
 
         cardsSystem.RefreshCard(cardToStarUpgrade);
         cameraController.ShowShopAndPlayerCards();

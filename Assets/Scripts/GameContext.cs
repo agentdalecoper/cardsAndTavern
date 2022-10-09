@@ -44,9 +44,10 @@ public class Card
     public Optional<Steroids> steroids;
     public Optional<Summon> summon;
     public Optional<Shield> shield;
-    public Optional<Quill> quill;
+    public Optional<HorseRide> horseRide;
     public Optional<ReduceDamage> reduceDamage;
     public Optional<GyroAttack> gyroAttack;
+    public Optional<(int, string)> healOther;
 
     public Optional<Poisoned> poisoned;
 
@@ -67,7 +68,7 @@ public class Card
     {
         return $"isDead: {IsDead} {name}\n hp:{hp}, damage:{damage}, {side}" +
                $" {splitAttack} {poisonOther} {deadlyPoison} {buff} " +
-               $"{steroids} {arrowShot} {reduceDamage} {summon} {quill} {shield} " +
+               $"{steroids} {arrowShot} {reduceDamage} {summon} {horseRide} {shield} " +
                $"{transformation} {gyroAttack}   ({poisoned} {poisoned?.Value?.level} {poisoned?.Value?.needToTick})";
     }
 }
@@ -177,7 +178,7 @@ public class Shield
 }
 
 [Serializable]
-public class Quill
+public class HorseRide
 {
 }
 

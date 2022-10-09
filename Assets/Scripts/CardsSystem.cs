@@ -19,7 +19,7 @@ namespace Client
 
         public static event Action<CardUI> ActionCardDamaged;
 
-        public async Task CardTurn(CardUI cardUi, CardUI enemyCardUi)
+        public async Task CardTurnEnemyToPlayer(CardUI cardUi, CardUI enemyCardUi)
         {
             Card card = cardUi.card;
             Card enemyCard = enemyCardUi.card;
@@ -28,8 +28,8 @@ namespace Client
 
             if (isDeadOrEmpty(enemyCard)) return;
 
-            await CardTurn(card, enemyCard, cardUi, enemyCardUi);
-            await CardTurn(enemyCard, card, enemyCardUi, cardUi);
+            await CardTurnMainSkills(card, enemyCard, cardUi, enemyCardUi);
+            await CardTurnMainSkills(enemyCard, card, enemyCardUi, cardUi);
 
             initializeCardSystem.ShowCardData(cardUi.cardPosition, card,
                 sceneConfiguration.enemyCardsHolder);
@@ -37,7 +37,8 @@ namespace Client
                 sceneConfiguration.playerCardsHolder);
         }
 
-        public async Task CardsTurn(CardUI cardUI, CardUI enemyCardUI, Side side)
+        public async Task CardsTurnAdditionalSkills(CardUI cardUI,
+            CardUI enemyCardUI, Side side, int line, int turn)
         {
             foreach (CardUI crdUi in GetCardUIList(side))
             {
@@ -58,23 +59,112 @@ namespace Client
                     await CheckDamageWithPoison(crdUi, crd);
                 }
 
+                // and if the first row
+                if (crd.horseRide.IsSet && line == 0)
+                {
+                    await HorseRide(cardUI);
+                }
+
+                if (crd.healOther.IsSet)
+                {
+                    FindAndHeal(crd);
+                }
+
+                if (crd.buff.IsSet && turn == 0)
+                {
+                    CardBuff(line, crd, crdUi);
+                }
+
                 if (crd.transformation.IsSet)
                 {
-                    Transformation transformation = crd.transformation.Value;
-                    if (transformation.countTurnsToTransform > 0)
-                    {
-                        transformation.countTurnsToTransform--;
-                    }
-                    else
-                    {
-                        await AnimateTransformShake(crdUi);
-                        Card transformedCard = initializeCardSystem.CreateCard(crd.side, transformation.transformTo);
-                        initializeCardSystem.ShowCardData(crdUi.cardPosition, transformedCard, GetCardHolder(crd.side));
-
-                        // crdUi.cardFace.color = Color.red;
-                        // initializeCardSystem.SetCardAtPosition(crdUi.cardPosition, gameContext, crd);
-                    }
+                    await CardTransformation(crd, crdUi);
                 }
+            }
+        }
+
+        private async Task CardTransformation(Card crd, CardUI crdUi)
+        {
+            Transformation transformation = crd.transformation.Value;
+            if (transformation.countTurnsToTransform > 0)
+            {
+                transformation.countTurnsToTransform--;
+            }
+            else
+            {
+                await AnimateTransformShake(crdUi);
+                Card transformedCard = initializeCardSystem.CreateCard(crd.side, transformation.transformTo);
+                initializeCardSystem.ShowCardData(crdUi.cardPosition, transformedCard, GetCardHolder(crd.side));
+
+                // crdUi.cardFace.color = Color.red;
+                // initializeCardSystem.SetCardAtPosition(crdUi.cardPosition, gameContext, crd);
+            }
+        }
+
+        private void CardBuff(int line, Card crd, CardUI crdUi)
+        {
+            // а давай buff это только в начале хода будет делаться
+            // возьми слева и справа карту и дай им 1 хп и 1 дэмедж
+            // сделай зеленым 
+
+            List<CardUI> cardList = GetCardUIList(crd.side, line);
+
+            if (crdUi.cardPosition - 1 >= 0)
+            {
+                CardUI cardToTheSideUI = cardList[crdUi.cardPosition - 1];
+
+                if (cardToTheSideUI != null && !isDeadOrEmpty(cardToTheSideUI.card))
+                {
+                    cardToTheSideUI.card.hp += 1;
+                    cardToTheSideUI.card.damage += 1;
+                }
+
+                Debug.Log("buff left " + cardToTheSideUI.card);
+            }
+
+            if (crdUi.cardPosition + 1 < sceneConfiguration.cardsOnBoardCount)
+            {
+                CardUI cardToTheSideUI = cardList[crdUi.cardPosition + 1];
+                if (cardToTheSideUI != null && !isDeadOrEmpty(cardToTheSideUI.card))
+                {
+                    cardToTheSideUI.card.hp += 1;
+                    cardToTheSideUI.card.damage += 1;
+                }
+
+                Debug.Log("buff right " + cardToTheSideUI.card);
+            }
+        }
+
+        private void FindAndHeal(Card crd)
+        {
+            // find random guy to heal
+            // add a 1 hp to him
+            CardUI cardToHeal = GetCardAllUIs(crd.side)
+                .Find(c =>
+                    !isDeadOrEmpty(c.card)
+                    && c.card.hp < c.card.cardObject.card.hp);
+
+            if (cardToHeal != null)
+            {
+                cardToHeal.card.hp += 1;
+                RefreshCard(cardToHeal);
+            }
+        }
+
+        private async Task HorseRide(CardUI cardUI)
+        {
+            // attacks with 1 damage both lines in front if the first line
+            CardUI acrossEnemyCardUI =
+                GetCardAcross(cardUI, 0);
+            if (acrossEnemyCardUI != null && !isDeadOrEmpty(acrossEnemyCardUI.card))
+            {
+                await DamageCardDirectly(acrossEnemyCardUI.card, acrossEnemyCardUI, 1);
+            }
+
+            CardUI acrossEnemyCardUI2 =
+                GetCardAcross(cardUI, 1);
+            if (acrossEnemyCardUI2 != null && !isDeadOrEmpty(acrossEnemyCardUI2.card))
+            {
+                await DamageCardDirectly(acrossEnemyCardUI2.card, acrossEnemyCardUI2, 1);
             }
         }
 
@@ -107,12 +197,12 @@ namespace Client
          * - - - -
          * - - - -
          * - - - -
-         *
+         * 
          * GetCardHolder(Side side, int cardLineLevel = 0)
          * var cardLineLevel = cardUiPos % sceneConfiguration.cardCountOnBoard
-         * 
+         * <param name="turn"></param>
          */
-        public async Task IterateCardsAndDamage()
+        public async Task IterateCardsAndDamage(int turn)
         {
             foreach (CardUI enemyCardUI in GetCardUIList(Side.enemy))
             {
@@ -124,12 +214,25 @@ namespace Client
                 CardUI playerCardUI = GetCardToAttack(enemyCardUI);
                 if (playerCardUI != null && !isDeadOrEmpty(playerCardUI.card))
                 {
-                    await Turn(enemyCardUI, playerCardUI);
+                    await Turn(enemyCardUI, playerCardUI, turn);
                 }
                 else
                 {
                     break;
                 }
+            }
+
+            int secondLine = 1;
+            foreach (CardUI enemyCardUI in GetCardUIList(Side.enemy, secondLine))
+            {
+                await CardsTurnAdditionalSkills(enemyCardUI, null,
+                    Side.enemy, secondLine, turn);
+            }
+
+            foreach (CardUI enemyCardUI in GetCardUIList(Side.player, secondLine))
+            {
+                await CardsTurnAdditionalSkills(enemyCardUI, null,
+                    Side.player, secondLine, turn);
             }
 
 
@@ -203,20 +306,20 @@ namespace Client
             return playerCardUI;
         }
 
-        public async Task Turn(CardUI enemyCardUi, CardUI playerCardUi)
+        public async Task Turn(CardUI enemyCardUi, CardUI playerCardUi, int turn)
         {
             // await Task.k(100);
             Debug.Log(" local pos player hold " + playerCardUi.transform.localPosition);
             await AnimateCardAttackPosition(enemyCardUi, playerCardUi);
 
-            await CardTurn(enemyCardUi,
+            await CardTurnEnemyToPlayer(enemyCardUi,
                 playerCardUi);
 
-            await CardsTurn(enemyCardUi,
-                playerCardUi, Side.player);
+            await CardsTurnAdditionalSkills(enemyCardUi,
+                playerCardUi, Side.player, 0, turn);
 
-            await CardsTurn(enemyCardUi,
-                playerCardUi, Side.enemy);
+            await CardsTurnAdditionalSkills(enemyCardUi,
+                playerCardUi, Side.enemy, 0, turn);
         }
 
         private static async Task AnimateCardAttackPosition(CardUI enemyCardUi, CardUI playerCardUi)
@@ -345,7 +448,7 @@ namespace Client
             Debug.Log($"Arrow shot enemy card {acrossEnemyCardUI} player card {playerCardUI}");
         }
 
-        private async Task CardTurn(Card card, Card enemyCard, CardUI cardUi, CardUI enemyCardUi)
+        private async Task CardTurnMainSkills(Card card, Card enemyCard, CardUI cardUi, CardUI enemyCardUi)
         {
             if (card.damage > 0)
             {
@@ -412,7 +515,7 @@ namespace Client
                 cardUI, 
                 card.damage);
 
-            if (enemyCard.quill.IsSet)
+            if (enemyCard.horseRide.IsSet)
             {
                 Debug.Log($"Damaging by quill damagedCard: {card}");
                 await DamageCardDirectly(card, cardUI, 1);
@@ -469,8 +572,8 @@ namespace Client
             }
 
             enemyCard.hp -= damage;
-            TextPopUpSpawnerManager.Instance.StartTextPopUpTween("-" + damage, Color.red,
-                enemyCardUi.transform);
+            // TextPopUpSpawnerManager.Instance.StartTextPopUpTween("-" + damage, Color.red,
+            //     enemyCardUi.transform);
             // await Task.Delay(500);
             await AnimateDamageShake(enemyCardUi, oppositeCard);
 
@@ -488,8 +591,8 @@ namespace Client
         {
             if (isDeadOrEmpty(carenemyCardUi.card)) return;
 
-            TextPopUpSpawnerManager.Instance.StartTextPopUpTween("Dead", Color.red,
-                carenemyCardUi.transform);
+            // TextPopUpSpawnerManager.Instance.StartTextPopUpTween("Dead", Color.red,
+            //     carenemyCardUi.transform);
             carenemyCardUi.card.IsDead = true;
             carenemyCardUi.ShowEmptyCardData();
         }
@@ -500,9 +603,9 @@ namespace Client
             cardToRemove.ShowEmptyCardData();
         }
 
-        public CardUI GetCardAcross(CardUI cardUI)
+        public CardUI GetCardAcross(CardUI cardUI, int line = 0)
         {
-            return GetCardUiListAcross(cardUI.card)[cardUI.cardPosition];
+            return GetCardUiListAcross(cardUI.card, line)[cardUI.cardPosition];
         }
 
         public CardUI GetCardAcrossAtPosition(CardUI cardUI, int position)
@@ -525,9 +628,9 @@ namespace Client
                     sceneConfiguration.hpBalanceManagerText.transform);
             }
          */
-        public List<CardUI> GetCardUiListAcross(Card card)
+        public List<CardUI> GetCardUiListAcross(Card card, int line = 0)
         {
-            return GetCardUIList(card.side == Side.player ? Side.enemy : Side.player);
+            return GetCardUIList(card.side == Side.player ? Side.enemy : Side.player, line);
         }
 
         public void RefreshCard(CardUI cardUI)
@@ -608,7 +711,7 @@ namespace Client
                 activeSkillObjects.Add(sceneConfiguration.skillsObjectsDict.shield);
             }
 
-            if (card.quill.IsSet)
+            if (card.horseRide.IsSet)
             {
                 activeSkillObjects.Add(sceneConfiguration.skillsObjectsDict.quill);
             }
@@ -685,8 +788,8 @@ namespace Client
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.quill)
             {
-                card.quill.IsSet = true;
-                card.quill.Value = new Quill();
+                card.horseRide.IsSet = true;
+                card.horseRide.Value = new HorseRide();
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.reduceDamage)

@@ -101,9 +101,12 @@ namespace Client
 
         private async Task<bool> CheckCardSessionIsFinished()
         {
+            int turn = 0;
+
             while (!cardsSystem.CheckDamageBoardOrNoEnemy())
             {
-                await cardsSystem.IterateCardsAndDamage();
+                await cardsSystem.IterateCardsAndDamage(turn);
+                turn++;
                 Debug.Log("Iterated cards and waiting for end session");
                 await Task.Yield();
             }

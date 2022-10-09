@@ -85,7 +85,7 @@ public class InitializeCardSystem : IEcsSystem
         {
             Vector3 initialPosition = cardUI.transform.position;
             cardUI.transform.position = animationMoveFromGo.transform.position;
-           await cardUI.transform.DOMove(initialPosition, 0.25f).AsyncWaitForCompletion();
+            await cardUI.transform.DOMove(initialPosition, 0.25f).AsyncWaitForCompletion();
         }
 
         return cardUI;
