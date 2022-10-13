@@ -128,10 +128,10 @@ public class ArrowShot
 [Serializable]
 public class Summon
 {
-    public int turnsToSummon = 1;
+    public int turnsToSummon = 2;
     
     [JsonIgnore]
-    public ScriptableObject cardToSummon;
+    public CardObject cardToSummon;
 }
 
 [Serializable]

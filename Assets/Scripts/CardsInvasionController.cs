@@ -103,6 +103,8 @@ namespace Client
         {
             int turn = 0;
 
+            await cardsSystem.CardsPreTurnSkills(Side.player);
+            cardsSystem.CardsPreTurnSkills(Side.enemy);
             while (!cardsSystem.CheckDamageBoardOrNoEnemy())
             {
                 await cardsSystem.IterateCardsAndDamage(turn);

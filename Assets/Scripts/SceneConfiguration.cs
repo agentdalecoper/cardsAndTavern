@@ -131,8 +131,8 @@ namespace Client
         public SkillObject steroids;
         public SkillObject summon;
         public SkillObject shield;
-        public SkillObject quill;
-        public SkillObject reduceDamage;
+        public SkillObject healOther;
+        public SkillObject horseRide;
         public SkillObject gyroAttack;
     }
 

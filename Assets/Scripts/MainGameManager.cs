@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Client;
+using DG.Tweening;
 using Leopotam.Ecs;
 using Newtonsoft.Json;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -51,6 +53,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
         InitializeCardSystem initializeCardSystm = new InitializeCardSystem();
         CameraController cameraControllr = new CameraController();
         ShopController shopSystm = new ShopController();
+        CardAnimationSystem cardAnimationStm = new CardAnimationSystem();
 
         _systems
             .Add(invasionController)
@@ -60,6 +63,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             .Add(initializeCardSystm)
             .Add(cameraControllr)
             .Add(DialogTextManager.Instance)
+            .Add(cardAnimationStm)
             .Add(this)
             .Add(shopSystm)
             .Inject(invasionController)
@@ -71,16 +75,14 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             .Inject(sceneConfiguration)
             .Inject(gameContext)
             .Inject(shopSystm)
+            .Inject(cardAnimationStm)
             .Inject(DialogTextManager.Instance)
             .Init();
 
         sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.tavernAmbient;
         sceneConfiguration.audioSource.Play();
 
-        CardUI.ActionCardStartDrag += cardUi =>
-        {
-            PlayAudioCardTaken();
-        };
+        CardUI.ActionCardStartDrag += cardUi => { PlayAudioCardTaken(); };
         CardsSystem.ActionCardDamaged += cardUi =>
         {
             sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardAttack;
@@ -107,26 +109,26 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
                 draggedCard.MoveToStartPosition();
                 return;
             }
-            
+
             if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.player)
             {
                 Debug.Log("Sell a card ActionCardDraggedOn");
                 shopController.SellACardClicked(draggedCard);
                 return;
             }
-            
+
             if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.shop)
             {
                 draggedCard.MoveToStartPosition();
                 return;
             }
-            
+
             if (!CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
             {
                 draggedCard.MoveToStartPosition();
                 return;
             }
-            
+
 
             // if card is from the shop and it is empty slot - buy card
             if (CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
@@ -162,7 +164,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
                 Debug.Log("Add a skill to a card ActionCardDraggedOn");
                 return;
             }
-            
+
             if (!CardsSystem.isDeadOrEmpty(underCard.card))
             {
                 Debug.Log("Swap cards ActionCardDraggedOn");
@@ -171,9 +173,8 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
                 sceneConfiguration.tableAudioSource.Play();
                 return;
             }
-
         };
-        
+
         MoneyDropManager.Instance.DropCoins(sceneConfiguration.shop.currentMoney);
 
         test();
@@ -196,8 +197,11 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
 
         if (sceneConfiguration.cardsPlayer.Length != 0)
         {
-            initializeCardSystem.CreateAndShowCard(2, Side.player,
-                sceneConfiguration.cardsPlayer[0]);
+            for (int i = 0; i < sceneConfiguration.cardsPlayer.Length; i++)
+            {
+                initializeCardSystem.CreateAndShowCard(i, Side.player,
+                    sceneConfiguration.cardsPlayer[i]);
+            }
         }
 
         Debug.Log("started iterated levels " + string.Join(',', sceneConfiguration.levels.ToList()));
@@ -293,7 +297,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
         {
             return;
         }
-        
+
         gameContext.cardChosenUI = cardUI;
     }
 
@@ -374,7 +378,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
     private void test()
     {
         Debug.Log("Start test");
-        
+
         Card card1 = new Card();
         Card card2 = card1.CloneJson();
 
@@ -389,6 +393,66 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
 
         Debug.Log($"card1 {card1}");
         Debug.Log($"card2 {card2}");
+    }
+}
+
+internal class CardAnimationSystem : IEcsSystem
+{
+    public async Task AnimateDamageShake(CardUI playerCardUi, CardUI oppositeCard, Optional<Color> color)
+    {
+        var localRotation = playerCardUi.transform.localRotation;
+        var tween =  playerCardUi.transform.DOShakeRotation(0.5f, 10f);
+        playerCardUi.transform.localRotation = localRotation;
+        var initColor = playerCardUi.cardFace.color;
+        await DOTween.Sequence().Join(tween)
+            .Join(playerCardUi.cardFace.DOColor(color?.Value ?? Color.red, 0.3f))
+            .AsyncWaitForCompletion();
+        await playerCardUi.cardFace.DOColor(initColor, 0.1f).AsyncWaitForCompletion();
+    }
+    
+    public async Task AnimateChangeOfStat(TextMesh text, Color color, bool returnColor = false)
+    {
+        var initColor = text.color;
+        
+        var tw1 = DOTween.To(() =>
+                text.color,
+            x => text.color = x,
+            color, 1f);
+        var tw2 =
+            text.transform.DOShakeScale(1f, 2f);
+
+        var sequence = DOTween.Sequence()
+            .Join(tw1)
+            .Join(tw2);
+        
+        await sequence
+            .AsyncWaitForCompletion();
+
+        if (returnColor)
+        {
+            text.color = initColor;
+        }
+    }
+    
+    public async Task AnimateSkillUsed(CardUI cardUI, Sprite skillSprite)
+    {
+        GameObject go = new GameObject("skillUsed")
+        {
+            transform =
+            {
+                parent = cardUI.transform
+            }
+        };
+
+        go.transform.position = new Vector3(0, 0, 0);
+        go.transform.localPosition = new Vector3(0, 0, 0);
+        go.transform.eulerAngles = new Vector3(90f, 0, 90f);
+        go.transform.localScale = new Vector3(1f, 1f, 0f);
+        
+        SpriteRenderer spriteRenderer = go.AddComponent<SpriteRenderer>();
+        spriteRenderer.sprite = skillSprite;
+        await go.transform.DOLocalMoveY(go.transform.localPosition.y + 0.7f, 0.7f)
+            .OnComplete(() => go.SetActive(false)).AsyncWaitForCompletion();
     }
 }
 
