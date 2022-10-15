@@ -47,6 +47,17 @@ namespace Client
             
             bool levelWon = await CheckCardSessionIsFinished();
             PlacePlayerCardsAgain(initialPlayerCards);
+
+            foreach (CardUI cardUI in cardsSystem.GetCardAllUIs(Side.player))
+            {
+                cardUI.ToInitialState();
+            }
+            
+            foreach (CardUI cardUI in cardsSystem.GetCardAllUIs(Side.enemy))
+            {
+                cardUI.ToInitialState();
+            }
+            
             cameraController.ShowShopAndPlayerCards();
 
             shopController.ProcessLevelEndedIncome(levelWon);

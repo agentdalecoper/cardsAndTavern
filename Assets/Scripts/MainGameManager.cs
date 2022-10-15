@@ -454,6 +454,18 @@ internal class CardAnimationSystem : IEcsSystem
         await go.transform.DOLocalMoveY(go.transform.localPosition.y + 0.7f, 0.7f)
             .OnComplete(() => go.SetActive(false)).AsyncWaitForCompletion();
     }
+
+    public async Task AnimateCardIsDead(CardUI carenemyCardUi)
+    {
+        var initSacle = carenemyCardUi.transform.localScale;
+        var initColor = carenemyCardUi.cardFace.color;
+        var tw1 = carenemyCardUi.transform.DOScale(0.8f, 0.2f);
+        var tw2 = carenemyCardUi.cardFace.DOColor(Color.grey, 0.2f);
+        await DOTween.Sequence().Join(tw1).Join(tw2).AsyncWaitForCompletion();
+
+        carenemyCardUi.transform.localScale = initSacle;
+        carenemyCardUi.cardFace.color = initColor;
+    }
 }
 
 public static class ObjectCopier

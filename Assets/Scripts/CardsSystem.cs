@@ -650,17 +650,18 @@ namespace Client
 
             if (enemyCard.hp <= 0)
             {
-                CardIsDead(enemyCardUi);
+                await CardIsDead(enemyCardUi);
             }
         }
 
-        public void CardIsDead(CardUI carenemyCardUi)
+        public async Task CardIsDead(CardUI carenemyCardUi)
         {
-            if (isDeadOrEmpty(carenemyCardUi.card)) return;
+            if (isDeadOrEmpty(carenemyCardUi.card)) return; // already dead
 
             // TextPopUpSpawnerManager.Instance.StartTextPopUpTween("Dead", Color.red,
             //     carenemyCardUi.transform);
             carenemyCardUi.card.IsDead = true;
+            await cardAnimationSystem.AnimateCardIsDead(carenemyCardUi);
             carenemyCardUi.ShowEmptyCardData();
         }
 

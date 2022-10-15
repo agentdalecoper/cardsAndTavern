@@ -47,11 +47,14 @@ public class CardUI : MonoBehaviour
 
     public Animator animator;
 
+    private Color initTextColor;
+
     private void Awake()
     {
         ShowEmptyCardData();
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        initTextColor = damageText.color;
     }
 
     private void Start()
@@ -89,6 +92,12 @@ public class CardUI : MonoBehaviour
         }
         
         cost.gameObject.transform.parent.gameObject.SetActive(false);
+    }
+
+    public void ToInitialState()
+    {
+        damageText.color = initTextColor;
+        hpText.color = initTextColor;
     }
 
     public void ShowCardData(Card cardToShow, int position,
