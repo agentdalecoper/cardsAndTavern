@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8bdeb6482a34bd785dbb6612cfa383c, type: 3}
+  m_Name: Plague Doctor 2
+  m_EditorClassIdentifier: 
+  card:
+    hp: 9
+    damage: 4
+    name: "Doc \u271D\u271D"
+    sprite: {fileID: 21300000, guid: 433ccef476cb746be89aa35354fee7c5, type: 3}
+    itemOnly:
+      IsSet: 0
+      Value:
+        income:
+          IsSet: 0
+          Value:
+            income: 0
+        itemAddsSkill:
+          IsSet: 0
+          Value:
+            cardWithSkill:
+              hp: 0
+              damage: 0
+              name: 
+              sprite: {fileID: 0}
+              itemOnly:
+                IsSet: 0
+                Value:
+                  income:
+                    IsSet: 0
+                    Value:
+                      income: 0
+                  itemAddsSkill:
+                    IsSet: 0
+                    Value:
+                      cardWithSkill:
+                        hp: 0
+                        damage: 0
+                        name: 
+                        cost: 0
+                        numberOfSlots: 1
+                  sellHigh:
+                    IsSet: 0
+              splitAttack:
+                IsSet: 0
+              poisonOther:
+                IsSet: 0
+                Value:
+                  level: 0
+              deadlyPoison:
+                IsSet: 0
+              buff:
+                IsSet: 0
+              transformation:
+                IsSet: 0
+                Value:
+                  transformTo: {fileID: 0}
+              arrowShot:
+                IsSet: 0
+              steroids:
+                IsSet: 0
+              summon:
+                IsSet: 0
+                Value:
+                  turnsToSummon: 1
+                  cardToSummon: {fileID: 0}
+              shield:
+                IsSet: 0
+                Value:
+                  Alive: 1
+              horseRide:
+                IsSet: 0
+              reduceDamage:
+                IsSet: 0
+              gyroAttack:
+                IsSet: 0
+              healOther:
+                IsSet: 0
+              poisoned:
+                IsSet: 0
+              cost: 0
+              numberOfSlots: 1
+        sellHigh:
+          IsSet: 0
+    splitAttack:
+      IsSet: 0
+    poisonOther:
+      IsSet: 0
+      Value:
+        level: 0
+    deadlyPoison:
+      IsSet: 0
+    buff:
+      IsSet: 0
+    transformation:
+      IsSet: 0
+      Value:
+        transformTo: {fileID: 0}
+    arrowShot:
+      IsSet: 0
+    steroids:
+      IsSet: 0
+    summon:
+      IsSet: 0
+      Value:
+        turnsToSummon: 1
+        cardToSummon: {fileID: 0}
+    shield:
+      IsSet: 0
+      Value:
+        Alive: 1
+    horseRide:
+      IsSet: 0
+    reduceDamage:
+      IsSet: 0
+    gyroAttack:
+      IsSet: 0
+    healOther:
+      IsSet: 1
+    poisoned:
+      IsSet: 0
+    cost: 1
+    numberOfSlots: 3
+  nextGrade: {fileID: 0}
