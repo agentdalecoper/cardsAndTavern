@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91dee88ab7446eb95f5f18f73ad8e1, type: 3}
   m_Name: ArrowShot
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 7fd01ad307436452fb8b27f191e0fbd2, type: 3}
+  sprite: {fileID: 21300000, guid: fa6cbf2bf9a46415baa046d79eeed1e3, type: 3}
   name: 
+  description: Shots an arrow in the front direction, can shot it from the second
+    line

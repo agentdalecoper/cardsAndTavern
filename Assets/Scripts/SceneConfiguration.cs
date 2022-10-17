@@ -11,6 +11,7 @@ namespace Client
     [Serializable]
     public class  Level
     {
+        public Optional<Tutorial> tutorial;
         public Optional<DialogObject> dialogObject;
         public Optional<ChoseCardsObject> chooseCardsObject;
         public Optional<EnemyCardsObject> enemyCardsObject;
@@ -18,7 +19,22 @@ namespace Client
         public UnityEvent levelStartEvents;
         public UnityEvent levelEndEvents;
     }
-    
+
+    [Serializable]
+    public class Tutorial
+    {
+        public CardObject tutorialCard;
+        
+        public string dragFromShopSayingText;
+        public string tryRollingText;
+        public string yourCardsWillRespawnText;
+        public string gradeYourCard;
+        public string youHaveInventorySayingText;
+        public string youCanSellCard;
+        public string youHaveHpText;
+        public string nowClickNextLevelText;
+    }
+
     [Serializable]
     public class SceneConfiguration
     {
@@ -71,6 +87,15 @@ namespace Client
         public SceneAudioConfiguration sceneAudioConfiguration;
 
         public SceneEffects sceneEffects;
+
+        public TutorialConfiguration tutorialConfiguration;
+    }
+
+    [Serializable]
+    public class TutorialConfiguration
+    {
+        public GameObject auraEffect;
+        public CardInfoUI cardInfoUI;
     }
 
     [Serializable]
@@ -115,6 +140,9 @@ namespace Client
 
         public ChoseCardsObject shopChoseCardsObject;
 
+        public GameObject nextLevelButtonObject;
+        public GameObject rollACardHolder;
+        public GameObject sellCardHolderObject;
         public GameObject inventoryCardsHolder;
         public GameObject shopGameObject;
     }
@@ -145,6 +173,13 @@ namespace Client
     [Serializable]
     public class EnemyCardsObject
     {
-        public CardObject[] cardsEnemy;
+        public NumAndCard[] numAndCards;
+    }
+
+    [Serializable]
+    public class NumAndCard
+    {
+        public CardObject cardObject;
+        public int num;
     }
 }

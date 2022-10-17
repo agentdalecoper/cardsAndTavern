@@ -12,7 +12,7 @@ public class InitializeCardSystem : IEcsSystem
     private GameContext gameContext;
     private CardsSystem cardsSystem;
 
-    public async Task InitializeCards(CardObject[] cards, Side side)
+    public async Task InitializeCards(NumAndCard[] cards, Side side)
     {
         // gameContext.cardsPlayer = new Card[sceneConfiguration.CARDS_ON_BOARD_COUNT];
         // gameContext.cardsEnemy = new Card[sceneConfiguration.CARDS_ON_BOARD_COUNT];
@@ -20,8 +20,11 @@ public class InitializeCardSystem : IEcsSystem
 
         for (var position = 0; position < cards.Length; position++)
         {
-            CardUI card = await CreateAndShowCard(position, side, 
-                 cards[position]);
+            NumAndCard numAndCard = cards[position];
+            for (int i = 0; i < numAndCard.num; i++)
+            {
+                CardUI card = await CreateAndShowCard(position + i, side, numAndCard.cardObject);
+            }
         }
 
         // Card mainCard = CreateCard(Side.player, sceneConfiguration.mainCardObject);
@@ -86,6 +89,7 @@ public class InitializeCardSystem : IEcsSystem
             Vector3 initialPosition = cardUI.transform.position;
             cardUI.transform.position = animationMoveFromGo.transform.position;
             await cardUI.transform.DOMove(initialPosition, 0.25f).AsyncWaitForCompletion();
+            cardUI.MoveToStartPosition();
         }
 
         return cardUI;

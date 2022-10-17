@@ -75,6 +75,11 @@ namespace Client
 
         public void ShowText(string text)
         {
+            if (dialogTextUi == null)
+            {
+                dialogTextUi = sceneConfiguration.dialogText;
+            }
+
             dialogTextUi.gameObject.SetActive(true);
             dialogTextUi.text = text;
         }

@@ -96,15 +96,7 @@ namespace Client
 
                 if (crd.healOther.IsSet)
                 {
-                    CardUI toHealCard = FindAndHeal(crd);
-
-                    if (toHealCard != null)
-                    {
-                        cardAnimationSystem.AnimateSkillUsed(crdUi,
-                            sceneConfiguration.skillsObjectsDict.healOther.sprite);
-                        await cardAnimationSystem
-                            .AnimateChangeOfStat(toHealCard.damageText, Color.green, true);
-                    }
+                    await Heal(crd, crdUi);
                 }
                 
                 if (crd.transformation.IsSet)
@@ -120,6 +112,19 @@ namespace Client
                     await cardAnimationSystem.AnimateSkillUsed(crdUi,
                         sceneConfiguration.skillsObjectsDict.summon.sprite);
                 }
+            }
+        }
+
+        private async Task Heal(Card crd, CardUI crdUi)
+        {
+            CardUI toHealCard = FindAndHeal(crd);
+
+            if (toHealCard != null)
+            {
+                cardAnimationSystem.AnimateSkillUsed(crdUi,
+                    sceneConfiguration.skillsObjectsDict.healOther.sprite);
+                await cardAnimationSystem
+                    .AnimateChangeOfStat(toHealCard.hpText, Color.green, true);
             }
         }
 
@@ -377,7 +382,7 @@ namespace Client
         {
             // await Task.k(100);
             Debug.Log(" local pos player hold " + playerCardUi.transform.localPosition);
-            await AnimateCardAttackPosition(enemyCardUi, playerCardUi);
+            await cardAnimationSystem.AnimateCardAttackPosition(enemyCardUi, playerCardUi);
 
             await CardTurnEnemyToPlayer(enemyCardUi,
                 playerCardUi);
@@ -387,27 +392,6 @@ namespace Client
             //
             // await CardsTurnAdditionalSkills(enemyCardUi,
             //     playerCardUi, Side.enemy, 0, turn);
-        }
-
-        private static async Task AnimateCardAttackPosition(CardUI enemyCardUi, CardUI playerCardUi)
-        {
-            // enemyCardUi.animator.enabled = true;
-            // enemyCardUi.animator.SetTrigger("Attack");
-            // enemyCardUi.animator.enabled = false;
-
-            await enemyCardUi.transform
-                .DOLocalRotate(new Vector3(-40f, 0f, 0f), 0.1f)
-                .AsyncWaitForCompletion();
-            
-            await enemyCardUi.transform
-                .DOPunchPosition((playerCardUi.transform.localPosition)
-                                                        - enemyCardUi.transform.localPosition
-                , 0.5f, 1).AsyncWaitForCompletion();
-            await enemyCardUi.transform
-                .DOLocalRotate(new Vector3(0f, 0f, 0f), 0.1f)
-                .AsyncWaitForCompletion();
-            
-            // enemyCardUi.animator.enabled = false;
         }
 
         private static async Task AnimateTransformShake(CardUI playerCardUi)

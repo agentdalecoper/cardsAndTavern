@@ -40,7 +40,7 @@ public class CardsChoseController : IEcsSystem
         Debug.Log("Finished chose cards level");
     }
 
-    private async Task ChooseCardsLevel(CardObject[] cardsToChoseFrom)
+    public async Task ChooseCardsLevel(CardObject[] cardsToChoseFrom)
     {
         gameContext.isCardChoseLevel = true;
         
@@ -192,7 +192,7 @@ public class CardsChoseController : IEcsSystem
         // sceneConfiguration.playerCardsHolder.parent.gameObject.SetActive(false);
         sceneConfiguration.cardsChooseHolder.gameObject.SetActive(true);
         
-        Debug.Log("Show table");
+        Debug.Log("Show cards chose");
         // cameraController.ShowTable();
     }
 }

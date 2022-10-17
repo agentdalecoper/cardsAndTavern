@@ -154,7 +154,7 @@ namespace Client
         private async Task InitiateCardsInvasion(EnemyCardsObject enemyCardsObject)
         {
             await initializeCardSystem.InitializeCards(
-                enemyCardsObject.cardsEnemy, Side.enemy);
+                enemyCardsObject.numAndCards, Side.enemy);
             
             cameraController.ShowInvasionAndPlayerCards();
         }

@@ -7,5 +7,6 @@ namespace Client
     {
         public Sprite sprite;
         public string name;
+        public string description;
     }
 }

@@ -22,9 +22,10 @@ public class CardUI : MonoBehaviour
     private RectTransform rectTransform;
 
     public UnityEvent ActionCardClicked;
-    public static event Action<CardUI, CardUI> ActionCardDraggedOn;
     public static event Action<CardUI> ActionCardStartDrag;
-
+    public static event Action<CardUI> ActionCardDragging;
+    public static event Action<CardUI, CardUI> ActionCardDraggedOn;
+    
     [NonSerialized] public int cardPosition;
     
     private bool dragable;

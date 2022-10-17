@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Client;
-using DG.Tweening;
 using Leopotam.Ecs;
 using Newtonsoft.Json;
 using TMPro;
@@ -82,7 +81,12 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
         sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.tavernAmbient;
         sceneConfiguration.audioSource.Play();
 
-        CardUI.ActionCardStartDrag += cardUi => { PlayAudioCardTaken(); };
+        CardUI.ActionCardStartDrag += dragCardUI =>
+        {
+            PlayAudioCardTaken();
+            ShowCardDescription(initializeCardSystm, dragCardUI, cardsSystem);
+        };
+        
         CardsSystem.ActionCardDamaged += cardUi =>
         {
             sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardAttack;
@@ -104,80 +108,109 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
          */
         CardUI.ActionCardDraggedOn += (draggedCard, underCard) =>
         {
-            if (underCard.gameObject.name.StartsWith("BuyCard"))
-            {
-                draggedCard.MoveToStartPosition();
-                return;
-            }
-
-            if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.player)
-            {
-                Debug.Log("Sell a card ActionCardDraggedOn");
-                shopController.SellACardClicked(draggedCard);
-                return;
-            }
-
-            if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.shop)
-            {
-                draggedCard.MoveToStartPosition();
-                return;
-            }
-
-            if (!CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
-            {
-                draggedCard.MoveToStartPosition();
-                return;
-            }
-
-
-            // if card is from the shop and it is empty slot - buy card
-            if (CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
-            {
-                Debug.Log("Buy a card ActionCardDraggedOn");
-                shopController.BuyCardClicked(draggedCard, underCard);
-                // sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
-                // sceneConfiguration.tableAudioSource.Play();
-                return;
-            }
-
-            if (!CardsSystem.isDeadOrEmpty(underCard.card) && underCard.card.side == Side.enemy)
-            {
-                Debug.LogWarning("Tried to drag onto the enemy");
-                return;
-            }
-
-            if (CardsSystem.isDeadOrEmpty(underCard.card))
-            {
-                Debug.Log("Move Card And Remove ActionCardDraggedOn");
-                initializeCardSystm.MoveCardAndRemove(draggedCard, underCard);
-                sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
-                sceneConfiguration.tableAudioSource.Play();
-                return;
-            }
-
-            if (!CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.itemOnly.IsSet
-                                                           && draggedCard.card.itemOnly.Value.itemAddsSkill.IsSet)
-            {
-                shopController.AddSkillToACard(draggedCard, underCard);
-                sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
-                sceneConfiguration.tableAudioSource.Play();
-                Debug.Log("Add a skill to a card ActionCardDraggedOn");
-                return;
-            }
-
-            if (!CardsSystem.isDeadOrEmpty(underCard.card))
-            {
-                Debug.Log("Swap cards ActionCardDraggedOn");
-                initializeCardSystm.SwapCards(draggedCard, underCard);
-                sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
-                sceneConfiguration.tableAudioSource.Play();
-                return;
-            }
+            CheckCardMoveAndSlots(underCard, draggedCard, initializeCardSystm);
+            sceneConfiguration.tutorialConfiguration.cardInfoUI.gameObject.SetActive(false);
         };
-
+        
+        sceneConfiguration.tutorialConfiguration.cardInfoUI.gameObject.SetActive(false);
         MoneyDropManager.Instance.DropCoins(sceneConfiguration.shop.currentMoney);
 
         test();
+    }
+
+    private void CheckCardMoveAndSlots(CardUI underCard, CardUI draggedCard, InitializeCardSystem initializeCardSystm)
+    {
+        if (underCard.gameObject.name.StartsWith("BuyCard"))
+        {
+            draggedCard.MoveToStartPosition();
+            return;
+        }
+
+        if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.player)
+        {
+            Debug.Log("Sell a card ActionCardDraggedOn");
+            shopController.SellACardClicked(draggedCard);
+            return;
+        }
+
+        if (underCard.gameObject.name == "SellCard" && draggedCard.card.side == Side.shop)
+        {
+            draggedCard.MoveToStartPosition();
+            return;
+        }
+
+        if (!CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
+        {
+            draggedCard.MoveToStartPosition();
+            return;
+        }
+
+
+        // if card is from the shop and it is empty slot - buy card
+        if (CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
+        {
+            Debug.Log("Buy a card ActionCardDraggedOn");
+            shopController.BuyCardClicked(draggedCard, underCard);
+            // sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
+            // sceneConfiguration.tableAudioSource.Play();
+            return;
+        }
+
+        if (!CardsSystem.isDeadOrEmpty(underCard.card) && underCard.card.side == Side.enemy)
+        {
+            Debug.LogWarning("Tried to drag onto the enemy");
+            return;
+        }
+
+        if (CardsSystem.isDeadOrEmpty(underCard.card))
+        {
+            Debug.Log("Move Card And Remove ActionCardDraggedOn");
+            initializeCardSystm.MoveCardAndRemove(draggedCard, underCard);
+            sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
+            sceneConfiguration.tableAudioSource.Play();
+            return;
+        }
+
+        if (!CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.itemOnly.IsSet
+                                                       && draggedCard.card.itemOnly.Value.itemAddsSkill.IsSet)
+        {
+            shopController.AddSkillToACard(draggedCard, underCard);
+            sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
+            sceneConfiguration.tableAudioSource.Play();
+            Debug.Log("Add a skill to a card ActionCardDraggedOn");
+            return;
+        }
+
+        if (!CardsSystem.isDeadOrEmpty(underCard.card))
+        {
+            Debug.Log("Swap cards ActionCardDraggedOn");
+            initializeCardSystm.SwapCards(draggedCard, underCard);
+            sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
+            sceneConfiguration.tableAudioSource.Play();
+            return;
+        }
+    }
+
+    private void ShowCardDescription(InitializeCardSystem initializeCardSystm, CardUI dragCardUI, CardsSystem cardsSystem)
+    {
+        CardInfoUI cardInfoUI = sceneConfiguration.tutorialConfiguration.cardInfoUI;
+        cardInfoUI.NullifyUIs();
+
+        sceneConfiguration.tutorialConfiguration.cardInfoUI.gameObject.SetActive(true);
+        initializeCardSystm.ShowCardData(dragCardUI.card, cardInfoUI.cardUI);
+        List<SkillObject> cardSkills = cardsSystem.GetActiveSkillObjects(dragCardUI.card);
+        
+        cardInfoUI.cardUI.gameObject.SetActive(true);
+        cardInfoUI.cardDesctiption.text = dragCardUI.card.cardObject.description;
+
+        for (int i = 0; i < cardSkills.Count; i++)
+        {
+            SkillObject skillObject = cardSkills[i];
+            SkillDescriptionUI skillDescriptionUI = cardInfoUI.skillDescriptionUis[i];
+            skillDescriptionUI.text.text = skillObject.description;
+            skillDescriptionUI.skillSprite.sprite = skillObject.sprite;
+            skillDescriptionUI.gameObject.SetActive(true);
+        }
     }
 
     public void PlayAudioCardTaken()
@@ -223,7 +256,12 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
 
         initializeCardSystem.RefreshCardsUIs();
 
-        if (level.dialogObject.IsSet && !level.chooseCardsObject.IsSet && !level.enemyCardsObject.IsSet)
+        if (level.tutorial.IsSet)
+        {
+            Debug.Log("Tutorial only level");
+            await dialogController.TutorialOnlyLevel(level.tutorial.Value);
+        }
+        else if (level.dialogObject.IsSet && !level.chooseCardsObject.IsSet && !level.enemyCardsObject.IsSet)
         {
             Debug.Log("dialog level");
             await dialogController.DialogOnlyLevel(level.dialogObject.Value);
@@ -327,6 +365,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
     {
         Debug.Log("Next level clicked");
         sceneConfiguration.clickedNextLevel = true;
+        sceneConfiguration.tutorialConfiguration.auraEffect.gameObject.SetActive(false);
     }
 
     public void BuyCardClicked()
@@ -393,78 +432,6 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
 
         Debug.Log($"card1 {card1}");
         Debug.Log($"card2 {card2}");
-    }
-}
-
-internal class CardAnimationSystem : IEcsSystem
-{
-    public async Task AnimateDamageShake(CardUI playerCardUi, CardUI oppositeCard, Optional<Color> color)
-    {
-        var localRotation = playerCardUi.transform.localRotation;
-        var tween =  playerCardUi.transform.DOShakeRotation(0.5f, 10f);
-        playerCardUi.transform.localRotation = localRotation;
-        var initColor = playerCardUi.cardFace.color;
-        await DOTween.Sequence().Join(tween)
-            .Join(playerCardUi.cardFace.DOColor(color?.Value ?? Color.red, 0.3f))
-            .AsyncWaitForCompletion();
-        await playerCardUi.cardFace.DOColor(initColor, 0.1f).AsyncWaitForCompletion();
-    }
-    
-    public async Task AnimateChangeOfStat(TextMesh text, Color color, bool returnColor = false)
-    {
-        var initColor = text.color;
-        
-        var tw1 = DOTween.To(() =>
-                text.color,
-            x => text.color = x,
-            color, 1f);
-        var tw2 =
-            text.transform.DOShakeScale(1f, 2f);
-
-        var sequence = DOTween.Sequence()
-            .Join(tw1)
-            .Join(tw2);
-        
-        await sequence
-            .AsyncWaitForCompletion();
-
-        if (returnColor)
-        {
-            text.color = initColor;
-        }
-    }
-    
-    public async Task AnimateSkillUsed(CardUI cardUI, Sprite skillSprite)
-    {
-        GameObject go = new GameObject("skillUsed")
-        {
-            transform =
-            {
-                parent = cardUI.transform
-            }
-        };
-
-        go.transform.position = new Vector3(0, 0, 0);
-        go.transform.localPosition = new Vector3(0, 0, 0);
-        go.transform.eulerAngles = new Vector3(90f, 0, 90f);
-        go.transform.localScale = new Vector3(1f, 1f, 0f);
-        
-        SpriteRenderer spriteRenderer = go.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = skillSprite;
-        await go.transform.DOLocalMoveY(go.transform.localPosition.y + 0.7f, 0.7f)
-            .OnComplete(() => go.SetActive(false)).AsyncWaitForCompletion();
-    }
-
-    public async Task AnimateCardIsDead(CardUI carenemyCardUi)
-    {
-        var initSacle = carenemyCardUi.transform.localScale;
-        var initColor = carenemyCardUi.cardFace.color;
-        var tw1 = carenemyCardUi.transform.DOScale(0.8f, 0.2f);
-        var tw2 = carenemyCardUi.cardFace.DOColor(Color.grey, 0.2f);
-        await DOTween.Sequence().Join(tw1).Join(tw2).AsyncWaitForCompletion();
-
-        carenemyCardUi.transform.localScale = initSacle;
-        carenemyCardUi.cardFace.color = initColor;
     }
 }
 

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff91dee88ab7446eb95f5f18f73ad8e1, type: 3}
   m_Name: Poisoned
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 68eee0a38ba044921a0939328ab84c92, type: 3}
+  sprite: {fileID: 21300000, guid: c3cc3155225b743c59e70260d1dd572d, type: 3}
   name: 
