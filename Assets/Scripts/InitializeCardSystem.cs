@@ -47,6 +47,12 @@ public class InitializeCardSystem : IEcsSystem
         }
      */
 
+    public async Task<CardUI> CreateAndShowCard(CardUI cardUItoPlace, Side side, CardObject cardObject)
+    {
+        return await CreateAndShowCard(cardUItoPlace.cardPosition,
+            side, cardObject);
+    }
+    
     public async Task<CardUI> CreateAndShowCard(int position,
         Side side, CardObject cardObject)
     {
@@ -63,8 +69,8 @@ public class InitializeCardSystem : IEcsSystem
 
     public void RefreshCardsUIs()
     {
-        List<CardUI> initialPlayerCards = cardsSystem.GetCardUIList(Side.player);
-        List<CardUI> initialEnemyCards = cardsSystem.GetCardUIList(Side.enemy);
+        List<CardUI> initialPlayerCards = cardsSystem.GetCardAllUIs(Side.player);
+        List<CardUI> initialEnemyCards = cardsSystem.GetCardAllUIs(Side.enemy);
         foreach (CardUI cardUI in initialPlayerCards)
         {
             cardsSystem.RefreshCard(cardUI);

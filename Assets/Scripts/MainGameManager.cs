@@ -97,6 +97,15 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.moneySound;
             sceneConfiguration.tableAudioSource.Play();
         };
+        CardUI.ActionCardDraggedOn += (draggedCard, underCard) =>
+        {
+            sceneConfiguration.tutorialConfiguration.cardInfoUI.gameObject.SetActive(false);
+
+            if (underCard != null)
+            {
+                CheckCardMoveAndSlots(underCard, draggedCard, initializeCardSystm);
+            }
+        };
 
         StartFunction();
 
@@ -106,11 +115,6 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
          * 
          * 
          */
-        CardUI.ActionCardDraggedOn += (draggedCard, underCard) =>
-        {
-            CheckCardMoveAndSlots(underCard, draggedCard, initializeCardSystm);
-            sceneConfiguration.tutorialConfiguration.cardInfoUI.gameObject.SetActive(false);
-        };
         
         sceneConfiguration.tutorialConfiguration.cardInfoUI.gameObject.SetActive(false);
         MoneyDropManager.Instance.DropCoins(sceneConfiguration.shop.currentMoney);

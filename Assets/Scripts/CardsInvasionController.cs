@@ -34,6 +34,10 @@ namespace Client
         public async Task CardInvasionLevel(EnemyCardsObject enemyCardsObject)
         {
             initializeCardSystem.RefreshCardsUIs();
+            foreach (CardUI cardUI in cardsSystem.GetCardAllUIs(Side.player))
+            {
+                cardUI.dragBlocked = true;
+            }
 
             Card[] initialPlayerCards = cardsSystem
                 .GetCardList(Side.player)
@@ -42,9 +46,9 @@ namespace Client
             // Card[] initialEnemyCards = cardsSystem.GetCardList(Side.enemy).Select(CloneCard).ToArray();
 
             await InitiateCardsInvasion(enemyCardsObject);
-            
+
             // CardUI.ActionCardDraggedOn += (ui, cardUI) => Turn(ui, cardUI);
-            
+
             bool levelWon = await CheckCardSessionIsFinished();
             PlacePlayerCardsAgain(initialPlayerCards);
 
@@ -52,15 +56,20 @@ namespace Client
             {
                 cardUI.ToInitialState();
             }
-            
+
             foreach (CardUI cardUI in cardsSystem.GetCardAllUIs(Side.enemy))
             {
                 cardUI.ToInitialState();
             }
-            
+
             cameraController.ShowShopAndPlayerCards();
 
             shopController.ProcessLevelEndedIncome(levelWon);
+
+            foreach (CardUI cardUI in cardsSystem.GetCardAllUIs(Side.player))
+            {
+                cardUI.dragBlocked = false;
+            }
 
             // CardUI.ActionCardDraggedOn -= (ui, cardUI) =>  Turn(ui, cardUI);
         }
@@ -81,6 +90,13 @@ namespace Client
                 result.transformation.Value.transformTo
                     = toCloneCard.transformation.Value.transformTo;
             }
+
+            if (toCloneCard.summon.IsSet)
+            {
+                result.summon.Value.cardToSummon
+                    = toCloneCard.summon.Value.cardToSummon;
+            }
+
             
             return result;
         }

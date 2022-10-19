@@ -108,9 +108,7 @@ namespace Client
 
                 if (crd.summon.IsSet)
                 {
-                    Summon(crd);
-                    await cardAnimationSystem.AnimateSkillUsed(crdUi,
-                        sceneConfiguration.skillsObjectsDict.summon.sprite);
+                    Summon(crdUi);
                 }
             }
         }
@@ -128,20 +126,25 @@ namespace Client
             }
         }
 
-        private void Summon(Card crd)
+        private async Task Summon(CardUI crdUi)
         {
+            Card crd = crdUi.card;
             Summon summon = crd.summon.Value;
             if (summon.turnsToSummon > 0)
             {
                 summon.turnsToSummon--;
             }
-            
             else
             {
                 CardUI freeCellUI =
-                    GetCardUIList(crd.side).Find(ui => isDeadOrEmpty(ui.card));
-                Card summonCard = initializeCardSystem.CreateCard(Side.player, summon.cardToSummon);
-                initializeCardSystem.ShowCardData(summonCard, freeCellUI);
+                    GetCardAllUIs(crd.side).Find(ui => isDeadOrEmpty(ui.card));
+                if (freeCellUI != null)
+                {
+                    await cardAnimationSystem.AnimateSkillUsed(crdUi,
+                        sceneConfiguration.skillsObjectsDict.summon.sprite);
+                    await initializeCardSystem.CreateAndShowCard(freeCellUI, crd.side, summon.cardToSummon);
+                }
+
                 summon.turnsToSummon = crd.cardObject.card.summon.Value.turnsToSummon;
             }
         }

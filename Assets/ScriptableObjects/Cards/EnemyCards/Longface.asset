@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8bdeb6482a34bd785dbb6612cfa383c, type: 3}
-  m_Name: Necromant 1
+  m_Name: Longface
   m_EditorClassIdentifier: 
   card:
-    hp: 5
-    damage: 3
-    name: Necromant
-    sprite: {fileID: 21300000, guid: 88171f9179f934e1aa9420019693d82c, type: 3}
+    hp: 7
+    damage: 12
+    name: Longface
+    sprite: {fileID: 21300000, guid: 327d342415b82429da5b5661bff5193b, type: 3}
     itemOnly:
       IsSet: 0
       Value:
@@ -71,7 +71,7 @@ MonoBehaviour:
               summon:
                 IsSet: 0
                 Value:
-                  turnsToSummon: 1
+                  turnsToSummon: 2
                   cardToSummon: {fileID: 0}
               shield:
                 IsSet: 0
@@ -100,20 +100,20 @@ MonoBehaviour:
     deadlyPoison:
       IsSet: 0
     buff:
-      IsSet: 0
+      IsSet: 1
     transformation:
       IsSet: 0
       Value:
-        transformTo: {fileID: 11400000, guid: a277f0e830a8a4ab0a2e0130482d07a5, type: 2}
+        transformTo: {fileID: 0}
     arrowShot:
       IsSet: 0
     steroids:
       IsSet: 0
     summon:
-      IsSet: 1
+      IsSet: 0
       Value:
-        turnsToSummon: 0
-        cardToSummon: {fileID: 11400000, guid: f3320e48a33994fe8bc77add3596c838, type: 2}
+        turnsToSummon: 2
+        cardToSummon: {fileID: 0}
     shield:
       IsSet: 0
       Value:
@@ -128,7 +128,7 @@ MonoBehaviour:
       IsSet: 0
     poisoned:
       IsSet: 0
-    cost: 1
-    numberOfSlots: 2
-  nextGrade: {fileID: 11400000, guid: 5406f748d192142a5943af48b648f56d, type: 2}
+    cost: 0
+    numberOfSlots: 1
+  nextGrade: {fileID: 0}
   description: 

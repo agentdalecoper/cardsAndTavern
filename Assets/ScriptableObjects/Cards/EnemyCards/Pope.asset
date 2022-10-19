@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8bdeb6482a34bd785dbb6612cfa383c, type: 3}
-  m_Name: Necromant 1
+  m_Name: Pope
   m_EditorClassIdentifier: 
   card:
     hp: 5
-    damage: 3
-    name: Necromant
-    sprite: {fileID: 21300000, guid: 88171f9179f934e1aa9420019693d82c, type: 3}
+    damage: 7
+    name: Pope
+    sprite: {fileID: 21300000, guid: 0d60c37eed0734030b8b65e4bb3120f3, type: 3}
     itemOnly:
       IsSet: 0
       Value:
@@ -71,7 +71,7 @@ MonoBehaviour:
               summon:
                 IsSet: 0
                 Value:
-                  turnsToSummon: 1
+                  turnsToSummon: 2
                   cardToSummon: {fileID: 0}
               shield:
                 IsSet: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
     transformation:
       IsSet: 0
       Value:
-        transformTo: {fileID: 11400000, guid: a277f0e830a8a4ab0a2e0130482d07a5, type: 2}
+        transformTo: {fileID: 0}
     arrowShot:
       IsSet: 0
     steroids:
@@ -112,8 +112,8 @@ MonoBehaviour:
     summon:
       IsSet: 1
       Value:
-        turnsToSummon: 0
-        cardToSummon: {fileID: 11400000, guid: f3320e48a33994fe8bc77add3596c838, type: 2}
+        turnsToSummon: 2
+        cardToSummon: {fileID: 11400000, guid: 7565f37279855423a8203c7a8b9dc9db, type: 2}
     shield:
       IsSet: 0
       Value:
@@ -128,7 +128,7 @@ MonoBehaviour:
       IsSet: 0
     poisoned:
       IsSet: 0
-    cost: 1
-    numberOfSlots: 2
-  nextGrade: {fileID: 11400000, guid: 5406f748d192142a5943af48b648f56d, type: 2}
+    cost: 0
+    numberOfSlots: 1
+  nextGrade: {fileID: 0}
   description: 

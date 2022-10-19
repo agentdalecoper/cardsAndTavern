@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8bdeb6482a34bd785dbb6612cfa383c, type: 3}
-  m_Name: Devil Pope
+  m_Name: Woordalak
   m_EditorClassIdentifier: 
   card:
-    hp: 3
-    damage: 2
-    name: 
-    sprite: {fileID: 21300000, guid: cf97b7d76ef3a4c5cb208df204c3dbd8, type: 3}
+    hp: 6
+    damage: 6
+    name: Woordalak
+    sprite: {fileID: 21300000, guid: addcb6f98cfee4613b82172b8e2fe90f, type: 3}
     itemOnly:
       IsSet: 0
       Value:
@@ -71,17 +71,19 @@ MonoBehaviour:
               summon:
                 IsSet: 0
                 Value:
-                  turnsToSummon: 1
+                  turnsToSummon: 2
                   cardToSummon: {fileID: 0}
               shield:
                 IsSet: 0
                 Value:
                   Alive: 1
-              quill:
+              horseRide:
                 IsSet: 0
               reduceDamage:
                 IsSet: 0
               gyroAttack:
+                IsSet: 0
+              healOther:
                 IsSet: 0
               poisoned:
                 IsSet: 0
@@ -110,19 +112,23 @@ MonoBehaviour:
     summon:
       IsSet: 0
       Value:
-        turnsToSummon: 1
+        turnsToSummon: 2
         cardToSummon: {fileID: 0}
     shield:
       IsSet: 0
       Value:
         Alive: 1
-    quill:
+    horseRide:
       IsSet: 0
     reduceDamage:
       IsSet: 0
     gyroAttack:
       IsSet: 0
+    healOther:
+      IsSet: 0
     poisoned:
       IsSet: 0
     cost: 0
     numberOfSlots: 1
+  nextGrade: {fileID: 0}
+  description: 

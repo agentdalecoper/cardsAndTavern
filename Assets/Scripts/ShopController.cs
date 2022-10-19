@@ -25,7 +25,7 @@ internal class ShopController : IEcsInitSystem
 
     public void BuyCardSlotsClicked()
     {
-        Debug.Log("Buy card clicked");
+        Debug.Log("Buy roll clicked " + sceneConfiguration.shop.currentMoney);
 
         if (sceneConfiguration.shop.buyCardCost > sceneConfiguration.shop.currentMoney)
         {
@@ -35,6 +35,24 @@ internal class ShopController : IEcsInitSystem
         cardsChoseController.ChooseCardsLevel();
         RemoveMoney(sceneConfiguration.shop.buyCardCost);
         RefreshShopUis();
+    }
+    public void BuyCardClicked(CardUI draggedCard, CardUI underCard)
+    {
+        if (draggedCard.card.cost > sceneConfiguration.shop.currentMoney)
+        {
+            return;
+        }
+
+        Card boughtCard = draggedCard.card;
+        boughtCard.side = Side.player;
+        RemoveMoney(boughtCard.cost);
+
+        if (!CheckIfCardSkillUpgrade(draggedCard))
+        {
+            initializeCardSystem.ShowCardData(draggedCard.card, underCard);
+            cardsSystem.RemoveCard(draggedCard);
+            draggedCard.MoveToStartPosition();
+        }
     }
 
     public void BuyIncomeClicked()
@@ -228,19 +246,5 @@ internal class ShopController : IEcsInitSystem
         cardsSystem.RefreshCard(cardToStarUpgrade);
         cameraController.ShowShopAndPlayerCards();
         // damage / hp x2? 
-    }
-
-    public void BuyCardClicked(CardUI draggedCard, CardUI underCard)
-    {
-        Card boughtCard = draggedCard.card;
-        boughtCard.side = Side.player;
-        RemoveMoney(boughtCard.cost);
-
-        if (!CheckIfCardSkillUpgrade(draggedCard))
-        {
-            initializeCardSystem.ShowCardData(draggedCard.card, underCard);
-            cardsSystem.RemoveCard(draggedCard);
-            draggedCard.MoveToStartPosition();
-        }
     }
 }

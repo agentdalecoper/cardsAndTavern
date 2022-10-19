@@ -29,6 +29,7 @@ public class CardUI : MonoBehaviour
     [NonSerialized] public int cardPosition;
     
     private bool dragable;
+    public bool dragBlocked;
     private Vector3 startAnchoredPosition;
 
     private List<RaycastResult> raycastResults = new List<RaycastResult>();
@@ -141,6 +142,7 @@ public class CardUI : MonoBehaviour
     {
         dragable = drag;
     }
+    
     private void SetDraggable(Card cardToShow)
     {
         if (cardToShow.side != Side.enemy)
@@ -157,16 +159,21 @@ public class CardUI : MonoBehaviour
 
     void OnMouseDown()
     {
-            Debug.Log("Card clicked " + this);
+        Debug.Log("Card clicked " + this);
         // ActionCardClicked?.Invoke();
-    
+
         if (!dragable)
         {
             return;
         }
-        
+
+        if (dragBlocked)
+        {
+            return;
+        }
+
         ActionCardStartDrag?.Invoke(this);
-        
+
         startAnchoredPosition = transform.position;
     }
 
@@ -176,6 +183,11 @@ public class CardUI : MonoBehaviour
         Debug.Log("drag");
 
         if (!dragable)
+        {
+            return;
+        }
+        
+        if (dragBlocked)
         {
             return;
         }
@@ -227,7 +239,15 @@ public class CardUI : MonoBehaviour
 
     public void OnMouseUp()
     {
+        MoveToStartPosition();
+        ActionCardDraggedOn?.Invoke(this, null);
+        
         if (!dragable)
+        {
+            return;
+        }
+        
+        if (dragBlocked)
         {
             return;
         }
@@ -263,7 +283,6 @@ public class CardUI : MonoBehaviour
         //     }
         // }
 
-        MoveToStartPosition();
         // transform.rotation = initialRotation;
     }
 
