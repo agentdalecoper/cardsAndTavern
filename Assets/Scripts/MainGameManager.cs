@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Client;
+using Cysharp.Threading.Tasks;
 using Leopotam.Ecs;
 using Newtonsoft.Json;
 using TMPro;
@@ -86,7 +87,6 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             PlayAudioCardTaken();
             ShowCardDescription(initializeCardSystm, dragCardUI, cardsSystem);
         };
-        
         CardsSystem.ActionCardDamaged += cardUi =>
         {
             sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardAttack;
@@ -106,7 +106,12 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
                 CheckCardMoveAndSlots(underCard, draggedCard, initializeCardSystm);
             }
         };
-
+        
+        gameContext.playerCardUIs = sceneConfiguration
+            .playerCardsHolder.GetComponentsInChildren<CardUI>();
+        gameContext.enemyCardUIs = sceneConfiguration
+            .enemyCardsHolder.GetComponentsInChildren<CardUI>();
+            
         StartFunction();
 
         // todo it can be better implemented via interfaces 
@@ -148,7 +153,6 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             draggedCard.MoveToStartPosition();
             return;
         }
-
 
         // if card is from the shop and it is empty slot - buy card
         if (CardsSystem.isDeadOrEmpty(underCard.card) && draggedCard.card.side == Side.shop)
@@ -227,7 +231,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
     private async void StartFunction()
     {
         Debug.Log("StartFunction()");
-        // await Task.Delay(500);
+        // await UniTask.Delay(500);
         await cameraController.FadeIn();
 
         sceneConfiguration.hpBalanceManagerText.text = gameContext.playerEnemyHpBalance.ToString();
@@ -254,7 +258,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
         cameraController.ShowGameWon();
     }
 
-    private async Task ProceedLevel(Level level)
+    private async UniTask ProceedLevel(Level level)
     {
         Debug.Log("ProceedLevel()");
 
@@ -465,7 +469,7 @@ public static class ObjectCopier
 
 
 //
-// private async Task<bool> EndTurn()
+// private async UniTask<bool> EndTurn()
 // {
 //     Debug.Log($"New turn playerCards={string.Join(" ,", gameContext.cardsPlayer.ToList())}," +
 //               $" enemyCards={string.Join(" ,", gameContext.cardsPlayer.ToList())}");

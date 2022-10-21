@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Client;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -17,7 +18,7 @@ internal class CardAnimationSystem : IEcsSystem
             .tutorialConfiguration.auraEffect.gameObject.SetActive(true);
     }
     
-    public async Task AnimateCardAttackPosition(CardUI enemyCardUi, CardUI playerCardUi)
+    public async UniTask AnimateCardAttackPosition(CardUI enemyCardUi, CardUI playerCardUi)
     {
         // enemyCardUi.animator.enabled = true;
         // enemyCardUi.animator.SetTrigger("Attack");
@@ -38,7 +39,7 @@ internal class CardAnimationSystem : IEcsSystem
         // enemyCardUi.animator.enabled = false;
     }
     
-    public async Task AnimateDamageShake(CardUI playerCardUi, CardUI oppositeCard, Optional<Color> color)
+    public async UniTask AnimateDamageShake(CardUI playerCardUi, CardUI oppositeCard, Optional<Color> color)
     {
         var localRotation = playerCardUi.transform.localRotation;
         var tween =  playerCardUi.transform.DOShakeRotation(0.5f, 10f);
@@ -50,7 +51,7 @@ internal class CardAnimationSystem : IEcsSystem
         await playerCardUi.cardFace.DOColor(initColor, 0.1f).AsyncWaitForCompletion();
     }
     
-    public async Task AnimateChangeOfStat(TextMesh text, Color color, bool returnColor = false)
+    public async UniTask AnimateChangeOfStat(TextMesh text, Color color, bool returnColor = false)
     {
         var initColor = text.color;
         
@@ -74,7 +75,7 @@ internal class CardAnimationSystem : IEcsSystem
         }
     }
     
-    public async Task AnimateSkillUsed(CardUI cardUI, Sprite skillSprite)
+    public async UniTask AnimateSkillUsed(CardUI cardUI, Sprite skillSprite)
     {
         GameObject go = new GameObject("skillUsed")
         {
@@ -95,7 +96,7 @@ internal class CardAnimationSystem : IEcsSystem
             .OnComplete(() => go.SetActive(false)).AsyncWaitForCompletion();
     }
 
-    public async Task AnimateCardIsDead(CardUI carenemyCardUi)
+    public async UniTask AnimateCardIsDead(CardUI carenemyCardUi)
     {
         var initSacle = carenemyCardUi.transform.localScale;
         var initColor = carenemyCardUi.cardFace.color;

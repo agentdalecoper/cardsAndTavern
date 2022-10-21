@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Leopotam.Ecs;
 using UnityEngine;
@@ -31,7 +32,7 @@ namespace Client
          *         not found => search left to the leftmost
          *         not found => search right to the rightmost
          */
-        public async Task CardInvasionLevel(EnemyCardsObject enemyCardsObject)
+        public async UniTask CardInvasionLevel(EnemyCardsObject enemyCardsObject)
         {
             initializeCardSystem.RefreshCardsUIs();
             foreach (CardUI cardUI in cardsSystem.GetCardAllUIs(Side.player))
@@ -126,7 +127,7 @@ namespace Client
             }
         }
 
-        private async Task<bool> CheckCardSessionIsFinished()
+        private async UniTask<bool> CheckCardSessionIsFinished()
         {
             int turn = 0;
 
@@ -137,7 +138,7 @@ namespace Client
                 await cardsSystem.IterateCardsAndDamage(turn);
                 turn++;
                 Debug.Log("Iterated cards and waiting for end session");
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             return await cardsSystem.EndOfInvasion();
@@ -167,7 +168,7 @@ namespace Client
             }
         }
 
-        private async Task InitiateCardsInvasion(EnemyCardsObject enemyCardsObject)
+        private async UniTask InitiateCardsInvasion(EnemyCardsObject enemyCardsObject)
         {
             await initializeCardSystem.InitializeCards(
                 enemyCardsObject.numAndCards, Side.enemy);
@@ -175,7 +176,7 @@ namespace Client
             cameraController.ShowInvasionAndPlayerCards();
         }
 
-        public async Task WaitForPlayerClickedNextRound()
+        public async UniTask WaitForPlayerClickedNextRound()
         {
             while (!sceneConfiguration.clickedNextLevel)
             {
@@ -195,13 +196,13 @@ namespace Client
                 }
                 
                 Debug.Log("Waiting for level clicked next round");
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             sceneConfiguration.clickedNextLevel = false;
         }
 
-        private async Task TakeCardIntoAHand(CardUI cardUI)
+        private async UniTask TakeCardIntoAHand(CardUI cardUI)
         {
             gameContext.cardChosenUI = cardUI;
             await cardsChoseController.TakeCardInHand(cardUI);

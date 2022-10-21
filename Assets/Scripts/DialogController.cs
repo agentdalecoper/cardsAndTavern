@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Leopotam.Ecs;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace Client
 
         private CardsChoseController cardsChoseController;
 
-        public async Task TutorialOnlyLevel(Tutorial tutorial)
+        public async UniTask TutorialOnlyLevel(Tutorial tutorial)
         {
             cardsChoseController.ChooseCardsLevel(new[]
             {
@@ -33,7 +34,7 @@ namespace Client
             int money = sceneConfiguration.shop.currentMoney;
             while (sceneConfiguration.shop.currentMoney == money)
             {
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             sceneConfiguration.shop.inventoryCardsHolder.SetActive(false);
@@ -48,7 +49,7 @@ namespace Client
             money = sceneConfiguration.shop.currentMoney;
             while (sceneConfiguration.shop.currentMoney == money)
             {
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             sceneConfiguration.shop.inventoryCardsHolder.SetActive(false);
@@ -70,7 +71,7 @@ namespace Client
             while (sceneConfiguration.shop.currentMoney
                    + tutorial.tutorialCard.card.cost * 2 != money)
             {
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             sceneConfiguration.shop.inventoryCardsHolder.SetActive(true);
@@ -84,7 +85,7 @@ namespace Client
 
             while (CheckForDialogEnd())
             {
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             DialogTextManager.Instance.ShowText(tutorial.youCanSellCard);
@@ -92,14 +93,14 @@ namespace Client
 
             while (CheckForDialogEnd())
             {
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             DialogTextManager.Instance.ShowText(tutorial.yourCardsWillRespawnText);
             animationSystem.AnimateGlow(sceneConfiguration.playerCardsHolder.transform.position);
             while (CheckForDialogEnd())
             {
-                await Task.Yield();
+                await UniTask.Yield();
             }
 
             DialogTextManager.Instance.ShowText(tutorial.nowClickNextLevelText);
@@ -112,7 +113,7 @@ namespace Client
             sceneConfiguration.cardsChooseHolder.gameObject.SetActive(true);
         }
         
-        public async Task DialogOnlyLevel(DialogObject dialogObject)
+        public async UniTask DialogOnlyLevel(DialogObject dialogObject)
         {
             cameraController.ShowDialogOnly();
             // cameraController.CannotLookOut = true;
@@ -120,7 +121,7 @@ namespace Client
             // cameraController.CannotLookOut = false;
         }
 
-        public async Task DialogLevel(DialogObject dialogObject)
+        public async UniTask DialogLevel(DialogObject dialogObject)
         {
             DialogTextManager.Instance.StartDialog(dialogObject);
             
@@ -128,7 +129,7 @@ namespace Client
             while (CheckForDialogEnd())
             {
                 Debug.Log("Check for dialog end");
-                await Task.Yield();
+                await UniTask.Yield();
             }
             
             Debug.Log("dialog finished");

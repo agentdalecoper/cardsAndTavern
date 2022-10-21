@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using Client;
 using DG.Tweening;
-using TMPro;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -177,10 +175,11 @@ public class CardUI : MonoBehaviour
         startAnchoredPosition = transform.position;
     }
 
+    private RaycastHit[] raycastHits = new RaycastHit[10];
 
     void OnMouseDrag()
     {
-        Debug.Log("drag");
+        // Debug.Log("drag");
 
         if (!dragable)
         {
@@ -195,22 +194,22 @@ public class CardUI : MonoBehaviour
         Vector3 screenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, CameraZDistance);
         Vector3 newWorldPosition =
             mainCamera.ScreenToWorldPoint(screenPosition); //Screen point converted to world point
-        transform.position = new Vector3(newWorldPosition.x, transform.position.y, newWorldPosition.z);
-        // transform.DOShakeRotation(0.1f, 0.1f, 1);
+
+        Transform transform1 = transform;
+        transform1.position = new Vector3(newWorldPosition.x, transform1.position.y, newWorldPosition.z);
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit[] hits = Physics.RaycastAll(ray, 100);
+        int hitsSize = Physics.RaycastNonAlloc(ray, raycastHits, 100);
 
-        if (hits.Length != 0)
+        for (int i = 0; i < hitsSize; i++)
         {
-            foreach (RaycastHit hit in hits)
+            RaycastHit hit = raycastHits[i];
+
+            CardUI otherCardUi = hit.collider.gameObject.GetComponent<CardUI>();
+            if (otherCardUi != null && otherCardUi != this && otherCardUi.gameObject.name == "SellCard")
             {
-                CardUI otherCardUi = hit.collider.gameObject.GetComponent<CardUI>();
-                if (otherCardUi != null && otherCardUi != this && otherCardUi.gameObject.name == "SellCard")
-                {
-                    cost.gameObject.transform.parent.gameObject.SetActive(true);
-                    return;
-                }
+                cost.gameObject.transform.parent.gameObject.SetActive(true);
+                return;
             }
         }
 
@@ -241,36 +240,36 @@ public class CardUI : MonoBehaviour
     {
         MoveToStartPosition();
         ActionCardDraggedOn?.Invoke(this, null);
-        
+
         if (!dragable)
         {
             return;
         }
-        
+
         if (dragBlocked)
         {
             return;
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit[] hits = Physics.RaycastAll(ray, 100);
-            
-        if (hits.Length != 0)
-        {
-            foreach (RaycastHit hit in hits)
-            {
-                CardUI otherCardUi = hit.collider.gameObject.GetComponent<CardUI>();
-                if (otherCardUi != null && otherCardUi != this)
-                {
-                    Debug.Log("Found raycast image!!! " + hit.collider.gameObject);
-                    ActionCardDraggedOn?.Invoke(this, otherCardUi);
-                    // transform.DOShakeRotation(0.1f, 2f, 10);
+        var size = Physics.RaycastNonAlloc(ray, raycastHits, 100);
 
-                    return;
-                }
+        for (int i = 0; i < size; i++)
+        {
+            RaycastHit hit = raycastHits[i];
+
+            CardUI otherCardUi = hit.collider.gameObject.GetComponent<CardUI>();
+            if (otherCardUi != null && otherCardUi != this)
+            {
+                Debug.Log("Found raycast image!!! " + hit.collider.gameObject);
+                ActionCardDraggedOn?.Invoke(this, otherCardUi);
+                // transform.DOShakeRotation(0.1f, 2f, 10);
+                Debug.Log("Ended raycast " + hit.collider.gameObject);
+                return;
             }
         }
-        //
+    }
+    //
         // foreach (RaycastResult result in raycastResults)
         // {
         //     // Debug.Log("checking raycast " + result.gameObject + " " + eventData.position);
@@ -284,7 +283,6 @@ public class CardUI : MonoBehaviour
         // }
 
         // transform.rotation = initialRotation;
-    }
 
     public void MoveToStartPosition()
     {
@@ -414,7 +412,7 @@ public Button buttonRight;
 //     // text.text = $"{successOrLoose} was checking {skillsCheck} vs. " +
 //     //             $" playerSkills={playerSkills} + diceRoll={diceRoll.roll}";
 //
-//     await Task.Delay(TimeSpan.FromSeconds(20f));
+//     await UniTask.Delay(TimeSpan.FromSeconds(20f));
 //     isWaitingUiDelay.TrySetResult(false);
 // }
 

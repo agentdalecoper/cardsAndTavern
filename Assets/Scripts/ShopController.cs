@@ -49,8 +49,11 @@ internal class ShopController : IEcsInitSystem
 
         if (!CheckIfCardSkillUpgrade(draggedCard))
         {
+            Debug.Log("Show card data:");
             initializeCardSystem.ShowCardData(draggedCard.card, underCard);
+            Debug.Log("remove card:");
             cardsSystem.RemoveCard(draggedCard);
+            Debug.Log("MoveToStartPosition:");
             draggedCard.MoveToStartPosition();
         }
     }

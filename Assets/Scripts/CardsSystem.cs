@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Leopotam.Ecs;
 using MyBox;
@@ -20,7 +21,7 @@ namespace Client
 
         public static event Action<CardUI> ActionCardDamaged;
 
-        public async Task CardTurnEnemyToPlayer(CardUI cardUi, CardUI enemyCardUi)
+        public async UniTask CardTurnEnemyToPlayer(CardUI cardUi, CardUI enemyCardUi)
         {
             Card card = cardUi.card;
             Card enemyCard = enemyCardUi.card;
@@ -38,7 +39,7 @@ namespace Client
                 sceneConfiguration.playerCardsHolder);
         }
 
-        public async Task CardsPreTurnSkills(Side side)
+        public async UniTask CardsPreTurnSkills(Side side)
         {
             foreach (CardUI crdUi in GetCardAllUIs(side))
             {
@@ -61,7 +62,7 @@ namespace Client
             }
         }
 
-        public async Task CardsTurnAdditionalSkills(Side side, int turn)
+        public async UniTask CardsTurnAdditionalSkills(Side side, int turn)
         {
             foreach (CardUI crdUi in GetCardAllUIs(side))
             {
@@ -113,7 +114,7 @@ namespace Client
             }
         }
 
-        private async Task Heal(Card crd, CardUI crdUi)
+        private async UniTask Heal(Card crd, CardUI crdUi)
         {
             CardUI toHealCard = FindAndHeal(crd);
 
@@ -126,7 +127,7 @@ namespace Client
             }
         }
 
-        private async Task Summon(CardUI crdUi)
+        private async UniTask Summon(CardUI crdUi)
         {
             Card crd = crdUi.card;
             Summon summon = crd.summon.Value;
@@ -149,7 +150,7 @@ namespace Client
             }
         }
 
-        private async Task CardTransformation(Card crd, CardUI crdUi)
+        private async UniTask CardTransformation(Card crd, CardUI crdUi)
         {
             Transformation transformation = crd.transformation.Value;
             if (transformation.countTurnsToTransform > 0)
@@ -167,7 +168,7 @@ namespace Client
             }
         }
 
-        private async Task<bool> CardBuff(int line, Card crd, CardUI crdUi)
+        private async UniTask<bool> CardBuff(int line, Card crd, CardUI crdUi)
         {
             // а давай buff это только в начале хода будет делаться
             // возьми слева и справа карту и дай им 1 хп и 1 дэмедж
@@ -231,7 +232,7 @@ namespace Client
             return cardToHeal;
         }
 
-        private async Task HorseRide(CardUI cardUI)
+        private async UniTask HorseRide(CardUI cardUI)
         {
             // attacks with 1 damage both lines in front if the first line
             CardUI acrossEnemyCardUI =
@@ -283,7 +284,7 @@ namespace Client
          * var cardLineLevel = cardUiPos % sceneConfiguration.cardCountOnBoard
          * <param name="turn"></param>
          */
-        public async Task IterateCardsAndDamage(int turn)
+        public async UniTask IterateCardsAndDamage(int turn)
         {
             foreach (CardUI enemyCardUI in GetCardUIList(Side.enemy))
             {
@@ -315,7 +316,7 @@ namespace Client
             await AdvancePreviousLineCards(Side.player);
         }
 
-        private async Task AdvancePreviousLineCards(Side side)
+        private async UniTask AdvancePreviousLineCards(Side side)
         {
             for (int line = 1;
                  line <
@@ -381,9 +382,9 @@ namespace Client
             return playerCardUI;
         }
 
-        public async Task Turn(CardUI enemyCardUi, CardUI playerCardUi, int turn)
+        public async UniTask Turn(CardUI enemyCardUi, CardUI playerCardUi, int turn)
         {
-            // await Task.k(100);
+            // await UniTask.k(100);
             Debug.Log(" local pos player hold " + playerCardUi.transform.localPosition);
             await cardAnimationSystem.AnimateCardAttackPosition(enemyCardUi, playerCardUi);
 
@@ -397,7 +398,7 @@ namespace Client
             //     playerCardUi, Side.enemy, 0, turn);
         }
 
-        private static async Task AnimateTransformShake(CardUI playerCardUi)
+        private static async UniTask AnimateTransformShake(CardUI playerCardUi)
         {
             var localRotation = playerCardUi.transform.localRotation;
             await playerCardUi.transform.DOShakeScale(0.5f, 0.5f).AsyncWaitForCompletion();
@@ -405,7 +406,7 @@ namespace Client
         }
 
 
-        public async Task<bool> EndOfInvasion()
+        public async UniTask<bool> EndOfInvasion()
         {
             bool levelWon;
 
@@ -431,7 +432,7 @@ namespace Client
 
                 gameContext.playerEnemyHpBalance -= damage;
                 Debug.Log("Damaging main board with damage " + damage);
-                // await Task.Delay(300);
+                // await UniTask.Delay(300);
                 await AnimationDamageMainBoard();
                 cameraController.ShowTable();
 
@@ -447,14 +448,14 @@ namespace Client
             return levelWon;
         }
 
-        private async Task AnimationDamageMainBoard()
+        private async UniTask AnimationDamageMainBoard()
         {
             sceneConfiguration.hpBalanceManagerText.text = gameContext.playerEnemyHpBalance.ToString();
             await cardAnimationSystem.AnimateChangeOfStat(sceneConfiguration.hpBalanceManagerText,
                 Color.red);
         }
 
-        private async Task CheckDamageWithPoison(CardUI cardUI, Card card)
+        private async UniTask CheckDamageWithPoison(CardUI cardUI, Card card)
         {
             Debug.Log("check damage with poison");
 
@@ -475,7 +476,7 @@ namespace Client
             RefreshCard(cardUI);
         }
 
-        private async Task ArrowShot(CardUI playerCardUI)
+        private async UniTask ArrowShot(CardUI playerCardUI)
         {
             CardUI acrossEnemyCardUI =
                 GetCardAcrossFromAll(playerCardUI);
@@ -484,7 +485,7 @@ namespace Client
             Debug.Log($"Arrow shot enemy card {acrossEnemyCardUI} player card {playerCardUI}");
         }
 
-        private async Task CardTurnMainSkills(Card card, Card enemyCard, CardUI cardUi, CardUI enemyCardUi)
+        private async UniTask CardTurnMainSkills(Card card, Card enemyCard, CardUI cardUi, CardUI enemyCardUi)
         {
             if (card.damage > 0)
             {
@@ -506,7 +507,7 @@ namespace Client
             }
         }
 
-        private async Task GyroAttack(Card card)
+        private async UniTask GyroAttack(Card card)
         {
             Debug.Log("gyro attack " + card);
 
@@ -528,7 +529,7 @@ namespace Client
             }
         }
 
-        private async Task SplitAttack(CardUI cardUI, CardUI enemyCardUi)
+        private async UniTask SplitAttack(CardUI cardUI, CardUI enemyCardUi)
         {
             bool used = false;
             
@@ -558,7 +559,7 @@ namespace Client
             }
         }
 
-        public async Task DamageCard(Card card, Card enemyCard, CardUI cardUI, CardUI enemyCardUi)
+        public async UniTask DamageCard(Card card, Card enemyCard, CardUI cardUI, CardUI enemyCardUi)
         {
             await DamageCardDirectly(enemyCard,
                 card, enemyCardUi, 
@@ -595,14 +596,14 @@ namespace Client
             card.poisoned.Value.needToTick = true;
         }
 
-        public async Task DamageCardDirectly(Card cardToDamage, Card enemyCard, CardUI cardToDamageUI,
+        public async UniTask DamageCardDirectly(Card cardToDamage, Card enemyCard, CardUI cardToDamageUI,
             CardUI cardUI,
             int damage)
         {
             await DamageCardDirectly(cardToDamage, cardToDamageUI, damage, cardUI);
         }
 
-        public async Task DamageCardDirectly(Card enemyCard,
+        public async UniTask DamageCardDirectly(Card enemyCard,
             CardUI enemyCardUi, int damage,
             CardUI oppositeCard = null, Optional<Color> color = null)
         {
@@ -629,7 +630,7 @@ namespace Client
             enemyCard.hp -= damage;
             // TextPopUpSpawnerManager.Instance.StartTextPopUpTween("-" + damage, Color.red,
             //     enemyCardUi.transform);
-            // await Task.Delay(500);
+            // await UniTask.Delay(500);
             await cardAnimationSystem.AnimateDamageShake(enemyCardUi, oppositeCard, color);
 
             initializeCardSystem.ShowCardData(enemyCardUi.cardPosition, enemyCard,
@@ -641,7 +642,7 @@ namespace Client
             }
         }
 
-        public async Task CardIsDead(CardUI carenemyCardUi)
+        public async UniTask CardIsDead(CardUI carenemyCardUi)
         {
             if (isDeadOrEmpty(carenemyCardUi.card)) return; // already dead
 
@@ -674,8 +675,7 @@ namespace Client
             return GetCardUiListAcross(cardUI.card)[position];
         }
 
-
-        private async Task DamageMainBoard(int damage)
+        private async UniTask DamageMainBoard(int damage)
         {
             sceneConfiguration.hpBalanceManagerText.transform.DOShakeScale(0.1f);
             gameContext.playerEnemyHpBalance -= damage;
@@ -890,8 +890,7 @@ namespace Client
 
         public Card[] GetCardList(Side side)
         {
-            Transform cardHolder = GetCardHolder(side);
-            return cardHolder.GetComponentsInChildren<CardUI>().Select(cardUi => cardUi.card).ToArray();
+            return GetCardAllUIs(side).Select(cardUi => cardUi.card).ToArray();
         }
 
         public List<CardUI> GetCardUIList(Side side, int lineLevel = 0)
@@ -906,11 +905,20 @@ namespace Client
 
         public List<CardUI> GetCardAllUIs(Side side)
         {
-            Transform cardHolder = GetCardHolder(side);
+            // Transform cardHolder = GetCardHolder(side);
+            //
+            //
+            // return cardHolder
+            //     .GetComponentsInChildren<CardUI>().ToList();
 
-
-            return cardHolder
-                .GetComponentsInChildren<CardUI>().ToList();
+            if (side == Side.player)
+            {
+                return gameContext.playerCardUIs.ToList();
+            }
+            else
+            {
+                return gameContext.enemyCardUIs.ToList();
+            }
         }
 
         public Transform GetCardHolder(Side side)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Leopotam.Ecs;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -50,13 +51,13 @@ namespace Client
             // }
         }
 
-        public async Task AwaitCinemachineBlending()
+        public async UniTask AwaitCinemachineBlending()
         {
             while (sceneConfiguration.cinemachineBrain.IsBlending)
             {
-                await Task.Yield();
+                await UniTask.Yield();
             }
-            // await Task.Delay(200);
+            // await UniTask.Delay(200);
         }
 
         public async void ShowFront()
@@ -70,7 +71,7 @@ namespace Client
 
             if (sceneConfiguration.monster.isActiveAndEnabled)
             {
-                // await Task.Delay(1000);
+                // await UniTask.Delay(1000);
                 sceneConfiguration.audioSource.gameObject.SetActive(true);
                 sceneConfiguration.mystAudioSource.Stop();
                 sceneConfiguration.planeGrid.MakeScary();
@@ -163,26 +164,26 @@ namespace Client
             sceneConfiguration.mainGameObject.SetActive(false);
         }
 
-        public async Task FadeIn()
+        public async UniTask FadeIn()
         {
             Color col = sceneConfiguration.endGameImage.color;
             while (sceneConfiguration.endGameImage.color.a > 0)
             {
                 sceneConfiguration.endGameImage.color =
                     new Color(col.r, col.g, col.b, sceneConfiguration.endGameImage.color.a - 0.01f);
-                await Task.Yield();
-                // await Task.Delay(10);
+                await UniTask.Yield();
+                // await UniTask.Delay(10);
             }
         }
 
-        public async Task FadeOut()
+        public async UniTask FadeOut()
         {
             Color col = sceneConfiguration.endGameImage.color;
             while (sceneConfiguration.endGameImage.color.a < 1)
             {
                 sceneConfiguration.endGameImage.color =
                     new Color(col.r, col.g, col.b, sceneConfiguration.endGameImage.color.a + 0.01f);
-                // await Task.Delay(10);
+                // await UniTask.Delay(10);
             }
         }
     }

@@ -7,12 +7,8 @@ using UnityEngine;
 [Serializable]
 public class GameContext
 {
-    [NonSerialized] public Card[] cardsPlayer;
-    [NonSerialized] public Card[] cardsEnemy;
-
-    [NonSerialized] public List<Card> cardsInDeck;
-
-    [NonSerialized] public List<Card> cardsInHand;
+    [NonSerialized] public CardUI[] playerCardUIs;
+    [NonSerialized] public CardUI[] enemyCardUIs;
 
     [NonSerialized] public int playerEnemyHpBalance = 5;
 

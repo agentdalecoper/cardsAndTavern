@@ -10,10 +10,12 @@ public class MoneyDropManager : MonoBehaviour
 {
     public GameObject coinPrefab;
 
-    private List<GameObject> coins = new List<GameObject>();
+    private List<GameObject> coins = new();
 
     private static MoneyDropManager instance;
     public static MoneyDropManager Instance => instance;
+
+    public int maxBatch = 100;
 
     private void Awake()
     {
@@ -40,10 +42,16 @@ public class MoneyDropManager : MonoBehaviour
 
     public void RemoveCoins(int num)
     {
+        List<GameObject> toRemove = new List<GameObject>();
         foreach (GameObject o in coins.Take(num))
         {
             o.SetActive(false);
-            coins.Remove(o);
+            toRemove.Add(o);
+        }
+
+        foreach (GameObject coin in toRemove)
+        {
+            coins.Remove(coin);
         }
     }
 }

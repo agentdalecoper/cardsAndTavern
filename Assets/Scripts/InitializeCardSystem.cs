@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Client;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Leopotam.Ecs;
 using MyBox;
@@ -12,7 +13,7 @@ public class InitializeCardSystem : IEcsSystem
     private GameContext gameContext;
     private CardsSystem cardsSystem;
 
-    public async Task InitializeCards(NumAndCard[] cards, Side side)
+    public async UniTask InitializeCards(NumAndCard[] cards, Side side)
     {
         // gameContext.cardsPlayer = new Card[sceneConfiguration.CARDS_ON_BOARD_COUNT];
         // gameContext.cardsEnemy = new Card[sceneConfiguration.CARDS_ON_BOARD_COUNT];
@@ -47,13 +48,13 @@ public class InitializeCardSystem : IEcsSystem
         }
      */
 
-    public async Task<CardUI> CreateAndShowCard(CardUI cardUItoPlace, Side side, CardObject cardObject)
+    public async UniTask<CardUI> CreateAndShowCard(CardUI cardUItoPlace, Side side, CardObject cardObject)
     {
         return await CreateAndShowCard(cardUItoPlace.cardPosition,
             side, cardObject);
     }
     
-    public async Task<CardUI> CreateAndShowCard(int position,
+    public async UniTask<CardUI> CreateAndShowCard(int position,
         Side side, CardObject cardObject)
     {
         Transform holder = side == Side.player
@@ -82,10 +83,15 @@ public class InitializeCardSystem : IEcsSystem
         }
     }
 
-    public async Task<CardUI> CreateAndShowCardInHolder(int position,
+    public async UniTask<CardUI> CreateAndShowCardInHolder(int position,
         Side side, CardObject cardObject,
         Transform holder, GameObject animationMoveFromGo = null)
     {
+        if (cardObject == null)
+        {
+            return null;
+        }
+        
         Card card = CreateCard(side, cardObject);
         // card.uIsDead = false;
         CardUI cardUI = ShowCardData(position, card, holder);
@@ -179,7 +185,7 @@ public class InitializeCardSystem : IEcsSystem
 /*
  *
  *
- * public async Task CardsTurn(GameContext gameContext,
+ * public async UniTask CardsTurn(GameContext gameContext,
         SceneConfiguration sceneConfiguration)
     {
         for (int position = 0; position < gameContext.cardsPlayer.Length; position++)
@@ -203,7 +209,7 @@ public class InitializeCardSystem : IEcsSystem
 
             if (card != null)
             {
-                await Task.Delay(500);
+                await UniTask.Delay(500);
             }
         }
 
@@ -218,7 +224,7 @@ public class InitializeCardSystem : IEcsSystem
 
             if (CheckForEndGame(gameContext, sceneConfiguration)) return;
 
-            await Task.Delay(1000);
+            await UniTask.Delay(1000);
         }
     }
 
@@ -328,7 +334,7 @@ public class InitializeCardSystem : IEcsSystem
         {
             TextPopUpSpawnerManager.Instance.StartTextPopUpTween("Poisoned" + card.damage, Color.red,
                 enemyCardUi.transform);
-            await Task.Delay(500);
+            await UniTask.Delay(500);
             CardIsDead(position, enemySideCards, enemyCardUi);
             return;
         }
@@ -355,13 +361,13 @@ public class InitializeCardSystem : IEcsSystem
         }
     }
     
-    private static async Task DamageCard(Card card, Card enemyCard, CardUI enemyCardUi, int damage)
+    private static async UniTask DamageCard(Card card, Card enemyCard, CardUI enemyCardUi, int damage)
     {
         // show in UI damage
         enemyCard.hp -= damage;
         TextPopUpSpawnerManager.Instance.StartTextPopUpTween("-" + damage, Color.red,
             enemyCardUi.transform);
-        await Task.Delay(500);
+        await UniTask.Delay(500);
     }
 
     private static void CardIsDead(int position, Card[] enemySideCards, CardUI carenemyCardUi)

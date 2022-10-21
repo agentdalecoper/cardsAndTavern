@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Client;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Leopotam.Ecs;
 using MyBox;
@@ -25,7 +26,7 @@ public class CardsChoseController : IEcsSystem
         });
     }
 
-    public async Task ChooseCardsLevel(ChoseCardsObject choseCardsObject)
+    public async UniTask ChooseCardsLevel(ChoseCardsObject choseCardsObject)
     {
         //CardObject[] cardsToChoseFrom = choseCardsObject.cardsToChoseFrom;
         
@@ -40,7 +41,7 @@ public class CardsChoseController : IEcsSystem
         Debug.Log("Finished chose cards level");
     }
 
-    public async Task ChooseCardsLevel(CardObject[] cardsToChoseFrom)
+    public async UniTask ChooseCardsLevel(CardObject[] cardsToChoseFrom)
     {
         gameContext.isCardChoseLevel = true;
         
@@ -52,7 +53,7 @@ public class CardsChoseController : IEcsSystem
         gameContext.isCardChoseLevel = false;
     }
 
-    public async Task TakeCardInHandAndWaitForClick(CardUI chosenCardUi)
+    public async UniTask TakeCardInHandAndWaitForClick(CardUI chosenCardUi)
     {
         await TakeCardInHand(chosenCardUi);
         CardUI emptySlotCardUi = await CheckForEmptySlotClicked();
@@ -64,7 +65,7 @@ public class CardsChoseController : IEcsSystem
         NullifyUIs();
     }
 
-    public async Task TakeCardInHand(CardUI chosenCardUi)
+    public async UniTask TakeCardInHand(CardUI chosenCardUi)
     {
         // await AnimationCardFromTableToHand(chosenCardUi);
         RefreshCameraOverlayCard(chosenCardUi);
@@ -86,7 +87,7 @@ public class CardsChoseController : IEcsSystem
         sceneConfiguration.choosenCardCameraOverlay.gameObject.SetActive(false);
     }
 
-    public async Task<CardUI> CheckForEmptySlotClicked()
+    public async UniTask<CardUI> CheckForEmptySlotClicked()
     {
         Debug.Log("check for empty slot clicked");
         while (gameContext.cardChosenUI == null ||
@@ -97,7 +98,7 @@ public class CardsChoseController : IEcsSystem
                                                  && gameContext.cardChosenUI.card.itemOnly.Value.itemAddsSkill.IsSet)
 
                 Debug.Log("Wait for empty slot clicked");
-            await Task.Yield();
+            await UniTask.Yield();
         }
 
         // await AnimationFromHandToTable(sceneConfiguration.choosenCardCameraOverlay, 
@@ -108,7 +109,7 @@ public class CardsChoseController : IEcsSystem
         return gameContext.playerCardClickedUI;
     }
 
-    public async Task AnimationFromHandToTable(CardUI handCard, CardUI toCard)
+    public async UniTask AnimationFromHandToTable(CardUI handCard, CardUI toCard)
     {
         var cardOverlayTransform = handCard.transform;
         var initialPos = cardOverlayTransform.position;
@@ -130,19 +131,19 @@ public class CardsChoseController : IEcsSystem
         // cardOverlayTransform.localScale = initialLocalScale;
     }
 
-    private async Task<CardUI> CheckForCardChosen()
+    private async UniTask<CardUI> CheckForCardChosen()
     {
         Debug.Log("check for card chosen");
         while (gameContext.cardChosenUI == null)
         {
             Debug.Log("Wait for card chosen");
-            await Task.Yield();
+            await UniTask.Yield();
         }
         
         return gameContext.cardChosenUI;
     }
 
-    private async Task AnimationCardFromTableToHand(CardUI chosenCardUi)
+    private async UniTask AnimationCardFromTableToHand(CardUI chosenCardUi)
     {
         var cardChosenOnBoard = chosenCardUi.transform;
         var targetCardOverlayTransform = sceneConfiguration.choosenCardCameraOverlay.transform;

@@ -1582,6 +1582,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 122bd8a6b1bf141918850dbaa17ba53e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122bd8a6b1bf141918850dbaa17ba53e, type: 3}
 --- !u!4 &184506720 stripped
@@ -2791,7 +2795,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7794486, y: 1}
+    m_SensorSize: {x: 1.7857143, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -11746,7 +11750,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7794486, y: 1}
+    m_SensorSize: {x: 1.7857143, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -23224,7 +23228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.cardsPlayer.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.rightwardVirtualCamera
@@ -24839,7 +24843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 921657555124705174, guid: 07afa7269ab2547f8b58922b89a9cdaa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.49
+      value: 1.73
       objectReference: {fileID: 0}
     - target: {fileID: 921657555124705174, guid: 07afa7269ab2547f8b58922b89a9cdaa, type: 3}
       propertyPath: m_AnchoredPosition.y
