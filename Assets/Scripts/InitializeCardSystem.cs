@@ -98,6 +98,7 @@ public class InitializeCardSystem : IEcsSystem
 
         if (animationMoveFromGo != null)
         {
+            Debug.Log("Animation start from enemy " + animationMoveFromGo);
             Vector3 initialPosition = cardUI.transform.position;
             cardUI.transform.position = animationMoveFromGo.transform.position;
             await cardUI.transform.DOMove(initialPosition, 0.25f).AsyncWaitForCompletion();

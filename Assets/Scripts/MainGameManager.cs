@@ -290,9 +290,14 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
         {
             Debug.Log("enemyCardsObject Started waiting for player next level");
             await cardsInvasionController.WaitForPlayerClickedNextRound();
+            sceneConfiguration.shop.nextLevelButtonObject.SetActive(false);
             Debug.Log("Player clicked proceed with invasion");
-            await cardsInvasionController.CardInvasionLevel(level.enemyCardsObject.Value);
+            await cardsInvasionController.CardInvasionLevel(level.enemyCardsObject.Value, level.levelIncome);
+            sceneConfiguration.clickedNextLevel = false;
+            sceneConfiguration.shop.nextLevelButtonObject.SetActive(true);
             Debug.Log("Game is finished");
+            
+            cardsChoseController.ChooseCardsLevel();
         }
     }
 

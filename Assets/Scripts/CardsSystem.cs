@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Leopotam.Ecs;
@@ -77,8 +76,6 @@ namespace Client
                 if (crdUi.card.arrowShot.IsSet) // && crdUi.card != cardUI.card
                 {
                     await ArrowShot(crdUi);
-                    await  cardAnimationSystem.AnimateSkillUsed(crdUi,
-                        sceneConfiguration.skillsObjectsDict.arrowShot.sprite);
                 }
 
                 if (crd.poisoned.IsSet)
@@ -410,11 +407,11 @@ namespace Client
         {
             bool levelWon;
 
-            List<CardUI> aliveCards = GetCardUIList(Side.player)
+            List<CardUI> aliveCards = GetCardAllUIs(Side.player)
                 .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
-            List<CardUI> aliveCardsEnemy = GetCardUIList(Side.enemy)
+            List<CardUI> aliveCardsEnemy = GetCardAllUIs(Side.enemy)
                 .Where(c => !isDeadOrEmpty(c.card))
                 .ToList();
 
@@ -424,7 +421,7 @@ namespace Client
 
                 foreach (CardUI cardUI in aliveCardsEnemy)
                 {
-                    damage += cardUI.card.damage;
+                    damage += 1;
                 }
 
                 // cameraController.ShowLeftward();
@@ -476,13 +473,26 @@ namespace Client
             RefreshCard(cardUI);
         }
 
-        private async UniTask ArrowShot(CardUI playerCardUI)
+        private async UniTask<bool> ArrowShot(CardUI playerCardUI)
         {
             CardUI acrossEnemyCardUI =
                 GetCardAcrossFromAll(playerCardUI);
-            await DamageCardDirectly(acrossEnemyCardUI.card, acrossEnemyCardUI, 
-                1, playerCardUI);
-            Debug.Log($"Arrow shot enemy card {acrossEnemyCardUI} player card {playerCardUI}");
+
+            if (acrossEnemyCardUI != null && !isDeadOrEmpty(acrossEnemyCardUI.card))
+            {
+                await cardAnimationSystem.AnimateSkillUsed(playerCardUI,
+                    sceneConfiguration.skillsObjectsDict.arrowShot.sprite);
+                await DamageCardDirectly(acrossEnemyCardUI.card, acrossEnemyCardUI,
+                    1, playerCardUI);
+                Debug.Log($"Arrow shot enemy card {acrossEnemyCardUI} player card {playerCardUI}");
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
         }
 
         private async UniTask CardTurnMainSkills(Card card, Card enemyCard, CardUI cardUi, CardUI enemyCardUi)
@@ -790,6 +800,11 @@ namespace Client
             if (card.poisoned.IsSet)
             {
                 activeSkillObjects.Add(sceneConfiguration.skillsObjectsDict.deadlyPoison);
+            }
+
+            if (card.itemOnly.IsSet && card.itemOnly.Value.income.IsSet)
+            {
+                activeSkillObjects.Add(sceneConfiguration.skillsObjectsDict.income);
             }
 
             return activeSkillObjects;

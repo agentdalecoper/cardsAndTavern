@@ -2795,7 +2795,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7857143, y: 1}
+    m_SensorSize: {x: 1.7776629, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10623,7 +10623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320651590}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.79, y: 5.29, z: 0}
+  m_LocalPosition: {x: 4.79, y: 2.394, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11750,7 +11750,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7857143, y: 1}
+    m_SensorSize: {x: 1.7776629, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12247,6 +12247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 5060912967506662127, guid: 070d140fa2ebc48248cead2cbaccfa43, type: 3}
+  maxBatch: 100
 --- !u!1 &1524388760
 GameObject:
   m_ObjectHideFlags: 0
@@ -23176,7 +23177,7 @@ PrefabInstance:
       objectReference: {fileID: 1083967662}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.size
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.playerCardsHolder
@@ -23184,7 +23185,7 @@ PrefabInstance:
       objectReference: {fileID: 1524388761}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.shop.currentMoney
-      value: 15
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.tableVirtualCamera
@@ -23255,6 +23256,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 179926376}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.skillsObjectsDict.income
+      value: 
+      objectReference: {fileID: 11400000, guid: f56dc283c389542538dd2bb57a258917, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.cardsPlayer.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 44f0fc171fada404ca3d1c16b35b3f2e, type: 2}
@@ -23319,6 +23324,46 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1110144045}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[0].levelIncome
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].levelIncome
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].levelIncome
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].levelIncome
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].levelIncome
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[5].levelIncome
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[6].levelIncome
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[7].levelIncome
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[8].levelIncome
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[9].levelIncome
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.sceneAudioConfiguration.cardDrop
       value: 
       objectReference: {fileID: 8300000, guid: eb820b3491399403c92d38589178f4c3, type: 3}
@@ -23339,6 +23384,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9068971157547552451}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[10].levelIncome
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.sceneAudioConfiguration.cardAttack
       value: 
       objectReference: {fileID: 8300000, guid: eb820b3491399403c92d38589178f4c3, type: 3}
@@ -23356,6 +23405,14 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: f061a328f25c043709effe0c55ea8b51, type: 3}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].dialogObject.IsSet
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].dialogObject.IsSet
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].dialogObject.IsSet
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
@@ -23384,7 +23441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[10].dialogObject.IsSet
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[11].dialogObject.IsSet
@@ -23395,12 +23452,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].enemyCardsObject.IsSet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.IsSet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.IsSet
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[4].enemyCardsObject.IsSet
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.IsSet
@@ -23428,7 +23493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[10].enemyCardsObject.IsSet
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[11].enemyCardsObject.IsSet
@@ -23447,12 +23512,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].chooseCardsObject.IsSet
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].chooseCardsObject.IsSet
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[4].chooseCardsObject.IsSet
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].chooseCardsObject.IsSet
@@ -23575,12 +23644,20 @@ PrefabInstance:
       value: You can place your cards in inventory, they will not fight in a wave
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].dialogObject.Value.dialogTexts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].dialogObject.Value.dialogTexts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].dialogObject.Value.dialogTexts.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].dialogObject.Value.dialogTexts.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].dialogObject.Value.dialogTexts.Array.size
@@ -23588,11 +23665,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].dialogObject.Value.dialogTexts.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].dialogObject.Value.dialogTexts.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[13].dialogObject.Value.dialogTexts.Array.size
@@ -23624,8 +23701,39 @@ PrefabInstance:
       value: I will be hanging out here, you know. Hehe
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].dialogObject.Value.dialogTexts.Array.data[0]
+      value: If you didn't saw that - oscilograph tracks your health. If your health
+        will become zero
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].dialogObject.Value.dialogTexts.Array.data[1]
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].dialogObject.Value.dialogTexts.Array.data[2]
+      value: Now, click "next round" button to start a fight
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[2].dialogObject.Value.dialogTexts.Array.data[2]
-      value: Now, click the "next round" button to start a fight
+      value: Now, click "next round" button to start a fight
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].dialogObject.Value.dialogTexts.Array.data[0]
+      value: If you didn't saw that - oscilograph tracks your health. If your health
+        will become zero
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].dialogObject.Value.dialogTexts.Array.data[1]
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].dialogObject.Value.dialogTexts.Array.data[2]
+      value: Now, click "next round" button to start a fight
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].dialogObject.Value.dialogTexts.Array.data[3]
+      value: And by the way, if you will see the other guy here today - take card
+        in hand and sacrifice it pressing F while looking at him.
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.cardsEnemy.Array.size
@@ -23633,29 +23741,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[4].dialogObject.Value.dialogTexts.Array.data[0]
-      value: If you didn't saw that - oscilograph tracks your health. If your health
-        will become zero
+      value: You probably wonder what is this place?
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[4].dialogObject.Value.dialogTexts.Array.data[1]
-      value: ...
+      value: I don't know either. I am trapped inside a skull as you see.
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[4].dialogObject.Value.dialogTexts.Array.data[2]
-      value: Now, click "next round" button to start a fight
+      value: Is it some kind of simulation or some crap like that I wonder?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].dialogObject.Value.dialogTexts.Array.data[3]
+      value: And by the way, if you will see the other guy here today - take card
+        in hand and sacrifice it pressing F while looking at him.
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].dialogObject.Value.dialogTexts.Array.data[0]
-      value: If you didn't saw that - oscilograph tracks your health. If your health
-        will become zero
+      value: You probably wonder what is this place
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].dialogObject.Value.dialogTexts.Array.data[1]
-      value: ...
+      value: I don't know either. I am trapped inside a skull as you see
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].dialogObject.Value.dialogTexts.Array.data[2]
-      value: Now, click "next round" button to start a fight
+      value: The world was blown up, you see. Is it some kind of simulation or some
+        crap like that I wonder?
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[5].dialogObject.Value.dialogTexts.Array.data[3]
+      value: And by the way, if you will see the other guy here today - take card
+        in hand and sacrifice it pressing F while looking at him.
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.cardsEnemy.Array.size
@@ -23663,15 +23780,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].dialogObject.Value.dialogTexts.Array.data[0]
-      value: You probably wonder what is this place?
+      value: congratulations, you have passed that
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].dialogObject.Value.dialogTexts.Array.data[1]
-      value: I don't know either. I am trapped inside a skull as you see.
+      value: Just don't let us be killed by it
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].dialogObject.Value.dialogTexts.Array.data[2]
-      value: Is it some kind of simulation or some crap like that I wonder?
+      value: Chief
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].dialogObject.Value.dialogTexts.Array.data[3]
@@ -23684,16 +23801,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].dialogObject.Value.dialogTexts.Array.data[0]
-      value: You probably wonder what is this place
+      value: 'You know, continuing with that idea that we are in simulation - that
+        guy can be a virus of some sort '
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].dialogObject.Value.dialogTexts.Array.data[1]
-      value: I don't know either. I am trapped inside a skull as you see
+      value: Just don't let us be killed by it
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].dialogObject.Value.dialogTexts.Array.data[2]
-      value: The world was blown up, you see. Is it some kind of simulation or some
-        crap like that I wonder?
+      value: Chief
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].dialogObject.Value.dialogTexts.Array.data[3]
@@ -23709,16 +23826,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].dialogObject.Value.dialogTexts.Array.data[0]
-      value: congratulations, you have passed that
+      value: 'You know, continuing with that idea that we are in simulation - that
+        guy can be a virus of some sort '
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].dialogObject.Value.dialogTexts.Array.data[1]
-      value: Fella or some thing...
+      value: Just don't let us be killed by it
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].dialogObject.Value.dialogTexts.Array.data[2]
-      value: 'You know, continuing with that idea that we are in simulation that
-        can be a virus of some sort '
+      value: Chief
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].dialogObject.Value.dialogTexts.Array.data[3]
@@ -23734,8 +23851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].dialogObject.Value.dialogTexts.Array.data[0]
-      value: 'You know, continuing with that idea that we are in simulation - that
-        guy can be a virus of some sort '
+      value: wowowo
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].dialogObject.Value.dialogTexts.Array.data[1]
@@ -23759,7 +23875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[10].dialogObject.Value.dialogTexts.Array.data[0]
-      value: wowowo
+      value: ...
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[10].enemyCardsObject.Value.cardsEnemy.Array.size
@@ -23798,12 +23914,24 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.size
+      propertyPath: sceneConfiguration.levels.Array.data[1].enemyCardsObject.Value.numAndCards.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.size
+      propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.Value.numAndCards.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].enemyCardsObject.Value.numAndCards.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.size
@@ -23811,11 +23939,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.size
@@ -23823,7 +23951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[10].enemyCardsObject.Value.numAndCards.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.cardsEnemy.Array.data[2]
@@ -24062,16 +24190,52 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].enemyCardsObject.Value.numAndCards.Array.data[0].num
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.Value.numAndCards.Array.data[0].num
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.Value.numAndCards.Array.data[1].num
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.Value.numAndCards.Array.data[2].num
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.data[0].num
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.data[1].num
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.data[2].num
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].enemyCardsObject.Value.numAndCards.Array.data[0].num
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].enemyCardsObject.Value.numAndCards.Array.data[1].num
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].enemyCardsObject.Value.numAndCards.Array.data[2].num
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.data[0].num
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.data[1].num
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.data[2].num
@@ -24079,39 +24243,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.data[0].num
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.data[1].num
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.data[2].num
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[0].num
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[0].num
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[1].num
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[2].num
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[0].num
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[1].num
+      propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[1].num
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[2].num
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[0].num
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[1].num
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[2].num
+      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[2].num
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[0].num
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[1].num
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[2].num
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[10].enemyCardsObject.Value.numAndCards.Array.data[0].num
@@ -24126,29 +24302,41 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[4].chooseCardsObject.Value.cardsToChoseFrom.Array.data[0]
+      propertyPath: sceneConfiguration.levels.Array.data[3].chooseCardsObject.Value.cardsToChoseFrom.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 829c0fbf3909a43789ed403fa732750b, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].chooseCardsObject.Value.cardsToChoseFrom.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: cddb2207b84f24127b8fa8e53fd5f188, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].chooseCardsObject.Value.cardsToChoseFrom.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 192104461e63c4d4dbd0725e1ab828e5, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].chooseCardsObject.Value.cardsToChoseFrom.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[4].chooseCardsObject.Value.cardsToChoseFrom.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: cddb2207b84f24127b8fa8e53fd5f188, type: 2}
+      objectReference: {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[4].chooseCardsObject.Value.cardsToChoseFrom.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 192104461e63c4d4dbd0725e1ab828e5, type: 2}
+      objectReference: {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].chooseCardsObject.Value.cardsToChoseFrom.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 829c0fbf3909a43789ed403fa732750b, type: 2}
+      objectReference: {fileID: 11400000, guid: 679c5466f76bb4f28bee4f94bfdfe24d, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].chooseCardsObject.Value.cardsToChoseFrom.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: cddb2207b84f24127b8fa8e53fd5f188, type: 2}
+      objectReference: {fileID: 11400000, guid: 8b64b7e019ce74f45a89dd28929e2e85, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].chooseCardsObject.Value.cardsToChoseFrom.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 192104461e63c4d4dbd0725e1ab828e5, type: 2}
+      objectReference: {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[13].chooseCardsObject.Value.cardsToChoseFrom.Array.data[0]
       value: 
@@ -24186,17 +24374,53 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 1788ff274c4634ed58d2d8a89bd658b6, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 8427c9f4c50d54c11a2afc3e57166dc5, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d4bc6cdecfee40b5936cc520fc11793, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
       value: 
       objectReference: {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 8427c9f4c50d54c11a2afc3e57166dc5, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d4bc6cdecfee40b5936cc520fc11793, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 30d863d234fc749f8a63e52bad565c5d, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 0029ba55124ed471c89b641025e9fa08, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[4].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d4bc6cdecfee40b5936cc520fc11793, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: 0af8be949e3d94a668ae6b05a0eb67e7, type: 2}
+      objectReference: {fileID: 11400000, guid: f8e1f899b135d4804a02208938b9a721, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: 8427c9f4c50d54c11a2afc3e57166dc5, type: 2}
+      objectReference: {fileID: 11400000, guid: 0029ba55124ed471c89b641025e9fa08, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
       value: 
@@ -24204,31 +24428,43 @@ PrefabInstance:
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: 30d863d234fc749f8a63e52bad565c5d, type: 2}
+      objectReference: {fileID: 11400000, guid: 24b97a53690714b4fa17dd0a0e5e10de, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
       value: 
       objectReference: {fileID: 11400000, guid: 0029ba55124ed471c89b641025e9fa08, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 0029ba55124ed471c89b641025e9fa08, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: f8e1f899b135d4804a02208938b9a721, type: 2}
+      objectReference: {fileID: 11400000, guid: e6c17d5031c334960b23433cc2406bbf, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
+      propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
       value: 
       objectReference: {fileID: 11400000, guid: 24b97a53690714b4fa17dd0a0e5e10de, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
-      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
+      propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
       value: 
       objectReference: {fileID: 11400000, guid: d6727cd1d0a5b4898b22b8d827da7616, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: e6c17d5031c334960b23433cc2406bbf, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: b51dd359b77c64250818712227db4060, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: 9d4bc6cdecfee40b5936cc520fc11793, type: 2}
+      objectReference: {fileID: 11400000, guid: d6727cd1d0a5b4898b22b8d827da7616, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: e6c17d5031c334960b23433cc2406bbf, type: 2}
+      objectReference: {fileID: 11400000, guid: 9331fc71a6cb243c5b83ab367195a83a, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
       value: 

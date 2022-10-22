@@ -18,6 +18,8 @@ namespace Client
 
         public UnityEvent levelStartEvents;
         public UnityEvent levelEndEvents;
+
+        public int levelIncome;
     }
 
     [Serializable]
@@ -162,6 +164,7 @@ namespace Client
         public SkillObject healOther;
         public SkillObject horseRide;
         public SkillObject gyroAttack;
+        public SkillObject income;
     }
 
     [Serializable]

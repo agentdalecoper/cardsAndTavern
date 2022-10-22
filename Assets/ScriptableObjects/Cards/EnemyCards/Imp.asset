@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Imp
   m_EditorClassIdentifier: 
   card:
-    hp: 12
-    damage: 12
+    hp: 3
+    damage: 3
     name: Imp
     sprite: {fileID: 21300000, guid: 76064334b6b6043c984b9b0c5ec9dff6, type: 3}
     itemOnly:

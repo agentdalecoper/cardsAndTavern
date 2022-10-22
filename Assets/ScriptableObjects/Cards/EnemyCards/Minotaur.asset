@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Minotaur
   m_EditorClassIdentifier: 
   card:
-    hp: 6
-    damage: 16
+    hp: 5
+    damage: 7
     name: 
     sprite: {fileID: 21300000, guid: fc14e5f900616431d8f28aee1783c3e5, type: 3}
     itemOnly:

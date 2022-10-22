@@ -167,11 +167,12 @@ internal class ShopController : IEcsInitSystem
         gameContextCardChosenUI.MoveToStartPosition();
     }
 
-    public void ProcessLevelEndedIncome(bool levelWon)
+    public void ProcessLevelEndedIncome(bool levelWon, int levelLevelIncome)
     {
-        int levelWonMoney = levelWon ? 2 : 0;
-        int incomeMoney = sceneConfiguration.shop.currentMoney / 10;
+        int levelWonMoney = levelWon ? 1 : 0;
+        int incomeMoney = sceneConfiguration.shop.currentMoney / 5;
         var incomeFromItems = GetInventoryUICards()
+            .Union(cardsSystem.GetCardAllUIs(Side.player))
             .Where(c => !CardsSystem.isDeadOrEmpty(c.card))
             .Select(c => c.card)
             .Where(c => c.itemOnly.IsSet
@@ -179,12 +180,13 @@ internal class ShopController : IEcsInitSystem
             .Select(c => c.itemOnly.Value.income.Value.income)
             .Sum();
 
-        string incomeFromItemsText = +incomeFromItems == 0 ? "" : $", income from items={incomeFromItems}";
-        AddMoney(incomeMoney + levelWonMoney + incomeFromItems);
+        string incomeFromItemsText = +incomeFromItems == 0 ? "" : $", income from workers={incomeFromItems}";
+        AddMoney(incomeMoney + levelWonMoney + incomeFromItems + levelLevelIncome);
 
-        DialogTextManager.Instance.ShowText($"Income added level money = {levelWonMoney}, " +
-                                            $"income={incomeMoney}"
-                                            + incomeFromItemsText);
+        DialogTextManager.Instance.ShowText(
+            $"Income added income from level={levelLevelIncome}," +
+            $"income={incomeMoney}"
+            + incomeFromItemsText);
     }
 
     public void AddSkillToACard(CardUI itemCardWithSkill, CardUI cardSkillToAdd)

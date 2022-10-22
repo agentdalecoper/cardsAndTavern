@@ -32,7 +32,7 @@ namespace Client
          *         not found => search left to the leftmost
          *         not found => search right to the rightmost
          */
-        public async UniTask CardInvasionLevel(EnemyCardsObject enemyCardsObject)
+        public async UniTask CardInvasionLevel(EnemyCardsObject enemyCardsObject, int levelLevelIncome)
         {
             initializeCardSystem.RefreshCardsUIs();
             foreach (CardUI cardUI in cardsSystem.GetCardAllUIs(Side.player))
@@ -65,7 +65,7 @@ namespace Client
 
             cameraController.ShowShopAndPlayerCards();
 
-            shopController.ProcessLevelEndedIncome(levelWon);
+            shopController.ProcessLevelEndedIncome(levelWon, levelLevelIncome);
 
             foreach (CardUI cardUI in cardsSystem.GetCardAllUIs(Side.player))
             {
@@ -170,30 +170,30 @@ namespace Client
 
         private async UniTask InitiateCardsInvasion(EnemyCardsObject enemyCardsObject)
         {
+            cameraController.ShowInvasionAndPlayerCards();
+
             await initializeCardSystem.InitializeCards(
                 enemyCardsObject.numAndCards, Side.enemy);
-            
-            cameraController.ShowInvasionAndPlayerCards();
         }
 
         public async UniTask WaitForPlayerClickedNextRound()
         {
             while (!sceneConfiguration.clickedNextLevel)
             {
-                if (gameContext.playerCardClickedUI != null
-                    && gameContext.cardChosenUI == null &&
-                    !gameContext.isCardChoseLevel)
-                {
-                    await TakeCardIntoAHand(gameContext.playerCardClickedUI);
-                    gameContext.playerCardClickedUI = null;
-                    CardUI emptySlotCardUi = await cardsChoseController.CheckForEmptySlotClicked();
-                    Debug.Log("Create and show card + " + sceneConfiguration.choosenCardCameraOverlay.card);
-                    initializeCardSystem.ShowCardData(emptySlotCardUi.cardPosition,
-                        sceneConfiguration.choosenCardCameraOverlay.card,
-                        sceneConfiguration.playerCardsHolder);
-
-                    cardsChoseController.NullifyUIs();
-                }
+                // if (gameContext.playerCardClickedUI != null
+                //     && gameContext.cardChosenUI == null &&
+                //     !gameContext.isCardChoseLevel)
+                // {
+                //     await TakeCardIntoAHand(gameContext.playerCardClickedUI);
+                //     gameContext.playerCardClickedUI = null;
+                //     CardUI emptySlotCardUi = await cardsChoseController.CheckForEmptySlotClicked();
+                //     Debug.Log("Create and show card + " + sceneConfiguration.choosenCardCameraOverlay.card);
+                //     initializeCardSystem.ShowCardData(emptySlotCardUi.cardPosition,
+                //         sceneConfiguration.choosenCardCameraOverlay.card,
+                //         sceneConfiguration.playerCardsHolder);
+                //
+                //     cardsChoseController.NullifyUIs();
+                // }
                 
                 Debug.Log("Waiting for level clicked next round");
                 await UniTask.Yield();

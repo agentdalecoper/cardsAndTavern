@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Longface
   m_EditorClassIdentifier: 
   card:
-    hp: 7
-    damage: 12
+    hp: 3
+    damage: 6
     name: Longface
     sprite: {fileID: 21300000, guid: 327d342415b82429da5b5661bff5193b, type: 3}
     itemOnly:
@@ -100,7 +100,7 @@ MonoBehaviour:
     deadlyPoison:
       IsSet: 0
     buff:
-      IsSet: 1
+      IsSet: 0
     transformation:
       IsSet: 0
       Value:
@@ -110,10 +110,10 @@ MonoBehaviour:
     steroids:
       IsSet: 0
     summon:
-      IsSet: 0
+      IsSet: 1
       Value:
         turnsToSummon: 2
-        cardToSummon: {fileID: 0}
+        cardToSummon: {fileID: 11400000, guid: 6d69b04654f6d4a16b92a57182bb45f1, type: 2}
     shield:
       IsSet: 0
       Value:
