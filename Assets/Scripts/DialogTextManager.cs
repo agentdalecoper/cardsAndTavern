@@ -2,6 +2,7 @@ using System;
 using Leopotam.Ecs;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Client
 {
@@ -19,14 +20,13 @@ namespace Client
         private SceneConfiguration sceneConfiguration;
         private GameContext gameContext;
 
+        public Button dialogButton;
+
         private void Awake()
         {
             instance = this;
-        }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            dialogButton.onClick.AddListener(() =>
             {
                 if (currentDialogObject != null)
                 {
@@ -36,8 +36,23 @@ namespace Client
                 {
                     dialogTextUi.gameObject.SetActive(false);
                 }
-            }
+            });
         }
+
+        // private void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Mouse0))
+        //     {
+        //         if (currentDialogObject != null)
+        //         {
+        //             ShowNextDialog();
+        //         }
+        //         else if (dialogTextUi.gameObject.activeSelf)
+        //         {
+        //             dialogTextUi.gameObject.SetActive(false);
+        //         }
+        //     }
+        // }
 
         public void StartDialog(DialogObject dialogObject)
         {

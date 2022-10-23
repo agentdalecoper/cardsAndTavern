@@ -20,6 +20,8 @@ namespace Client
         public UnityEvent levelEndEvents;
 
         public int levelIncome;
+
+        public bool isReward;
     }
 
     [Serializable]
@@ -31,6 +33,7 @@ namespace Client
         public string tryRollingText;
         public string yourCardsWillRespawnText;
         public string gradeYourCard;
+        public string youHaveGradedCard;
         public string youHaveInventorySayingText;
         public string youCanSellCard;
         public string youHaveHpText;
@@ -129,7 +132,9 @@ namespace Client
     [Serializable]
     public class Shop
     {
-        public int buyCardCost;
+        public int buyCardInitialCost;
+        public int buyCardCostStep;
+        public int numberTimesRolled;
         public int buyIncomeCost;
 
         public int currentIncome;
@@ -147,6 +152,8 @@ namespace Client
         public GameObject sellCardHolderObject;
         public GameObject inventoryCardsHolder;
         public GameObject shopGameObject;
+        
+        public CardObject[] inventoryRewardObjects;
     }
 
     [Serializable]

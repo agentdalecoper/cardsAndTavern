@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card:
     hp: 14
-    damage: 7
+    damage: 9
     name: "Witcher \u271D\u271D"
     sprite: {fileID: 21300000, guid: ac14d110c0c4448a98755e2d567f1dd7, type: 3}
     itemOnly:
@@ -131,3 +131,5 @@ MonoBehaviour:
     cost: 1
     numberOfSlots: 3
   nextGrade: {fileID: 0}
+  description: C'mon plotva
+  isBoss: 0

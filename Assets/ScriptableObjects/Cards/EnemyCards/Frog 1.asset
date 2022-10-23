@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Frog 1
   m_EditorClassIdentifier: 
   card:
-    hp: 4
+    hp: 3
     damage: 1
     name: 
     sprite: {fileID: 21300000, guid: b9d631036fbaa4667a2b7335d080caa5, type: 3}
@@ -131,3 +131,5 @@ MonoBehaviour:
     cost: 0
     numberOfSlots: 1
   nextGrade: {fileID: 0}
+  description: 
+  isBoss: 0

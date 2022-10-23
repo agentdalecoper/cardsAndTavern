@@ -43,7 +43,7 @@ public class Card
     public Optional<HorseRide> horseRide;
     public Optional<ReduceDamage> reduceDamage;
     public Optional<GyroAttack> gyroAttack;
-    public Optional<(int, string)> healOther;
+    public Optional<int> healOther;
 
     public Optional<Poisoned> poisoned;
 
@@ -119,6 +119,7 @@ public class Steroids
 [Serializable]
 public class ArrowShot
 {
+    public int damage;
 }
 
 [Serializable]
@@ -138,6 +139,7 @@ public class DeadlyPoison
 [Serializable]
 public class Buff
 {
+    public int buff;
 }
 
 
@@ -165,6 +167,7 @@ public class Optional<T>
 [Serializable]
 public class SplitAttack
 {
+    public int damage = 2;
 }
 
 [Serializable]

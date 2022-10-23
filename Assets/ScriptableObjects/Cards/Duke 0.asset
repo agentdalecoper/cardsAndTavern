@@ -131,4 +131,4 @@ MonoBehaviour:
     cost: 5
     numberOfSlots: 1
   nextGrade: {fileID: 11400000, guid: e668abfea043e4007995f7a540ad81ed, type: 2}
-  description: Duke cook duke
+  description: Duke encourages your soldiers to fight evil

@@ -19,12 +19,14 @@ public class InitializeCardSystem : IEcsSystem
         // gameContext.cardsEnemy = new Card[sceneConfiguration.CARDS_ON_BOARD_COUNT];
         Debug.Log("Intilize cards");
 
+        int currentPos = 0;
         for (var position = 0; position < cards.Length; position++)
         {
             NumAndCard numAndCard = cards[position];
             for (int i = 0; i < numAndCard.num; i++)
             {
-                CardUI card = await CreateAndShowCard(position + i, side, numAndCard.cardObject);
+                CardUI card = await CreateAndShowCard(currentPos, side, numAndCard.cardObject);
+                currentPos++;
             }
         }
 

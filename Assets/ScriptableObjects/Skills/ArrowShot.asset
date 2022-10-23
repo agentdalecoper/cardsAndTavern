@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: fa6cbf2bf9a46415baa046d79eeed1e3, type: 3}
   name: 
-  description: Shots an arrow in the front direction, can shot it from the second
-    line
+  description: Shots an arrow dealing 1 damage in front slot. Can be shot from the
+    second line

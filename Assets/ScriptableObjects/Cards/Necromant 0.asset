@@ -131,4 +131,4 @@ MonoBehaviour:
     cost: 7
     numberOfSlots: 1
   nextGrade: {fileID: 11400000, guid: 44f0fc171fada404ca3d1c16b35b3f2e, type: 2}
-  description: necromeme
+  description: Dark things this person can conjure

@@ -79,6 +79,14 @@ namespace Client
             sceneConfiguration.shop.nextLevelButtonObject.SetActive(false);
             sceneConfiguration.shop.sellCardHolderObject.SetActive(true);
             sceneConfiguration.cardsChooseHolder.gameObject.SetActive(true);
+            
+            DialogTextManager.Instance.ShowText(tutorial.youHaveGradedCard);
+            sceneConfiguration.tutorialConfiguration.auraEffect.gameObject.SetActive(false);
+
+            while (CheckForDialogEnd())
+            {
+                await UniTask.Yield();
+            }
 
             DialogTextManager.Instance.ShowText(tutorial.youHaveInventorySayingText);
             animationSystem.AnimateGlow(sceneConfiguration.shop.inventoryCardsHolder.transform.position);
@@ -97,7 +105,8 @@ namespace Client
             }
 
             DialogTextManager.Instance.ShowText(tutorial.yourCardsWillRespawnText);
-            animationSystem.AnimateGlow(sceneConfiguration.playerCardsHolder.transform.position);
+            sceneConfiguration.tutorialConfiguration.auraEffect.gameObject.SetActive(false);
+            // animationSystem.AnimateGlow(sceneConfiguration.playerCardsHolder.transform.position);
             while (CheckForDialogEnd())
             {
                 await UniTask.Yield();

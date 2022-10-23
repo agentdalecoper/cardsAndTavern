@@ -27,13 +27,18 @@ internal class ShopController : IEcsInitSystem
     {
         Debug.Log("Buy roll clicked " + sceneConfiguration.shop.currentMoney);
 
-        if (sceneConfiguration.shop.buyCardCost > sceneConfiguration.shop.currentMoney)
+        int currentCost = sceneConfiguration.shop.buyCardInitialCost +
+                          sceneConfiguration.shop.numberTimesRolled * sceneConfiguration.shop.buyCardCostStep;
+        
+        if (currentCost > sceneConfiguration.shop.currentMoney)
         {
             return;
         }
 
+        sceneConfiguration.shop.numberTimesRolled += 1;
+
         cardsChoseController.ChooseCardsLevel();
-        RemoveMoney(sceneConfiguration.shop.buyCardCost);
+        RemoveMoney(currentCost);
         RefreshShopUis();
     }
     public void BuyCardClicked(CardUI draggedCard, CardUI underCard)
@@ -92,15 +97,15 @@ internal class ShopController : IEcsInitSystem
         MoneyDropManager.Instance.RemoveCoins(money);
     }
 
-    private void RefreshShopUis()
+    public void RefreshShopUis()
     {
         sceneConfiguration.shop.currentMoneyUI.text
             = sceneConfiguration.shop.currentMoney + "$";
 
         sceneConfiguration.shop.buyCardUI.costText.text
-            = sceneConfiguration.shop.buyCardCost + "$";
+            = sceneConfiguration.shop.buyCardCostStep + "$";
 
-        if (sceneConfiguration.shop.buyCardCost > sceneConfiguration.shop.currentMoney)
+        if (sceneConfiguration.shop.buyCardCostStep > sceneConfiguration.shop.currentMoney)
         {
             sceneConfiguration.shop.buyCardUI.costText.color = Color.grey;
         }
@@ -113,6 +118,11 @@ internal class ShopController : IEcsInitSystem
         {
             sceneConfiguration.shop.buyIncomeUI.costText.color = Color.grey;
         }
+
+        int currentRollCost = sceneConfiguration.shop.buyCardInitialCost +
+                              sceneConfiguration.shop.numberTimesRolled * sceneConfiguration.shop.buyCardCostStep;
+        sceneConfiguration.shop
+            .rollACardHolder.GetComponentInChildren<TextMesh>().text = "Roll " + currentRollCost + "$";
     }
 
     public void SacrificeCardClicked(CardUI cardToSacrificeUI)
@@ -249,7 +259,7 @@ internal class ShopController : IEcsInitSystem
         cardToStarUpgrade.card = upgradedCard;
 
         cardsSystem.RefreshCard(cardToStarUpgrade);
-        cameraController.ShowShopAndPlayerCards();
+        // cameraController.ShowShopAndPlayerCards();
         // damage / hp x2? 
     }
 }

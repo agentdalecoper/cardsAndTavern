@@ -60,12 +60,16 @@ MonoBehaviour:
                 IsSet: 0
               buff:
                 IsSet: 0
+                Value:
+                  buff: 0
               transformation:
                 IsSet: 0
                 Value:
                   transformTo: {fileID: 0}
               arrowShot:
                 IsSet: 0
+                Value:
+                  damage: 0
               steroids:
                 IsSet: 0
               summon:
@@ -85,6 +89,7 @@ MonoBehaviour:
                 IsSet: 0
               healOther:
                 IsSet: 0
+                Value: 0
               poisoned:
                 IsSet: 0
               cost: 0
@@ -101,12 +106,16 @@ MonoBehaviour:
       IsSet: 0
     buff:
       IsSet: 0
+      Value:
+        buff: 0
     transformation:
       IsSet: 0
       Value:
         transformTo: {fileID: 0}
     arrowShot:
       IsSet: 0
+      Value:
+        damage: 0
     steroids:
       IsSet: 0
     summon:
@@ -126,8 +135,11 @@ MonoBehaviour:
       IsSet: 0
     healOther:
       IsSet: 1
+      Value: 4
     poisoned:
       IsSet: 0
     cost: 1
     numberOfSlots: 3
   nextGrade: {fileID: 0}
+  description: Will help you heal your soldiers
+  isBoss: 0

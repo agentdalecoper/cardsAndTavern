@@ -787,7 +787,6 @@ GameObject:
   - component: {fileID: 8147319169695176537}
   - component: {fileID: 1770802902613670713}
   - component: {fileID: 843585666}
-  - component: {fileID: 6176466010595362412}
   m_Layer: 0
   m_Name: Card1
   m_TagString: Untagged
@@ -861,6 +860,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  dragBlocked: 0
   skillUis:
   - {fileID: 2989373968910079368}
   - {fileID: 3540324616956945750}
@@ -869,26 +869,6 @@ MonoBehaviour:
   cardFace: {fileID: 7113280172948451590}
   cost: {fileID: 5108799083028062640}
   animator: {fileID: 0}
---- !u!95 &6176466010595362412
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772097885512208830}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b23d9b0177dd140439e8d63fa23e2dfe, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2055547434778227777
 GameObject:
   m_ObjectHideFlags: 0

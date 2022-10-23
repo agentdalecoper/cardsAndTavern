@@ -23,7 +23,7 @@ MonoBehaviour:
         income:
           IsSet: 1
           Value:
-            income: 2
+            income: 6
         itemAddsSkill:
           IsSet: 0
           Value:
@@ -131,3 +131,5 @@ MonoBehaviour:
     cost: 1
     numberOfSlots: 1
   nextGrade: {fileID: 11400000, guid: 712567cb27abd4e81873e362b279fc6e, type: 2}
+  description: Hard worker to your aid
+  isBoss: 0

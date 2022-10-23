@@ -186,6 +186,7 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             sceneConfiguration.tableAudioSource.clip = sceneConfiguration.sceneAudioConfiguration.cardDrop;
             sceneConfiguration.tableAudioSource.Play();
             Debug.Log("Add a skill to a card ActionCardDraggedOn");
+            // cardsChoseController.ChooseCardsLevel();
             return;
         }
 
@@ -296,8 +297,10 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             sceneConfiguration.clickedNextLevel = false;
             sceneConfiguration.shop.nextLevelButtonObject.SetActive(true);
             Debug.Log("Game is finished");
-            
-            cardsChoseController.ChooseCardsLevel();
+
+            sceneConfiguration.shop.numberTimesRolled = 0;
+            shopController.RefreshShopUis();
+            cardsChoseController.ChooseCardsLevel(level.isReward);
         }
     }
 

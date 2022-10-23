@@ -131,4 +131,4 @@ MonoBehaviour:
     cost: 3
     numberOfSlots: 1
   nextGrade: {fileID: 11400000, guid: a3ab2ca4901004c0fb578cab8b670864, type: 2}
-  description: plage
+  description: Will help you heal your soldiers

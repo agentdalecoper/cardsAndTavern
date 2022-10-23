@@ -181,8 +181,8 @@ namespace Client
 
                 if (cardToTheSideUI != null && !isDeadOrEmpty(cardToTheSideUI.card))
                 {
-                    cardToTheSideUI.card.hp += 1;
-                    cardToTheSideUI.card.damage += 1;
+                    cardToTheSideUI.card.hp += crd.buff.Value.buff;
+                    cardToTheSideUI.card.damage += crd.buff.Value.buff;
                     cardAnimationSystem.AnimateChangeOfStat(cardToTheSideUI.hpText, Color.blue);
                     cardAnimationSystem.AnimateChangeOfStat(cardToTheSideUI.damageText, Color.blue);
                     RefreshCard(cardToTheSideUI);
@@ -197,8 +197,8 @@ namespace Client
                 CardUI cardToTheSideUI = cardList[crdUi.cardPosition + 1];
                 if (cardToTheSideUI != null && !isDeadOrEmpty(cardToTheSideUI.card))
                 {
-                    cardToTheSideUI.card.hp += 1;
-                    cardToTheSideUI.card.damage += 1;
+                    cardToTheSideUI.card.hp += crd.buff.Value.buff;
+                    cardToTheSideUI.card.damage += crd.buff.Value.buff;
                     cardAnimationSystem.AnimateChangeOfStat(cardToTheSideUI.hpText, Color.blue);
                     cardAnimationSystem.AnimateChangeOfStat(cardToTheSideUI.damageText, Color.blue);
                     RefreshCard(cardToTheSideUI);
@@ -222,7 +222,7 @@ namespace Client
 
             if (cardToHeal != null)
             {
-                cardToHeal.card.hp += 1;
+                cardToHeal.card.hp += crd.healOther.Value;
                 RefreshCard(cardToHeal);
             }
 
@@ -483,7 +483,7 @@ namespace Client
                 await cardAnimationSystem.AnimateSkillUsed(playerCardUI,
                     sceneConfiguration.skillsObjectsDict.arrowShot.sprite);
                 await DamageCardDirectly(acrossEnemyCardUI.card, acrossEnemyCardUI,
-                    1, playerCardUI);
+                    playerCardUI.card.arrowShot.Value.damage, playerCardUI);
                 Debug.Log($"Arrow shot enemy card {acrossEnemyCardUI} player card {playerCardUI}");
 
                 return true;
@@ -505,8 +505,6 @@ namespace Client
             if (card.splitAttack.IsSet)
             {
                 await SplitAttack(cardUi, enemyCardUi);
-                await cardAnimationSystem.AnimateSkillUsed(cardUi,
-                    sceneConfiguration.skillsObjectsDict.splitAttack.sprite);
             }
 
             if (card.gyroAttack.IsSet)
@@ -542,7 +540,7 @@ namespace Client
         private async UniTask SplitAttack(CardUI cardUI, CardUI enemyCardUi)
         {
             bool used = false;
-            
+
             Debug.Log("split attack " + cardUI.card);
             List<CardUI> cardsAcross = GetCardUiListAcross(cardUI.card);
 
@@ -550,7 +548,8 @@ namespace Client
             {
                 used = true;
                 CardUI cardAcrossUi = cardsAcross[enemyCardUi.cardPosition - 1];
-                await DamageCardDirectly(cardAcrossUi.card, cardAcrossUi, 1, cardUI);
+                await DamageCardDirectly(cardAcrossUi.card, cardAcrossUi, 
+                    enemyCardUi.card.splitAttack.Value.damage, cardUI);
                 Debug.Log("split attack left " + cardAcrossUi.card);
             }
 
@@ -558,14 +557,15 @@ namespace Client
             {
                 used = true;
                 CardUI cardAcrossUi = cardsAcross[enemyCardUi.cardPosition + 1];
-                await DamageCardDirectly(cardAcrossUi.card, cardAcrossUi, 1, cardUI);
+                await DamageCardDirectly(cardAcrossUi.card, cardAcrossUi,
+                    enemyCardUi.card.splitAttack.Value.damage, cardUI);
                 Debug.Log("split attack right " + cardAcrossUi.card);
             }
 
             if (used)
             {
-                await  cardAnimationSystem.AnimateSkillUsed(cardUI, 
-                    sceneConfiguration.skillsObjectsDict.splitAttack.sprite);   
+                await cardAnimationSystem.AnimateSkillUsed(cardUI,
+                    sceneConfiguration.skillsObjectsDict.splitAttack.sprite);
             }
         }
 
@@ -671,8 +671,8 @@ namespace Client
 
         public CardUI GetCardAcrossFromAll(CardUI cardUI)
         {
-            return GetCardAllUIs(cardUI.card.side == Side.player
-                ? Side.enemy : Side.player)[cardUI.cardPosition];
+            return GetCardUIList(cardUI.card.side == Side.player
+                ? Side.enemy : Side.player)[cardUI.cardPosition % sceneConfiguration.cardsOnBoardCount];
         }
 
         public CardUI GetCardAcross(CardUI cardUI, int line = 0)
@@ -829,7 +829,7 @@ namespace Client
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.buff)
             {
                 card.buff.IsSet = true;
-                card.buff.Value = new Buff();
+                card.buff.Value = new Buff() { buff = 2};
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.transformation)
@@ -841,7 +841,7 @@ namespace Client
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.arrowShot)
             {
                 card.arrowShot.IsSet = true;
-                card.arrowShot.Value = new ArrowShot();
+                card.arrowShot.Value = new ArrowShot() {damage = 2};
             }
 
             if (skillToAdd == sceneConfiguration.skillsObjectsDict.steroids)
@@ -879,7 +879,7 @@ namespace Client
                 card.gyroAttack.Value = new GyroAttack();
             }
 
-            card.name += "+";
+            // card.name += "+";
 
             RefreshCard(cardUI);
 

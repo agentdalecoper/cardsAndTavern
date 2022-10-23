@@ -1344,11 +1344,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8147319169695176537, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.78
+      value: 1.4129999
       objectReference: {fileID: 0}
     - target: {fileID: 8147319169695176537, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.7
+      value: -0.6999999
       objectReference: {fileID: 0}
     - target: {fileID: 8147319169695176537, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2353,7 +2353,6 @@ GameObject:
   - component: {fileID: 276863415}
   - component: {fileID: 276863414}
   - component: {fileID: 276863413}
-  - component: {fileID: 276863417}
   m_Layer: 0
   m_Name: SellCard
   m_TagString: Untagged
@@ -2369,7 +2368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276863411}
   m_LocalRotation: {x: -0.4940543, y: -0.5062244, z: 0.5003666, w: 0.49928}
-  m_LocalPosition: {x: -0.004, y: 0.058, z: -0.0092}
+  m_LocalPosition: {x: -0.02, y: 0.836, z: -0.007}
   m_LocalScale: {x: 5.661163, y: 0.500209, z: 12.901265}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2467,31 +2466,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276863411}
   m_Mesh: {fileID: -2432090755550338912, guid: ea74a0a4bef5f4fd3b9219c6579b689e, type: 3}
---- !u!114 &276863417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276863411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1b78bbe7d44578837249fb62b69f43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageText: {fileID: 0}
-  hpText: {fileID: 0}
-  nameText: {fileID: 0}
-  image: {fileID: 0}
-  ActionCardClicked:
-    m_PersistentCalls:
-      m_Calls: []
-  dragBlocked: 0
-  skillUis: []
-  view: {fileID: 0}
-  cardFace: {fileID: 0}
-  cost: {fileID: 0}
-  animator: {fileID: 0}
 --- !u!1001 &283538977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2795,7 +2769,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7776629, y: 1}
+    m_SensorSize: {x: 1.7791411, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7337,7 +7311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1772097885512208830, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7113280172948451590, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_Size.x
@@ -7417,11 +7391,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8147319169695176537, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2.69
+      value: 2.541
       objectReference: {fileID: 0}
     - target: {fileID: 8147319169695176537, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.69000036
+      value: -0.696
       objectReference: {fileID: 0}
     - target: {fileID: 8147319169695176537, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11533,6 +11507,7 @@ GameObject:
   - component: {fileID: 1405980271}
   - component: {fileID: 1405980270}
   - component: {fileID: 1405980272}
+  - component: {fileID: 1405980273}
   m_Layer: 5
   m_Name: DialogText
   m_TagString: Untagged
@@ -11580,16 +11555,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: refferfe
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: edeee9e844cdc4d9191c327d0bde8353, type: 2}
-  m_sharedMaterial: {fileID: -713284354627707815, guid: 6e82d3e7bc60a4e38b6b0a7da1857427, type: 2}
+  m_sharedMaterial: {fileID: -3686124098947044547, guid: edeee9e844cdc4d9191c327d0bde8353, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4285984385
+    rgba: 4280923862
   m_fontColor: {r: 0.8396226, g: 0.7139738, b: 0.16237983, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -11646,7 +11621,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1405980271
@@ -11672,6 +11647,50 @@ MonoBehaviour:
   textMesh: {fileID: 0}
   textMesh2: {fileID: 0}
   strength: 2
+--- !u!114 &1405980273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405980268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1405980270}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1413936615
 GameObject:
   m_ObjectHideFlags: 0
@@ -11750,7 +11769,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7776629, y: 1}
+    m_SensorSize: {x: 1.7791411, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -12745,11 +12764,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8147319169695176537, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.419
+      value: 0.23799986
       objectReference: {fileID: 0}
     - target: {fileID: 8147319169695176537, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.69
+      value: -0.68999994
       objectReference: {fileID: 0}
     - target: {fileID: 8147319169695176537, guid: f564c95dbd6bf4f02bb1ecef64f76589, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23027,6 +23046,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: df3d343ca48824e059ec0f0bf1bfe269, type: 3}
+    - target: {fileID: 7561255661760698667, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: dialogButton
+      value: 
+      objectReference: {fileID: 1405980273}
     - target: {fileID: 7561255661760698672, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: m_Name
       value: Managers
@@ -23216,6 +23239,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.shop.buyCardCostStep
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.shop.rollACardHolder
       value: 
       objectReference: {fileID: 1873551379}
@@ -23243,6 +23270,10 @@ PrefabInstance:
       propertyPath: sceneConfiguration.sceneEffects.buffOrHeal
       value: 
       objectReference: {fileID: 648712656}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.shop.buyCardInitialCost
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.skillsObjectsDict.quill
       value: 
@@ -23320,6 +23351,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: c8e73575c3f3a4a6c8cfc60d180c14f8, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[1].isReward
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[2].isReward
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[7].isReward
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.sceneEffects.inventoryStartGo
       value: 
       objectReference: {fileID: 1110144045}
@@ -23329,39 +23372,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[1].levelIncome
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[2].levelIncome
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].levelIncome
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[4].levelIncome
-      value: 13
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].levelIncome
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].levelIncome
-      value: 17
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].levelIncome
-      value: 17
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].levelIncome
-      value: 17
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].levelIncome
-      value: 17
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.sceneAudioConfiguration.cardDrop
@@ -23385,7 +23428,7 @@ PrefabInstance:
       objectReference: {fileID: 9068971157547552451}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[10].levelIncome
-      value: 19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.sceneAudioConfiguration.cardAttack
@@ -23403,6 +23446,10 @@ PrefabInstance:
       propertyPath: sceneConfiguration.sceneAudioConfiguration.tavernAmbient
       value: 
       objectReference: {fileID: 8300000, guid: f061a328f25c043709effe0c55ea8b51, type: 3}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.shop.inventoryRewardObjects.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].dialogObject.IsSet
       value: 0
@@ -23447,6 +23494,26 @@ PrefabInstance:
       propertyPath: sceneConfiguration.levels.Array.data[11].dialogObject.IsSet
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.shop.inventoryRewardObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 71480f06c89df48268efcfe20e23bfc9, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.shop.inventoryRewardObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4492a06d3276b42b1b16cacd83ed2466, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.shop.inventoryRewardObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 46aa8286f9ef442e39cd60f43977f55c, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.shop.inventoryRewardObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: b545e493f214542b8a501b8ff2d8a6ec, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.shop.inventoryRewardObjects.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 65085454a13554a8fb5a44ba347a7c0b, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].enemyCardsObject.IsSet
       value: 0
@@ -23537,19 +23604,23 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 192104461e63c4d4dbd0725e1ab828e5, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].tutorial.Value.gradeYourCard
-      value: Your card grades whenever you have bought 3 cards of the same type
+      value: Grade your card buying two cards of the same type
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].tutorial.Value.youHaveHpText
-      value: You loose if your hp will be zero
+      value: You loose if your hp will be zero  (click here to continue)
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].tutorial.Value.tryRollingText
-      value: Try rolling to get new cards to drag from
+      value: Try roll to get new cards to drag from
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].tutorial.Value.youCanSellCard
-      value: You can sell a card if you want to
+      value: You can sell a card if you want to  (click here to continue)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[0].tutorial.Value.youHaveGradedCard
+      value: Your card has a skill now! (click here to continue)
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.shop.shopChoseCardsObject.cardsToChoseFrom.Array.size
@@ -23597,7 +23668,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 011f7dc80b6fc466fa7da7acf7b557c8, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].tutorial.Value.nowClickNextLevelText
-      value: Now, click the next leevl
+      value: Now, click the next level
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.shop.shopChoseCardsObject.cardsToChoseFrom.Array.data[10]
@@ -23633,7 +23704,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 9deefafdd39364f319d5983f5e29f864, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].tutorial.Value.dragFromShopSayingText
-      value: Buy a card, dragging it from the shop
+      value: Buy a card by dragging it from the shop
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].tutorial.Value.yourCardsWillRespawnText
@@ -23641,7 +23712,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[0].tutorial.Value.youHaveInventorySayingText
-      value: You can place your cards in inventory, they will not fight in a wave
+      value: You can place your cards in inventory, they will not fight in a wave.
+        (click here to continue)
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].dialogObject.Value.dialogTexts.Array.size
@@ -23947,7 +24019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[10].enemyCardsObject.Value.numAndCards.Array.size
@@ -24199,7 +24271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.Value.numAndCards.Array.data[1].num
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[2].enemyCardsObject.Value.numAndCards.Array.data[2].num
@@ -24211,11 +24283,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.data[1].num
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[3].enemyCardsObject.Value.numAndCards.Array.data[2].num
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[4].enemyCardsObject.Value.numAndCards.Array.data[0].num
@@ -24231,7 +24303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.data[0].num
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[5].enemyCardsObject.Value.numAndCards.Array.data[1].num
@@ -24255,11 +24327,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[0].num
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[1].num
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[2].num
@@ -24267,11 +24339,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[0].num
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[1].num
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[2].num
@@ -24279,14 +24351,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[0].num
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[1].num
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[2].num
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[3].num
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
@@ -24428,11 +24504,11 @@ PrefabInstance:
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: 24b97a53690714b4fa17dd0a0e5e10de, type: 2}
+      objectReference: {fileID: 11400000, guid: 0029ba55124ed471c89b641025e9fa08, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: 0029ba55124ed471c89b641025e9fa08, type: 2}
+      objectReference: {fileID: 11400000, guid: 6d69b04654f6d4a16b92a57182bb45f1, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[6].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
       value: 
@@ -24440,11 +24516,11 @@ PrefabInstance:
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: e6c17d5031c334960b23433cc2406bbf, type: 2}
+      objectReference: {fileID: 11400000, guid: 6d69b04654f6d4a16b92a57182bb45f1, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: 24b97a53690714b4fa17dd0a0e5e10de, type: 2}
+      objectReference: {fileID: 11400000, guid: e6c17d5031c334960b23433cc2406bbf, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[7].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
       value: 
@@ -24452,11 +24528,11 @@ PrefabInstance:
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: e6c17d5031c334960b23433cc2406bbf, type: 2}
+      objectReference: {fileID: 11400000, guid: b51dd359b77c64250818712227db4060, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: b51dd359b77c64250818712227db4060, type: 2}
+      objectReference: {fileID: 11400000, guid: e6c17d5031c334960b23433cc2406bbf, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[8].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
       value: 
@@ -24464,13 +24540,17 @@ PrefabInstance:
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[0].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: 9331fc71a6cb243c5b83ab367195a83a, type: 2}
+      objectReference: {fileID: 11400000, guid: b51dd359b77c64250818712227db4060, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[1].cardObject
       value: 
-      objectReference: {fileID: 11400000, guid: b51dd359b77c64250818712227db4060, type: 2}
+      objectReference: {fileID: 11400000, guid: 9331fc71a6cb243c5b83ab367195a83a, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
       propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[2].cardObject
+      value: 
+      objectReference: {fileID: 11400000, guid: b51dd359b77c64250818712227db4060, type: 2}
+    - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}
+      propertyPath: sceneConfiguration.levels.Array.data[9].enemyCardsObject.Value.numAndCards.Array.data[3].cardObject
       value: 
       objectReference: {fileID: 11400000, guid: d6727cd1d0a5b4898b22b8d827da7616, type: 2}
     - target: {fileID: 7561255661760698679, guid: 62268bb9fdbd34baea9c4421a10e8781, type: 3}

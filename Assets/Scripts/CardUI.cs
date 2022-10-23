@@ -44,6 +44,8 @@ public class CardUI : MonoBehaviour
     public TextMesh cost;
 
     private Quaternion initialRotation;
+    private Vector3 initialScale;
+    private Vector3 initSpriteScale;
 
     public Animator animator;
 
@@ -52,9 +54,9 @@ public class CardUI : MonoBehaviour
     private void Awake()
     {
         ShowEmptyCardData();
-        animator = GetComponent<Animator>();
-        animator.enabled = false;
         initTextColor = damageText.color;
+        initialScale = transform.localScale;
+        initSpriteScale = cardFace.gameObject.transform.localScale;
     }
 
     private void Start()
@@ -134,6 +136,24 @@ public class CardUI : MonoBehaviour
         {
             cost.gameObject.transform.parent.gameObject.SetActive(true);
         }
+
+        if (card.cardObject.isBoss)
+        {
+            transform.localScale = initialScale * 1.5f;
+        }
+        else
+        {
+            transform.localScale = initialScale;
+        }
+
+        if (card.itemOnly.IsSet && card.itemOnly.Value.itemAddsSkill.IsSet)
+        {
+            cardFace.gameObject.transform.localScale = initSpriteScale * 2;
+        }
+        else
+        {
+            cardFace.gameObject.transform.localScale = initSpriteScale;
+        }
     }
 
     public void SetDraggable(bool drag)
@@ -205,8 +225,8 @@ public class CardUI : MonoBehaviour
         {
             RaycastHit hit = raycastHits[i];
 
-            CardUI otherCardUi = hit.collider.gameObject.GetComponent<CardUI>();
-            if (otherCardUi != null && otherCardUi != this && otherCardUi.gameObject.name == "SellCard")
+            GameObject otherCardUi = hit.collider.gameObject;
+            if (otherCardUi != null && otherCardUi.name == "SellCard")
             {
                 cost.gameObject.transform.parent.gameObject.SetActive(true);
                 return;

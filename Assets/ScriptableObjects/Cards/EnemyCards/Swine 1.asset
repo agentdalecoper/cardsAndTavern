@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Swine 1
   m_EditorClassIdentifier: 
   card:
-    hp: 4
-    damage: 1
-    name: 
+    hp: 2
+    damage: 2
+    name: Swine
     sprite: {fileID: 21300000, guid: 28dadace458054b178983f87c1c993ba, type: 3}
     itemOnly:
       IsSet: 0
@@ -60,12 +60,16 @@ MonoBehaviour:
                 IsSet: 0
               buff:
                 IsSet: 0
+                Value:
+                  buff: 0
               transformation:
                 IsSet: 0
                 Value:
                   transformTo: {fileID: 0}
               arrowShot:
                 IsSet: 0
+                Value:
+                  damage: 0
               steroids:
                 IsSet: 0
               summon:
@@ -85,6 +89,7 @@ MonoBehaviour:
                 IsSet: 0
               healOther:
                 IsSet: 0
+                Value: 0
               poisoned:
                 IsSet: 0
               cost: 0
@@ -101,12 +106,16 @@ MonoBehaviour:
       IsSet: 0
     buff:
       IsSet: 0
+      Value:
+        buff: 0
     transformation:
       IsSet: 0
       Value:
         transformTo: {fileID: 0}
     arrowShot:
       IsSet: 0
+      Value:
+        damage: 0
     steroids:
       IsSet: 0
     summon:
@@ -126,8 +135,11 @@ MonoBehaviour:
       IsSet: 0
     healOther:
       IsSet: 0
+      Value: 0
     poisoned:
       IsSet: 0
     cost: 0
     numberOfSlots: 1
   nextGrade: {fileID: 0}
+  description: 
+  isBoss: 0

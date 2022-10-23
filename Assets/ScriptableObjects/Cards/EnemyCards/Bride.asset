@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Bride
   m_EditorClassIdentifier: 
   card:
-    hp: 5
-    damage: 5
+    hp: 3
+    damage: 2
     name: Bride
     sprite: {fileID: 21300000, guid: ef0a171e2db884d6e8c4ecfdc0821890, type: 3}
     itemOnly:
@@ -60,12 +60,16 @@ MonoBehaviour:
                 IsSet: 0
               buff:
                 IsSet: 0
+                Value:
+                  buff: 0
               transformation:
                 IsSet: 0
                 Value:
                   transformTo: {fileID: 0}
               arrowShot:
                 IsSet: 0
+                Value:
+                  damage: 0
               steroids:
                 IsSet: 0
               summon:
@@ -85,6 +89,7 @@ MonoBehaviour:
                 IsSet: 0
               healOther:
                 IsSet: 0
+                Value: 0
               poisoned:
                 IsSet: 0
               cost: 0
@@ -101,12 +106,16 @@ MonoBehaviour:
       IsSet: 0
     buff:
       IsSet: 0
+      Value:
+        buff: 0
     transformation:
       IsSet: 0
       Value:
         transformTo: {fileID: 0}
     arrowShot:
       IsSet: 0
+      Value:
+        damage: 0
     steroids:
       IsSet: 0
     summon:
@@ -126,9 +135,11 @@ MonoBehaviour:
       IsSet: 0
     healOther:
       IsSet: 0
+      Value: 0
     poisoned:
       IsSet: 0
     cost: 0
     numberOfSlots: 1
   nextGrade: {fileID: 0}
   description: 
+  isBoss: 0

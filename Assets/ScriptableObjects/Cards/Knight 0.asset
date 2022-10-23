@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   card:
     hp: 5
-    damage: 1
+    damage: 2
     name: Knight
     sprite: {fileID: 21300000, guid: ed06beaf548bc4a238d049bb29e82349, type: 3}
     itemOnly:
@@ -131,4 +131,5 @@ MonoBehaviour:
     cost: 7
     numberOfSlots: 1
   nextGrade: {fileID: 11400000, guid: 8f1b427214a07423a909688e8f38f386, type: 2}
-  description: Mighy knight
+  description: Hedge knight joined  you to aid the battle agains evil
+  isBoss: 0

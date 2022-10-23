@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: eed0595f90333474cbaf9597d45b7851, type: 3}
   name: Income
-  description: Adds income depending on grade of the worker.
+  description: Adds income depending on grade of the worker 1 coin

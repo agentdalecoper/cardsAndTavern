@@ -131,3 +131,4 @@ MonoBehaviour:
     cost: 1
     numberOfSlots: 3
   nextGrade: {fileID: 0}
+  description: Dark things this person can conjure

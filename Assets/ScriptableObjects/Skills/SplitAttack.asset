@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 45711e1b989564458ac11c6b238c1605, type: 3}
   name: 
-  description: Splits attack to left and right of you
+  description: Splits 1 damage to left and right of the card

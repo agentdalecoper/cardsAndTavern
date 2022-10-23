@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: d41170a6dce834cada02021ab3cf22ef, type: 3}
   name: 
-  description: Increases hp and damage of the cars to the sides of this
+  description: Increases hp and damage of the cars to the sides of this card by 1
