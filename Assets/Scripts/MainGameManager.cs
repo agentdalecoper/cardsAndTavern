@@ -111,6 +111,8 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             .playerCardsHolder.GetComponentsInChildren<CardUI>();
         gameContext.enemyCardUIs = sceneConfiguration
             .enemyCardsHolder.GetComponentsInChildren<CardUI>();
+
+        await WaitIntroScreenSkipped();
             
         StartFunction();
 
@@ -125,6 +127,14 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
         MoneyDropManager.Instance.DropCoins(sceneConfiguration.shop.currentMoney);
 
         test();
+    }
+
+    private async UniTask WaitIntroScreenSkipped()
+    {
+        while (sceneConfiguration.intorGameCanvas.gameObject.activeSelf)
+        {
+            await UniTask.Yield();
+        }
     }
 
     private void CheckCardMoveAndSlots(CardUI underCard, CardUI draggedCard, InitializeCardSystem initializeCardSystm)
@@ -256,7 +266,9 @@ sealed class MainGameManager : MonoBehaviour, IEcsSystem
             level.levelEndEvents?.Invoke();
         }
 
-        cameraController.ShowGameWon();
+        sceneConfiguration.gameIsWonCanvas.gameObject.SetActive(true);
+
+        // cameraController.ShowGameWon();
     }
 
     private async UniTask ProceedLevel(Level level)

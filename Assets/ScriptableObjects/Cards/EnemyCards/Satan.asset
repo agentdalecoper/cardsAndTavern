@@ -16,7 +16,7 @@ MonoBehaviour:
     hp: 10
     damage: 10
     name: Satan
-    sprite: {fileID: 21300000, guid: ede6cf0a312e941e49b4119c32381717, type: 3}
+    sprite: {fileID: 21300000, guid: 443dac842b822423ea3d294b835883ae, type: 3}
     itemOnly:
       IsSet: 0
       Value:
@@ -52,6 +52,8 @@ MonoBehaviour:
                     IsSet: 0
               splitAttack:
                 IsSet: 0
+                Value:
+                  damage: 2
               poisonOther:
                 IsSet: 0
                 Value:
@@ -98,6 +100,8 @@ MonoBehaviour:
           IsSet: 0
     splitAttack:
       IsSet: 0
+      Value:
+        damage: 2
     poisonOther:
       IsSet: 0
       Value:

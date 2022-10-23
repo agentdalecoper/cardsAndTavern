@@ -26,7 +26,7 @@ public class CardsChoseController : IEcsSystem
             null
         });
     }
-    
+
     public void ChooseCardsLevel(bool addReward = false)
     {
         ChoseCardsObject shopChoseCardsObject = sceneConfiguration.shop.shopChoseCardsObject;
@@ -34,7 +34,8 @@ public class CardsChoseController : IEcsSystem
         {
             shopChoseCardsObject.cardsToChoseFrom.GetRandom(),
             shopChoseCardsObject.cardsToChoseFrom.GetRandom(),
-            addReward ? sceneConfiguration.shop.inventoryRewardObjects.GetRandom() : null
+            null
+            // addReward ? sceneConfiguration.shop.inventoryRewardObjects.GetRandom() : null
         });
     }
 
@@ -199,10 +200,10 @@ public class CardsChoseController : IEcsSystem
             1, Side.shop, cardsToChoseFrom[1],
             sceneConfiguration.cardsChooseHolder,
             sceneConfiguration.sceneEffects.inventoryStartGo);
-        initializeCardSystem.CreateAndShowCardInHolder(
-            2, Side.shop, cardsToChoseFrom[2],
-            sceneConfiguration.cardsChooseHolder,
-            sceneConfiguration.sceneEffects.inventoryStartGo);
+        // initializeCardSystem.CreateAndShowCardInHolder(
+        //     2, Side.shop, cardsToChoseFrom[2],
+        //     sceneConfiguration.cardsChooseHolder,
+        //     sceneConfiguration.sceneEffects.inventoryStartGo);
 
         // initializeCardSystem.CreateAndShowCardInHolder(2, Side.player, cardsToChoseFrom[2],
         //     sceneConfiguration.cardsChooseHolder);

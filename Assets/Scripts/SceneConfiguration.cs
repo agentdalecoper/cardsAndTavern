@@ -59,7 +59,10 @@ namespace Client
 
         public GameObject mainGameObject;
 
-        public Canvas endGameCanvas;
+        public Canvas intorGameCanvas;
+
+        public Canvas gameIsWonCanvas;
+        public Canvas gameIsLostCanvas;
        
         public TextMeshProUGUI dialogText;
         public TextMeshProUGUI endText;

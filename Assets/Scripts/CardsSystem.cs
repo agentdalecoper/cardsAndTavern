@@ -100,8 +100,6 @@ namespace Client
                 if (crd.transformation.IsSet)
                 {
                     await CardTransformation(crd, crdUi);
-                    await cardAnimationSystem.AnimateSkillUsed(crdUi,
-                        sceneConfiguration.skillsObjectsDict.transformation.sprite);
                 }
 
                 if (crd.summon.IsSet)
@@ -159,7 +157,8 @@ namespace Client
                 await AnimateTransformShake(crdUi);
                 Card transformedCard = initializeCardSystem.CreateCard(crd.side, transformation.transformTo);
                 initializeCardSystem.ShowCardData(crdUi.cardPosition, transformedCard, GetCardHolder(crd.side));
-
+                await cardAnimationSystem.AnimateSkillUsed(crdUi,
+                    sceneConfiguration.skillsObjectsDict.transformation.sprite);
                 // crdUi.cardFace.color = Color.red;
                 // initializeCardSystem.SetCardAtPosition(crdUi.cardPosition, gameContext, crd);
             }
@@ -432,6 +431,11 @@ namespace Client
                 // await UniTask.Delay(300);
                 await AnimationDamageMainBoard();
                 cameraController.ShowTable();
+
+                if (gameContext.playerEnemyHpBalance <= 0)
+                {
+                    sceneConfiguration.gameIsLostCanvas.gameObject.SetActive(true);
+                }
 
                 levelWon = false;
             }

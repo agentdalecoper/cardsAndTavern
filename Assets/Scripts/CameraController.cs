@@ -144,7 +144,7 @@ namespace Client
 
         public async void ShowGameLost(string str)
         {
-            sceneConfiguration.endGameCanvas.gameObject.SetActive(true);
+            // sceneConfiguration.intorGameCanvas.gameObject.SetActive(true);
             sceneConfiguration.endText.gameObject.SetActive(true);
             sceneConfiguration.endText.text = $"End game. {str}";
 
@@ -155,7 +155,7 @@ namespace Client
 
         public async void ShowGameWon()
         {
-            sceneConfiguration.endGameCanvas.gameObject.SetActive(true);
+            // sceneConfiguration.intorGameCanvas.gameObject.SetActive(true);
             sceneConfiguration.endText.gameObject.SetActive(true);
             sceneConfiguration.endText.text = "You made proper sacrifices. Thanks for playing!";
 

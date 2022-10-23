@@ -12,7 +12,7 @@ public class CardUI : MonoBehaviour
     public TextMesh damageText;
     public TextMesh hpText;
     public TextMesh nameText;
-    
+
     public Image image;
 
     [NonSerialized] public Card card;
@@ -23,9 +23,9 @@ public class CardUI : MonoBehaviour
     public static event Action<CardUI> ActionCardStartDrag;
     public static event Action<CardUI> ActionCardDragging;
     public static event Action<CardUI, CardUI> ActionCardDraggedOn;
-    
+
     [NonSerialized] public int cardPosition;
-    
+
     private bool dragable;
     public bool dragBlocked;
     private Vector3 startAnchoredPosition;
@@ -68,9 +68,14 @@ public class CardUI : MonoBehaviour
         initialRotation = transform.localRotation;
         startAnchoredPosition = transform.position;
     }
-    
+
     public void ShowEmptyCardData()
     {
+        if (gameObject.name == "SellCard")
+        {
+            return;
+        }
+
         damageText.text = "";
         hpText.text = "";
         nameText.text = "";
@@ -92,7 +97,7 @@ public class CardUI : MonoBehaviour
             skillUis[i].sprite = null;
             skillUis[i].gameObject.SetActive(false);
         }
-        
+
         cost.gameObject.transform.parent.gameObject.SetActive(false);
     }
 
@@ -100,6 +105,7 @@ public class CardUI : MonoBehaviour
     {
         damageText.color = initTextColor;
         hpText.color = initTextColor;
+        ShowEmptyCardData();
     }
 
     public void ShowCardData(Card cardToShow, int position,
@@ -160,7 +166,7 @@ public class CardUI : MonoBehaviour
     {
         dragable = drag;
     }
-    
+
     private void SetDraggable(Card cardToShow)
     {
         if (cardToShow.side != Side.enemy)
@@ -205,7 +211,7 @@ public class CardUI : MonoBehaviour
         {
             return;
         }
-        
+
         if (dragBlocked)
         {
             return;
@@ -225,8 +231,8 @@ public class CardUI : MonoBehaviour
         {
             RaycastHit hit = raycastHits[i];
 
-            GameObject otherCardUi = hit.collider.gameObject;
-            if (otherCardUi != null && otherCardUi.name == "SellCard")
+            GameObject go = hit.collider.gameObject;
+            if (go != null && go.name == "SellCard")
             {
                 cost.gameObject.transform.parent.gameObject.SetActive(true);
                 return;
@@ -241,7 +247,7 @@ public class CardUI : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (card != null && card.side == Side.player )
+        if (card != null && card.side == Side.player)
         {
             transform.DOShakeRotation(0.1f, 0.5f, 10);
         }
@@ -290,19 +296,19 @@ public class CardUI : MonoBehaviour
         }
     }
     //
-        // foreach (RaycastResult result in raycastResults)
-        // {
-        //     // Debug.Log("checking raycast " + result.gameObject + " " + eventData.position);
-        //
-        //     CardUI otherCardUi = result.gameObject.GetComponent<CardUI>();
-        //     if (otherCardUi != null && otherCardUi != this)
-        //     {
-        //         Debug.Log("Found raycast image!!! " + result.gameObject);
-        //         ActionCardDraggedOn?.Invoke(this, otherCardUi);
-        //     }
-        // }
+    // foreach (RaycastResult result in raycastResults)
+    // {
+    //     // Debug.Log("checking raycast " + result.gameObject + " " + eventData.position);
+    //
+    //     CardUI otherCardUi = result.gameObject.GetComponent<CardUI>();
+    //     if (otherCardUi != null && otherCardUi != this)
+    //     {
+    //         Debug.Log("Found raycast image!!! " + result.gameObject);
+    //         ActionCardDraggedOn?.Invoke(this, otherCardUi);
+    //     }
+    // }
 
-        // transform.rotation = initialRotation;
+    // transform.rotation = initialRotation;
 
     public void MoveToStartPosition()
     {
