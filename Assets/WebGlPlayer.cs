@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,39 +17,46 @@ public class WebGlPlayer : MonoBehaviour
     public TextMeshProUGUI playGameText;
     public GameObject catSign;
 
+    public string animToPlay;
+
     private void Awake()
     {
         videoPlayer = GetComponent<VideoPlayer>();
         videoPlayer.gameObject.SetActive(false);
 
-        nextButton.onClick.AddListener(() =>
+        if (string.IsNullOrEmpty(animToPlay))
         {
-            videoPlayer.gameObject.SetActive(true);
-
-            nextButton.onClick.RemoveAllListeners();
-            videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "Won.mp4");
-            videoPlayer.Play();
-            sayingText.text = "It was a 1254 year after Christ birth in the nameless country in the nameless place.";
-
-            titleText.gameObject.SetActive(false);
-            catSign.SetActive(false);
-
-            playGameText.text = "Next";
-
-            sayingText.gameObject.SetActive(true);
+            videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "TabernOut.mp4");
 
             nextButton.onClick.AddListener(() =>
             {
-                nextButton.onClick.RemoveAllListeners();
-                videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, "TabernOut.mp4");
-                sayingText.text = "I was walking to my tavern to play card game we liked. It was called - Apocalypse.";
-
-                nextButton.onClick.AddListener(() =>
-                {
-                    nextButton.onClick.RemoveAllListeners();
-                    gameObject.transform.parent.gameObject.SetActive(false);
-                });
+                PlayClicked();
+                WaitingForDisabling();
             });
-        });
+        }
+        else
+        {
+            // videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, animToPlay + ".mp4");
+            // videoPlayer.gameObject.SetActive(true);
+            // videoPlayer.Play();
+        }
+    }
+
+    private void PlayClicked()
+    {
+        titleText.gameObject.SetActive(false);
+        catSign.SetActive(false);
+        playGameText.gameObject.SetActive(false);
+        sayingText.gameObject.SetActive(false);
+        videoPlayer.gameObject.SetActive(false);
+        // videoPlayer.Play();
+
+        Debug.Log("Started playing " + videoPlayer);
+    }
+
+    private async void WaitingForDisabling()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f), ignoreTimeScale: false);
+        gameObject.transform.parent.gameObject.SetActive(false);
     }
 }
