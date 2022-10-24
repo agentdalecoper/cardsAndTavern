@@ -867,8 +867,8 @@ MonoBehaviour:
   - {fileID: 4051476872070548694}
   view: {fileID: 8564296427525305151}
   cardFace: {fileID: 7113280172948451590}
+  backGround: {fileID: 5307664700522873263}
   cost: {fileID: 5108799083028062640}
-  animator: {fileID: 0}
 --- !u!1 &2055547434778227777
 GameObject:
   m_ObjectHideFlags: 0

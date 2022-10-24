@@ -158,8 +158,7 @@ namespace Client
                 Card transformedCard = initializeCardSystem.CreateCard(crd.side, transformation.transformTo);
                 initializeCardSystem.ShowCardData(crdUi.cardPosition, transformedCard, GetCardHolder(crd.side));
                 await cardAnimationSystem.AnimateSkillUsed(crdUi,
-                    sceneConfiguration.skillsObjectsDict.transformation.sprite);
-                // crdUi.cardFace.color = Color.red;
+                    sceneConfiguration.skillsObjectsDict.transformation.sprite); // crdUi.cardFace.color = Color.red;
                 // initializeCardSystem.SetCardAtPosition(crdUi.cardPosition, gameContext, crd);
             }
         }

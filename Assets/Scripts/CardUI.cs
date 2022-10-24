@@ -40,6 +40,7 @@ public class CardUI : MonoBehaviour
     public GameObject view;
 
     public SpriteRenderer cardFace;
+    public SpriteRenderer backGround;
 
     public TextMesh cost;
 
@@ -47,9 +48,8 @@ public class CardUI : MonoBehaviour
     private Vector3 initialScale;
     private Vector3 initSpriteScale;
 
-    public Animator animator;
-
     private Color initTextColor;
+    private Color initBackColor;
 
     private void Awake()
     {
@@ -57,6 +57,11 @@ public class CardUI : MonoBehaviour
         initTextColor = damageText.color;
         initialScale = transform.localScale;
         initSpriteScale = cardFace.gameObject.transform.localScale;
+
+        if (cardFace != null)
+        {
+            initBackColor = backGround.color;
+        }
     }
 
     private void Start()
@@ -159,6 +164,15 @@ public class CardUI : MonoBehaviour
         else
         {
             cardFace.gameObject.transform.localScale = initSpriteScale;
+        }
+
+        if (card.name.Contains("✝"))
+        {
+            backGround.color = new Color(255, 255, 255, 255);
+        }
+        else
+        {
+            backGround.color = initBackColor;
         }
     }
 
