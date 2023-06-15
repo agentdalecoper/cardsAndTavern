@@ -6,4 +6,3 @@ Find yourself in a old tavern, playing card game where  your cards are the human
 Try to lead your last soldiers of justice in a decisive battle with the evil spawn by means of buying, managing your income and upgrading your card deck.
 https://agentdalecoper.itch.io/tavern-defence
 
-<img width="1429" alt="image" src="https://github.com/agentdalecoper/cardsAndTavern/assets/23356183/4ff21ce4-15df-4bc0-9f07-06bb4195b2d9">
